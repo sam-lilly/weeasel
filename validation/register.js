@@ -7,7 +7,6 @@ module.exports = function validateRegisterInput(data) {
   data.username = validText(data.username) ? data.username : '';
   data.email = validText(data.email) ? data.email : '';
   data.password = validText(data.password) ? data.password : '';
-  data.passwordConfirm = validText(data.passwordConfirm) ? data.passwordConfirm : '';
 
   if (Validator.isEmpty(data.username)) {
     errors.username = 'Username field is required';
@@ -29,16 +28,22 @@ module.exports = function validateRegisterInput(data) {
     errors.password = 'Password must be at least 6 characters';
   }
 
-  if (Validator.isEmpty(data.passwordConfirm)) {
-    errors.passwordConfirm = 'Confirm Password field is required';
-  }
-
-  if (!Validator.equals(data.password, data.passwordConfirm)) {
-    errors.passwordConfirm = 'Passwords must match';
-  }
 
   return {
     errors,
     isValid: Object.keys(errors).length === 0
   };
 };
+
+
+//just in case if we want 2stop pw
+
+  // data.passwordConfirm = validText(data.passwordConfirm) ? data.passwordConfirm : '';
+
+  // if (Validator.isEmpty(data.passwordConfirm)) {
+  //   errors.passwordConfirm = 'Confirm Password field is required';
+  // }
+
+  // if (!Validator.equals(data.password, data.passwordConfirm)) {
+  //   errors.passwordConfirm = 'Passwords must match';
+  // }
