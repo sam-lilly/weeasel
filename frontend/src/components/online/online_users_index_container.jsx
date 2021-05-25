@@ -1,5 +1,5 @@
 import  { connect } from 'react-redux';
-import { fetchOnlineUsers, fetchOnlineUser } from '../../actions/online_users_actions';
+import { fetchOnlineUsers, fetchOnlineUser } from '../../actions/online_user_actions';
 // need  to import the createFriend function for 'add friend' button beside the users name
 import OnlineUsersIndex from './online_users_index';
 

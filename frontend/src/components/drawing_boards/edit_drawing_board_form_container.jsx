@@ -11,10 +11,14 @@ class EditDrawingBoardForm extends React.Component {
     render () {
 
         return (
-            // <DrawingBoardForm
-            //     whatever we need to be passing in
-            // />
-            <h1>this is the edit drawing board container</h1>
+            <div>
+
+                <DrawingBoardForm
+                    whatever we need to be passing in
+                    />
+                <h1>this is the edit drawing board container</h1>
+            
+            </div>
         )
 
     }
