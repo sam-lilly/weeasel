@@ -17,14 +17,7 @@ const EaselSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    },
-    comments: [
-        {
-            username: { type: String },
-            text: { type: String },
-            createdAt: { type: Date, default: Date.now }
-        }
-    ],
+    }
 
 })
 
