@@ -15,9 +15,9 @@ class SessionForm extends React.Component {
         this.handleDemoSubmit = this.handleDemoSubmit.bind(this);
     }
 
-    componentWillUnmount() {
-        this.props.clearErrors();
-    }
+    // componentWillUnmount() {
+    //     this.props.clearErrors();
+    // }
 
     update(field) {
         return e => this.setState({
@@ -162,3 +162,5 @@ class SessionForm extends React.Component {
 
 
 }
+
+export default SessionForm;
