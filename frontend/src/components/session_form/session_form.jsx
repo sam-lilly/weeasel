@@ -78,7 +78,7 @@ class SessionForm extends React.Component {
     }
 
 
-    render () {
+    render() {
         let signUpNameForm
         if (this.props.formType === "Create Account") {
             signUpNameForm = this.signupForm();
@@ -97,7 +97,7 @@ class SessionForm extends React.Component {
                         <div className="session-form">
 
                             {signUpNameForm}
-                            
+
                             <label> Username:
                                 <input
                                     type="text"
@@ -107,7 +107,7 @@ class SessionForm extends React.Component {
                                     className="login-input"
                                 />
                             </label>
-                            
+
                             <label> Password:
                                 <input
                                     type="password"

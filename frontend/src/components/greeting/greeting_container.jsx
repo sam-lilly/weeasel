@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Greeting from './greeting';
 
 const mSTP = ({ session, entities: { users } }) => ({
-    currentUser : users[session.id]
+    currentUser: users[session.id]
 })
 
 const mDTP = (dispatch) => ({
@@ -13,4 +13,4 @@ const mDTP = (dispatch) => ({
 
 // ^need to make sure all are set up the same way
 
-export default connect (mSTP, mDTP)(Greeting);
+export default connect(mSTP, mDTP)(Greeting);

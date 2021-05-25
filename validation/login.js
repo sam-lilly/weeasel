@@ -8,12 +8,12 @@ module.exports = function validateLoginInput(data) {
   data.email = validText(data.email) ? data.email : '';
   data.password = validText(data.password) ? data.password : '';
 
-  if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
-  }
-  if (Validator.isEmpty(data.email)) {
-    errors.email = 'Email field is required';
-  }
+  // if (!Validator.isEmail(data.email)) {
+  //   errors.email = 'Email is invalid';
+  // }
+  // if (Validator.isEmpty(data.email)) {
+  //   errors.email = 'Email field is required';
+  // }
 
   if (Validator.isEmpty(data.username)) {
     errors.username = 'username field is required';
