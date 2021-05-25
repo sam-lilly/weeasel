@@ -3,6 +3,7 @@ const app = express();
 const http = require("http").createServer(app);
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
+
 const io = require("socket.io")(http, {
     cors: {
         origin: "http://localhost:3000",
@@ -27,14 +28,31 @@ io.on('connection', (socket) => {
 
 
 
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const users = require('./routes/api/user');
+
+
 mongoose
-    .connect(db, { useNewUrlParser: true })
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
+
 
 app.get("/", (req, res) => res.send(" World"));
 
 
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
+
+app.get("/", (req, res) => res.send("Hiya World"));
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use("/api/users", users);
 
 const port = process.env.PORT || 5000;
 
