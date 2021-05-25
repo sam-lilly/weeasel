@@ -7,23 +7,65 @@ import io from "socket.io-client"
 class Board extends React.Component {
     constructor(props){
         super(props);
-        this.socket.on("canvas-data", function(data){
+        this.state = {
+            board: "board1"
+        }
+
+      
+       
+        this.changeBoard = this.changeBoard.bind(this)
+        this.drawOnCanvas = this.drawOnCanvas.bind(this)
+    }
+    
+
+    componentDidUpdate(prevProps, prevState){
+        this.socket.off(prevState.board)
+        this.socket.on(this.state.board, function (data, boardName) {
+
             const image = new Image();
-            const canvas = document.querySelector("#board")
+            const canvas = document.querySelector(`#${boardName}`)
+            // if (!canvas) return
             const ctx = canvas.getContext("2d");
-            image.onload = function() {
+            image.onload = function () {
                 ctx.drawImage(image, 0, 0);
             };
             image.src = data;
         })
     }
+
+    changeBoard(e){
+        this.state.board === "board1" ? 
+        this.setState({ board: "board2"}) :
+        this.setState({ board: "board1"}) 
+
+    }
+
     timeout;
     socket = io.connect("http://localhost:5000")
+    // subsocket = socket(`/${this.state.board}`)
     componentDidMount() {
+        this.socket.on(this.state.board, function (data, boardName) {
+
+            const image = new Image();
+            const canvas = document.querySelector(`#${boardName}`)
+            // if (!canvas) return
+            const ctx = canvas.getContext("2d");
+
+            image.onload = function () {
+                ctx.drawImage(image, 0, 0);
+            };
+            image.src = data;
+        })
+
         this.drawOnCanvas();
+
     }
+
+
+
     drawOnCanvas(){
-            const canvas = document.querySelector('#board');
+        const canvas = document.querySelector(`#${this.state.board}`);
+        // if (!canvas) return
             const ctx = canvas.getContext('2d');
 
             const sketch = document.querySelector('#sketch');
@@ -66,7 +108,8 @@ class Board extends React.Component {
                 if (root.timeout !== undefined) clearTimeout(root.timeout)
                 root.timeout = setTimeout(function(){
                     const base64Imagedata = canvas.toDataURL("image/png")
-                    root.socket.emit("canvas-data", base64Imagedata)
+                    root.socket.emit("canvas-data", base64Imagedata, root.state.board
+                        )
                 }, 1000)
             };
 
@@ -76,7 +119,12 @@ class Board extends React.Component {
     render() {
         return (
             <div id="sketch">
-                <canvas className="board" id="board"></canvas>
+                <h1>{this.state.board}</h1>
+                {this.state.board === "board1" ?
+                    <canvas className="board" id="board1"></canvas> :
+                    <canvas className="board" id="board2"></canvas> 
+                    }
+               <button onClick={this.changeBoard}>Change Board</button>
             </div>
         )
     }
