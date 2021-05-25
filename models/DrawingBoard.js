@@ -21,7 +21,14 @@ const DrawingBoardSchema = new Schema({
     easels: [{
         type: Schema.Types.ObjectId,
         ref: 'Easel'
-    }]
+    }],
+    comments: [
+    {
+        username: { type: String },
+        text: { type: String },
+        createdAt: { type: Date, default: Date.now }
+    }
+]
 })
 
 DrawingBoard = mongoose.model('DrawingBoard', DrawingBoardSchema);
