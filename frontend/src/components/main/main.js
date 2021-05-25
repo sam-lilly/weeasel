@@ -8,7 +8,7 @@ class Main extends React.Component {
       <div>
         <h1> collaborative easel 🦦 Weeasel🦦</h1>
         <footer>
-          Created by Sam Lily, Robby Balistreri, Tahj Harris, Julia Kim
+          Created by Sam Lilly, Robby Balistreri, Tahj Harris, Julia Kim
         </footer>
       </div>
     );
