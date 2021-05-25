@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const passport = require('passport');
 const bodyParser = require('body-parser');
+
 const users = require('./routes/api/user');
+const drawingBoards = require('./routes/api/drawingBoards')
 
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api/users", users);
+app.use("/api/drawingBoards", drawingBoards)
 
 const port = process.env.PORT || 5000;
 
