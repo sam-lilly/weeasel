@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { signup, clearErrors } from '../../actions/session_actions';
+import { signup, clearErrors } from '../../actions/session_actions';
 // make sure these are the correct names
 import SessionForm from './session_form';
 
 const mSTP = ({ errors }) => ({
-    errors: errors.session,
+    errors: Object.values(errors.session),
     formType: 'Create Account',
     headerType: 'Register',
     formNav: 'Have an account?',
@@ -21,4 +21,4 @@ const mDTP = (dispatch) => ({
     // make sure these are the same names we are using
 })
 
-export default connect (mSTP, mDTP)(SessionForm);
+export default connect(mSTP, mDTP)(SessionForm);

@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const users = require('./routes/api/user');
 
 mongoose
-    .connect(db, { useNewUrlParser: true })
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
 
