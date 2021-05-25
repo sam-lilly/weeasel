@@ -11,10 +11,14 @@ class EditEaselForm extends React.Component {
     render () {
 
         return (
-            // <EaselForm
-            //     whatever we need to be passing in
-            // />
-            <h1>this is the edit easel container</h1>
+            <div>
+
+                <EaselForm
+                    whatever we need to be passing in
+                    />
+                <h1>this is the edit easel container</h1>
+                
+            </div>
         )
 
     }

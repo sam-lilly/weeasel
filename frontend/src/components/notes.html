@@ -1,40 +1,52 @@
-<!-- session form
+session form
     login form container
     signup form container
-    session form -->
+    session form
 
-<!-- nav bar
+
+nav bar
     nav bar
-    nav bar container -->
+    nav bar container
 
-<!-- splash
+
+splash
     splash container
-    splash -->
+    splash
 
-<!-- footer
+
+footer
     footer container
-    footer -->
+    footer
 
-<!-- greeting
+
+greeting
     greeting container
-    greeting -->
+    greeting
 
-<!-- friends
+
+friends
     friend index container
     friend index
     friend index item
     * can delete friends from this page //
     * add deleteFriend in mSTP
-    * on the main page // home -->
+    * on the main page // home
 
-<!-- home
+    -fetchFriends()
+    -fetchFriend(FriendId)
+    -createFriend(Friend)
+    -deleteFriend(FriendId)
+
+
+home
     home container
     home
     * not sure what all we want here yet
     * definitely want to have friends
-    * then maybe just a splash image -->
+    * then maybe just a splash image
 
-<!-- drawing boards
+
+drawing boards
     drawing board index container
     drawing board index
     drawing board index item
@@ -42,9 +54,16 @@
     edit drawing board form container
     drawing board form
     drawing board show container
-    drawing board show -->
+    drawing board show
 
-<!-- easel
+    -fetchDrawingBoards()
+    -fetchDrawingBoard(drawingBoardId)
+    -createDrawingBoard(drawingBoard)
+    -updateDrawingBoard(drawingBoard)
+    -deleteDrawingBoard(drawingBoardId)
+
+
+easel
     easel index container
     easel index item
     easel index
@@ -52,24 +71,39 @@
     easel show
     create easel form container
     edit easel form container
-    easel form -->
+    easel form
+
+    -fetchEasels()
+    -fetchEasel(EaselId)
+    -createEasel(Easel)
+    -updateEasel(Easel)
+    -deleteEasel(EaselId)
     
-online
+
+online users
     online index container
     online index item
     online index
     * put a button for add friend under  users if not friends
-    
-offline
+
+    -fetchOnlineUsers()
+    -fetchOnlineUser(OnlineUserId)
+
+
+offline users
     offline index container
     offline index item
     offline index
     * put a button for add friend under  users if not friends
     
-<!-- game mode
+    -fetchOfflineUsers()
+    -fetchOfflineUser(OfflineUserId)
+
+
+game mode
     game container
     game
-    *need to add a lot more here but will find in time -->
+    *need to add a lot more here but will find in time
 
 
 
