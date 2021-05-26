@@ -1,7 +1,7 @@
 
 import React from 'react'
 import "./board.css"
-import io from "socket.io-client" 
+
 
 
 class Board extends React.Component {
@@ -19,6 +19,7 @@ class Board extends React.Component {
     
 
     componentDidUpdate(prevProps, prevState){
+        
         this.socket.off(prevState.board)
         this.socket.on(this.state.board, function (data, boardName) {
 
@@ -31,6 +32,7 @@ class Board extends React.Component {
             };
             image.src = data;
         })
+        
     }
 
     changeBoard(e){
