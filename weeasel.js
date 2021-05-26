@@ -65,9 +65,9 @@ app.listen(port, () => console.log(`Server is running on port ${port}`));
 // app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 
-http.listen(port, () => {
-    console.log("Started on :" + port)
-})
+// http.listen(port, () => {
+//     console.log("Started on :" + port)
+// })
 
 
 
