@@ -6,7 +6,11 @@ class Footer extends React.Component {
     render () {
         return (
             <div className="footer">
-                <h1>this is the footer!</h1>
+                <div className="connect">connect with the creators:</div>
+                <div className="julia">julia</div>
+                <div className="robby">robby</div>
+                <div className="sam">sam</div>
+                <div className="tahj">tahj</div>
             </div>
         )
     }

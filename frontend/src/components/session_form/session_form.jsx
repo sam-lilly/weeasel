@@ -2,6 +2,7 @@ import React from 'react';
 import { login } from '../../actions/session_actions';
 // make sure correct import
 import { Link } from 'react-router-dom';
+import '../scss/styles.scss';
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -64,7 +65,7 @@ class SessionForm extends React.Component {
                         className="login-input"
                     />
                 </label> */}
-                <label> Email:
+                {/* <label> Email: */}
                     <input
                         type="text"
                         placeholder="Email"
@@ -72,7 +73,7 @@ class SessionForm extends React.Component {
                         onChange={this.update('email')}
                         className="login-input"
                     />
-                </label>
+                {/* </label> */}
             </>
         )
     }
@@ -98,7 +99,7 @@ class SessionForm extends React.Component {
 
                             {signUpNameForm}
 
-                            <label> Username:
+                            {/* <label> Username: */}
                                 <input
                                     type="text"
                                     placeholder="Username"
@@ -106,9 +107,9 @@ class SessionForm extends React.Component {
                                     onChange={this.update('username')}
                                     className="login-input"
                                 />
-                            </label>
+                            {/* </label> */}
 
-                            <label> Password:
+                            {/* <label> Password: */}
                                 <input
                                     type="password"
                                     placeholder="Password"
@@ -116,9 +117,9 @@ class SessionForm extends React.Component {
                                     onChange={this.update('password')}
                                     className="login-input"
                                 />
-                            </label>
+                            {/* </label> */}
 
-                            <p className="forgot-password" onClick={this.handleDemoSubmit}>Forgot your Password? Login as Demo User!</p>
+                            {/* <p className="forgot-password" onClick={this.handleDemoSubmit}>Forgot your Password? Login as Demo User!</p> */}
 
                             <input
                                 className="session-submit"
@@ -128,13 +129,7 @@ class SessionForm extends React.Component {
                             <br />
                             <p className="new-user">{this.props.formNav}</p>
 
-                            <div>
-                                <Link to={this.props.navLinkInRender}>
-                                    <div className="session-submit">
-                                        {this.props.NavText}
-                                    </div>
-                                </Link>
-                            </div>
+                            {this.props.navLink}
 
                             <button className="session-submit" onClick={this.handleDemoSubmit}>
                                 Login as Demo User
