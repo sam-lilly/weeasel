@@ -6,12 +6,12 @@ const easelsReducer = (oldState = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_EASELS:
-            return action.easels;
+            return action.easels.data;
         case RECEIVE_EASEL:
-            nextState[action.easel.id] = action.easel;
+            nextState[action.easel.data.id] = action.easel.data;
             return nextState;
         case REMOVE_EASEL:
-            delete nextState[action.easelId];
+            delete nextState[action.easelId.data.easelId];
             return nextState;
         default:
             return oldState;

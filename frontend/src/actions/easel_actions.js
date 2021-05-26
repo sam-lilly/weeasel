@@ -41,5 +41,5 @@ export const updateEasel = (boardId, easelId, easel) => (dispatch) => (
 
 export const deleteEasel = (boardId, easelId) => (dispatch) => (
     EaselApiUtil.deleteEasel(boardId, easelId)
-        .then(() => dispatch(removeEasel(easelId)))
+        .then((easelId) => dispatch(removeEasel(easelId)))
 )
