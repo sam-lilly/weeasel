@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../../models/User');
 const DrawingBoard = require('../../models/DrawingBoard');
 const Easel = require('../../models/Easel');
+const keys = require('../../config/keys');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
@@ -10,22 +11,22 @@ const validateBoardInput = require('../../validation/drawingBoard');
 
 //fetchDrawingBoards()
 router.get('/',
-passport.authenticate('jwt', { session: false }),
-(req, res) => {
-  DrawingBoard.findBy({creator: req.user.id})
-    .then(boards => res.json(boards))
-    .catch(err => res.status(404).json({ error: 'No DrawingBoard found' }));
-})
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    DrawingBoard.find({ creator: req.user.id })
+      .then(boards => res.json(boards))
+      .catch(err => res.status(404).json({ error: 'No DrawingBoard found' }));
+  })
 
 
-//fetchDrawingBoard(drawingBoardId)
-// router.get('/:id', (req, res) => {
-//   DrawingBoard.findById(req.params.id)
-//     .then(board => res.json(board))
-//     .catch(err =>
-//       res.status(404).json({ error: `DrawingBoard ${req.params.id} doesn't exist` })
-//     );
-// });
+// fetchDrawingBoard(drawingBoardId)
+router.get('/:id', (req, res) => {
+  DrawingBoard.findById(req.params.id)
+    .then(board => res.json(board))
+    .catch(err =>
+      res.status(404).json({ error: `DrawingBoard ${req.params.id} doesn't exist` })
+    );
+});
 
 //passport middleware reqObj will have req.user.id = currentUser
 //createDrawingBoard(drawingBoard)
@@ -89,11 +90,14 @@ router.put('/:id',
 //   }
 // )
 
-router.post(`/api/drawingBoards/comments`, (req, res) => {
+router.post(`/:drawingBoardsId/comments`, (req, res) => {
   let newComment = req.body;
-  let drawingBoard = DrawingBoard.findBy({_id: req.body.drawingBoardId})
-  drawingBoard.comments.push(newComment);
-  drawingBoard.update();
+  DrawingBoard.findById(req.params.drawingBoardsId)
+    .then(board => {
+      board.comments.push(newComment);
+      board.save();
+    })
+  newComment['boardId'] = req.params.drawingBoardsId
   res.json(newComment)
 })
 
@@ -162,22 +166,18 @@ router.put('/:board_id/easels/:easel_id', (req, res) => {
 
 // - deleteEasel(EaselId)
 router.delete('/:board_id/easels/:easel_id', (req, res) => {
-  Easel.findByIdAndDelete(req.params.easel_id)
+  Easel.findOneAndDelete({ _id: req.params.easel_id })
     .then(easel => {
       if (!easel) {
         return res.status(404).send({ error: `Easel ${req.params.easel_id} doesn't exist` })
       }
-      const drawingBoard = DrawingBoard.findBy({_id: req.params.board_id})
-      const index = drawingBoard.easels.indexOf(req.params.easel_id);
-      drawingBoard.easels.splice(index, 1);
-      drawingBoard.update()
-      // DrawingBoard.update({ _id: req.params.board_id }, { $pull: { easels: req.params.easel_id } })
-      // DrawingBoard.findById(req.params.board_id)
-      //   .then(board => {
-      //     board.easels.pull({ _id: req.params.easel_id })
-      //     board.save()
-      //   })
-      return res.send({ success: 'The Easel has been successfully deleted' })
+      DrawingBoard.findById(req.params.board_id)
+        .then(board => {
+          const index = board.easels.indexOf(req.params.easel_id);
+          board.easels.splice(index, 1);
+          board.save()
+        })
+      return res.json(easel.toObject())
     })
     .catch(err => {
       return res.status(500).send({ error: 'Cannot delete this Easel' })

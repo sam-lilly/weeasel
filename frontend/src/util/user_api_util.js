@@ -19,3 +19,7 @@ export const deleteFriend = (friendId) => {
 export const joinDrawingBoard = (drawingBoardId) => {
     return axios.post(`/api/users/drawingboards/${drawingBoardId}`)
 }
+
+export const leaveDrawingBoard = (drawingBoardId) => {
+    return axios.delete(`/api/users/drawingboards/${drawingBoardId}`)
+}

@@ -16,8 +16,8 @@ export const updateDrawingBoard = (drawingBoard) => {
     return axios.patch(`/api/drawingBoards/${drawingBoard.id}`, drawingBoard)
 }
 
-export const addComment = (comment) => {
-    return axios.post(`/api/drawingBoards/comments`, comment)
+export const addComment = (drawingBoardsId, comment) => {
+    return axios.post(`/api/drawingBoards/${drawingBoardsId}/comments`, comment)
 }
 
 export const deleteDrawingBoard = (drawingBoardId) => {

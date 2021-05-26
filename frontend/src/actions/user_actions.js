@@ -3,7 +3,8 @@ import * as UserAPiUtil from '../util/user_api_util';
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const RECEIVE_FRIEND = "RECEIVE_FRIEND";
 export const REMOVE_FRIEND = "REMOVE_FRIEND";
-export const JOIN_DRAWINGBOARD = 'JOIN_DRAWINGBOARD'
+export const JOIN_DRAWINGBOARD = 'JOIN_DRAWINGBOARD';
+export const REMOVE_JOINED_DRAWINGBOARD = 'REMOVE_JOINED_DRAWINGBOARD';
 
 const receiveUsers = (users) => ({
     type: RECEIVE_USERS,
@@ -24,6 +25,14 @@ const receiveJoinedDrawingboard = (drawingBoardId) => ({
     type: JOIN_DRAWINGBOARD,
     drawingBoardId
 })
+
+
+const removeJoinedDrawingboard = (drawingBoardId) => ({
+    type: REMOVE_JOINED_DRAWINGBOARD,
+    drawingBoardId
+})
+
+
 
 export const fetchUsers = () => (dispatch) => (
     UserAPiUtil.fetchUsers()
@@ -47,5 +56,10 @@ export const deleteFriend = (friendId) => (dispatch) => (
 
 export const joinDrawingBoard = (drawingBoardId) => dispatch => (
     UserAPiUtil.joinDrawingBoard(drawingBoardId)
-    .then(drawingBoardId => dispatch(receiveJoinedDrawingboard(drawingBoardId)))
+        .then(drawingBoardId => dispatch(receiveJoinedDrawingboard(drawingBoardId)))
+)
+
+export const leaveDrawingBoard = (drawingBoardId) => dispatch => (
+    UserAPiUtil.leaveDrawingBoard(drawingBoardId)
+        .then(drawingBoardId => dispatch(removeJoinedDrawingboard(drawingBoardId)))
 )

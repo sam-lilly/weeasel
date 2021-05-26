@@ -50,7 +50,7 @@ export const deleteDrawingBoard = (drawingBoardId) => (dispatch) => (
         .then(() => dispatch(removeDrawingBoard(drawingBoardId)))
 )
 
-export const addComment = (comment) => dispatch => (
-    DrawingBoardApiUtil.addComment(comment)
+export const addComment = (drawingBoardsId, comment) => dispatch => (
+    DrawingBoardApiUtil.addComment(drawingBoardsId, comment)
         .then(comment => dispatch(receiveComment(comment)))
 )
