@@ -53,18 +53,18 @@ io.on('connection', (socket) => {
         socket.broadcast.emit("broadcast", {description: people + "clients connected!"})
     })
 
-<<<<<<< HEAD
+
     socket.on("canvas-data", (data, boardName) => {
         console.log(data)
         console.log(boardName)
         socket.broadcast.emit(boardName, data, boardName)
     })
 })
-=======
+
 // http.listen(port, () => {
 //     console.log("Started on :" + port)
 // })
->>>>>>> main
+
 
 
 

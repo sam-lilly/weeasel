@@ -36,7 +36,7 @@ export const fetchUsers = () => (dispatch) => (
 // )
 
 export const addFriend = (friendId) => (dispatch) => (
-    UserAPiUtil.creatFriend(friendId)
+    UserAPiUtil.createFriend(friendId)
         .then(friendId => dispatch(receiveFriend(friendId)))
 )
 
