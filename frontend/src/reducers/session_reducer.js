@@ -38,7 +38,7 @@ export default function (state = initialState, action) {
       return newState;
 
     case REMOVE_JOINED_DRAWINGBOARD:
-      let index = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId);
+      index = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId);
       newState.user.joinedDrawingBoards.splice(index, 1);
       return newState;
 
