@@ -29,7 +29,7 @@ export default function (state = initialState, action) {
       return newState;
 
     case REMOVE_FRIEND:
-      const index = newState.user.friends.indexOf(action.friendId);
+      let index = newState.user.friends.indexOf(action.friendId);
       newState.user.friends.splice(index, 1);
       return newState;
 
@@ -38,7 +38,7 @@ export default function (state = initialState, action) {
       return newState;
 
     case REMOVE_JOINED_DRAWINGBOARD:
-      const index = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId);
+      let index = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId);
       newState.user.joinedDrawingBoards.splice(index, 1);
       return newState;
 
