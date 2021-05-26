@@ -11,8 +11,8 @@ const EaselSchema = new Schema({
         ref: 'DrawingBoard'
     },
     image: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        default: ''
     },
     date: {
         type: Date,
