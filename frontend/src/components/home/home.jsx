@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import DrawingBoardIndex from '../drawing_boards/drawing_board_index';
+// import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
 
@@ -7,6 +8,11 @@ class Home extends React.Component {
         return (
             <div className="home">
                 <h1>you made it home!!! (this is the homepage)</h1>
+                <DrawingBoardIndex />
+                <EaselShow />
+                <EaselIndex />
+                <ChatIndex />
+                <FriendsIndex />
             </div>
         )
     }
