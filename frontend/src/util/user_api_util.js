@@ -8,11 +8,11 @@ export const fetchUsers = () => {
 //     return axios.get(`/api/users/${friendId}`)
 // };
 
-export const addFriend = (userId) => {
+export const createFriend = (userId) => {
     return axios.post(`/api/users`, { userId })
 };
 
-export const deleteFriend = ( friendId) => {
+export const deleteFriend = (friendId) => {
     return axios.delete(`/api/users/${friendId}`)
 };
 

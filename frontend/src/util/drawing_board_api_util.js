@@ -4,9 +4,9 @@ export const fetchDrawingBoards = () => {
     return axios.get(`/api/drawingBoards`)
 };
 
-// export const fetchDrawingBoard = (drawingBoardId) => {
-//     return axios.get(`/api/drawingBoards/${drawingBoardId}`)
-// };
+export const fetchDrawingBoard = (drawingBoardId) => {
+    return axios.get(`/api/drawingBoards/${drawingBoardId}`)
+};
 
 export const createDrawingBoard = (drawingBoard) => {
     return axios.post(`/api/drawingBoards`, drawingBoard)
@@ -20,6 +20,6 @@ export const addComment = (comment) => {
     return axios.post(`/api/drawingBoards/comments`, comment)
 }
 
-// export const deleteDrawingBoard = (drawingBoardId) => {
-//     return axios.delete(`/api/drawingBoards/${drawingBoardId}`)
-// };
+export const deleteDrawingBoard = (drawingBoardId) => {
+    return axios.delete(`/api/drawingBoards/${drawingBoardId}`)
+};

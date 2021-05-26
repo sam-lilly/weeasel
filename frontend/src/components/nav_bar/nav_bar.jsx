@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import GreetingContainer from '../greeting/greeting_container';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../scss/styles.scss';
 
 
 class NavBar extends React.Component {
 
 
-    render () {
+    render() {
         return (
             <div className="nav-container">
 

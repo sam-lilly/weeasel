@@ -4,9 +4,9 @@ export const fetchEasels = (boardId) => {
     return axios.get(`/api/drawingBaords/${boardId}/easels`)
 };
 
-// export const fetchEasel = (easelId) => {
-//     return axios.get(`/api/easels/${easelId}`)
-// };
+export const fetchEasel = (easelId) => {
+    return axios.get(`/api/easels/${easelId}`)
+};
 
 export const createEasel = (boardId, easel) => {
     return axios.post(`/api/drawingBaords/${boardId}/easels`, easel)
