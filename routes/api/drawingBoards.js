@@ -9,21 +9,23 @@ const jwt = require('jsonwebtoken');
 const validateBoardInput = require('../../validation/drawingBoard');
 
 //fetchDrawingBoards()
-router.get('/', (req, res) => {
-  DrawingBoard.find()
+router.get('/',
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+  DrawingBoard.findBy({creator: req.user.id})
     .then(boards => res.json(boards))
     .catch(err => res.status(404).json({ error: 'No DrawingBoard found' }));
 })
 
 
 //fetchDrawingBoard(drawingBoardId)
-router.get('/:id', (req, res) => {
-  DrawingBoard.findById(req.params.id)
-    .then(board => res.json(board))
-    .catch(err =>
-      res.status(404).json({ error: `DrawingBoard ${req.params.id} doesn't exist` })
-    );
-});
+// router.get('/:id', (req, res) => {
+//   DrawingBoard.findById(req.params.id)
+//     .then(board => res.json(board))
+//     .catch(err =>
+//       res.status(404).json({ error: `DrawingBoard ${req.params.id} doesn't exist` })
+//     );
+// });
 
 //passport middleware reqObj will have req.user.id = currentUser
 //createDrawingBoard(drawingBoard)
@@ -72,20 +74,28 @@ router.put('/:id',
 
 // Finds a matching document, removes it, passing the found document (if any) to the callback.
 // we may not user it :-)
-router.delete('/:id',
-  (req, res) => {
-    DrawingBoard.findByIdAndDelete(req.params.id)
-      .then(board => {
-        if (!board) {
-          return res.status(404).send({ error: `DrawingBoard ${req.params.id} doesn't exist` })
-        }
-        return res.send({ success: 'The DrawingBoard has been successfully deleted' })
-      })
-      .catch(err => {
-        return res.status(500).send({ error: 'Cannot delete this DrawingBoard' })
-      })
-  }
-)
+// router.delete('/:id',
+//   (req, res) => {
+//     DrawingBoard.findByIdAndDelete(req.params.id)
+//       .then(board => {
+//         if (!board) {
+//           return res.status(404).send({ error: `DrawingBoard ${req.params.id} doesn't exist` })
+//         }
+//         return res.send({ success: 'The DrawingBoard has been successfully deleted' })
+//       })
+//       .catch(err => {
+//         return res.status(500).send({ error: 'Cannot delete this DrawingBoard' })
+//       })
+//   }
+// )
+
+router.post(`/api/drawingBoards/comments`, (req, res) => {
+  let newComment = req.body;
+  let drawingBoard = DrawingBoard.findBy({_id: req.body.drawingBoardId})
+  drawingBoard.comments.push(newComment);
+  drawingBoard.update();
+  res.json(newComment)
+})
 
 
 /*=====================================//
@@ -157,7 +167,11 @@ router.delete('/:board_id/easels/:easel_id', (req, res) => {
       if (!easel) {
         return res.status(404).send({ error: `Easel ${req.params.easel_id} doesn't exist` })
       }
-      DrawingBoard.update({ _id: req.params.board_id }, { $pull: { easels: req.params.easel_id } })
+      const drawingBoard = DrawingBoard.findBy({_id: req.params.board_id})
+      const index = drawingBoard.easels.indexOf(req.params.easel_id);
+      drawingBoard.easels.splice(index, 1);
+      drawingBoard.update()
+      // DrawingBoard.update({ _id: req.params.board_id }, { $pull: { easels: req.params.easel_id } })
       // DrawingBoard.findById(req.params.board_id)
       //   .then(board => {
       //     board.easels.pull({ _id: req.params.easel_id })

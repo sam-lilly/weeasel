@@ -110,4 +110,29 @@ router.post('/login', (req, res) => {
     })
 })
 
+router.get('/api/users', (req, res) => {
+    User.find().then(users => res.json(users))
+  }
+)
+
+router.post('/api/users',
+ passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+  let currUser = User.findOne({ _id: req.user.id })
+  currUser.friends.push(req.body.friendId);
+  currUser.update();
+  res.json(req.body.friendId)
+})
+
+router.post('/api/users/:userId', 
+passport.authenticate('jwt', { session: false }),
+(req,res) => {
+  let currentUser = User.findOne({ _id: req.user.id });
+  const index = currentUser.friends.indexOf(req.body.friendId);
+  currentUser.friends.splice(index, 1);
+  currentUser.update();
+
+  res.json(req.body.friendId);
+})
+
 module.exports = router;

@@ -1,17 +1,17 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-export const fetchFriends = () => {
-    return axios.get(`/api/friends`)
-};
+// export const fetchUsers = () => {
+//     return axios.get(`/api/users`)
+// };
 
-export const fetchFriend = (friendId) => {
-    return axios.get(`/api/friends/${friendId}`)
-};
+// // export const fetchFriend = (userId) => {
+// //     return axios.get(`/api/users/${friendId}`)
+// // };
 
-export const createFriend = (friend) => {
-    return axios.post(`/api/friends`, friend)
-};
+// export const createFriend = (currUserId, userId) => {
+//     return axios.post(`/api/users`, {currUserId, userId})
+// };
 
-export const deleteFriend = (friendId) => {
-    return axios.delete(`/api/friends/${friendId}`)
-};
+// export const deleteFriend = (currUserId, friendId) => {
+//     return axios.delete(`/api/friends/${currUserId}/${friendId}`)
+// };

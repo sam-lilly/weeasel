@@ -3,6 +3,7 @@ import * as DrawingBoardApiUtil from '../util/drawing_board_api_util';
 export const RECEIVE_DRAWING_BOARDS = "RECEIVE_DRAWING_BOARDS"
 export const RECEIVE_DRAWING_BOARD = "RECEIVE_DRAWING_BOARD"
 export const REMOVE_DRAWING_BOARD = "REMOVE_DRAWING_BOARD"
+export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 
 const receiveDrawingBoards = (drawingBoards) => ({
     type: RECEIVE_DRAWING_BOARDS,
@@ -14,9 +15,14 @@ const receiveDrawingBoard = (drawingBoard) => ({
     drawingBoard
 })
 
-const removeDrawingBoard = (drawingBoardId) => ({
-    type: REMOVE_DRAWING_BOARD,
-    drawingBoardId
+// const removeDrawingBoard = (drawingBoardId) => ({
+//     type: REMOVE_DRAWING_BOARD,
+//     drawingBoardId
+// })
+
+const receiveComment = (comment) => ({
+    type: RECEIVE_COMMENT,
+    comment
 })
 
 export const fetchDrawingBoards = () => (dispatch) => (
@@ -24,10 +30,10 @@ export const fetchDrawingBoards = () => (dispatch) => (
         .then(drawingBoards => dispatch(receiveDrawingBoards(drawingBoards)))
 )
 
-export const fetchDrawingBoard = (drawingBoardId) => (dispatch) => (
-    DrawingBoardApiUtil.fetchDrawingBoard(drawingBoardId)
-        .then(drawingBoard => dispatch(receiveDrawingBoard(drawingBoard)))
-)
+// export const fetchDrawingBoard = (drawingBoardId) => (dispatch) => (
+//     DrawingBoardApiUtil.fetchDrawingBoard(drawingBoardId)
+//         .then(drawingBoard => dispatch(receiveDrawingBoard(drawingBoard)))
+// )
 
 export const createDrawingBoard = (drawingBoard) => (dispatch) => (
     DrawingBoardApiUtil.createDrawingBoard(drawingBoard)
@@ -39,7 +45,12 @@ export const updateDrawingBoard = (drawingBoard) => (dispatch) => (
         .then(drawingBoard => dispatch(receiveDrawingBoard(drawingBoard)))
 )
 
-export const deleteDrawingBoard = (drawingBoardId) => (dispatch) => (
-    DrawingBoardApiUtil.deleteDrawingBoard(drawingBoardId)
-        .then(() => dispatch(removeDrawingBoard(drawingBoardId)))
+// export const deleteDrawingBoard = (drawingBoardId) => (dispatch) => (
+//     DrawingBoardApiUtil.deleteDrawingBoard(drawingBoardId)
+//         .then(() => dispatch(removeDrawingBoard(drawingBoardId)))
+// )
+
+export const addComment = (comment) => dispatch => (
+    DrawingBoardApiUtil.addComment(comment)
+    .then(comment => dispatch(receiveComment(comment)))
 )
