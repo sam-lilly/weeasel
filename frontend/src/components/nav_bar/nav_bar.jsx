@@ -15,7 +15,7 @@ class NavBar extends React.Component {
                 {/* <h1>this is the nav bar<i class="far fa-user"></i></h1> */}
 
                 <div className="header-left">
-                    <Link to="/" className="home" >HOME</Link>
+                    <Link to="/" className="home-nav" >HOME</Link>
                 </div>
 
                 <div className="header-right">

@@ -1,8 +1,30 @@
+// font-family: 'Josefin Sans', sans-serif;
+
 // color: rgb(0, 0, 0);
 // color: rgb(237, 168, 91);
 // color: rgb(120, 106, 98);
 // color: rgb(244, 225, 165);
 // color: rgb(182, 192, 200);
+// first color scheme NOT GOOD
+
+
+// color: rgb(16, 3, 7);
+// // nav / & footer background
+// color: rgb(237, 168, 91);
+// // connect / & tahj
+// color: rgb(179, 142, 120);
+// // julia
+// color: rgb(193, 188, 174);
+// // robby
+// color: rgb(162, 198, 228);
+// // sam
+// color: rgb(30, 5, 14);
+// // splash background
+// color: rgb(244, 225, 165);
+// // splash font
+
+
+
 
 
 // 
@@ -69,22 +91,22 @@ input[type="submit"] {
 
 
 .nav-container {
-    // font-family: 'Spartan', sans-serif;
-    font-family: 'Josefin Sans', sans-serif;
-    // border: 2px solid magenta;
+    // font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Spartan', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     width: 100%;
-    // margin-top: 0;
     height: 10vh;
-    // background: rgb(0, 0, 0);
-    background: rgb(16, 3, 7);
-    // color: rgb(237, 168, 91);
-    // color: rgb(120, 106, 98);
-    // color: rgb(244, 225, 165);
-    color: rgb(182, 192, 200);
+    // background: rgb(57, 57, 57);
+    // pic sent 1
+    // background: rgb(23, 23, 23);
+    // pic sent 2
+    background: rgb(7, 7, 9);
+    // color: rgb(203, 191, 255);
+    // pic sent 1 & 2
+    color: rgb(252, 229, 195);
 
   .header-left {
     margin-left: 2vw;
@@ -106,9 +128,8 @@ input[type="submit"] {
 
 
   .footer {
-    // font-family: 'Spartan', sans-serif;
-    font-family: 'Josefin Sans', sans-serif;
-    // border: 2px solid magenta;
+    // font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Spartan', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -116,27 +137,40 @@ input[type="submit"] {
     width: 100%;
     height: 10vh;
     bottom: 0;
-    // background: rgb(0, 0, 0);
-    background: rgb(16, 3, 7);
+    // background: rgb(57, 57, 57);
+    // pic sent 1
+    // background: rgb(23, 23, 23);
+    // pic sent 2
+    background: rgb(7, 7, 9);
       div {
         margin-left: 2vw;
         margin-right: 2.5vw;
         font-size: 18px;
       }
     .connect {
-      color: rgb(237, 168, 91);
-    }
-    .julia {
-      color: rgb(179, 142, 120);
-    }
-    .robby {
-      color: rgb(193, 188, 174);
+      // color: rgb(255, 197, 130);
+      // pic sent 1 & 2
+      color: rgb(252, 229, 195);
     }
     .sam {
-      color: rgb(162, 198, 228);
+      // color: rgb(203, 191, 255);
+      // pic sent 1 & 2
+      color: rgb(183, 167, 255);
+    }
+    .robby {
+      // color: rgb(220, 198, 196);
+      // pic sent 1 & 2
+      color: rgb(255, 169, 169);
+    }
+    .julia {
+      // color: rgb(177, 255, 230);
+      // pic sent 1 & 2
+      color: rgb(200, 221, 249);
     }
     .tahj {
-      color: rgb(237, 168, 91);
+      // color: rgb(255, 197, 130);
+      // pic sent 1 & 2
+      color: rgb(252, 229, 195);
     }
   }
 
@@ -149,18 +183,15 @@ input[type="submit"] {
 
 
 .splash-page {
-  // font-family: 'Spartan', sans-serif;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Spartan', sans-serif;
   padding-top: 15vh;
   padding-left: 2vw;
   padding-right: 2vw;
   padding-bottom: 15vh;
   height: 70vh;
   width: 96vw;
-  background: rgb(30, 5, 14);
-  // ^this one is nice ?? dark burg
-  // background: rgb(23, 23, 23);
-  color: rgb(244, 225, 165);
+  background: rgb(16, 24, 30);
+  color: rgb(200, 221, 249);
 }
 
 
@@ -170,18 +201,22 @@ input[type="submit"] {
 
 
 .session-form-container {
-  // font-family: 'Spartan', sans-serif;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Spartan', sans-serif;
   font-size: 16px;
   padding-top: 15vh;
-  margin-left: 3vw;
-  margin-right: 3vw;
   padding-bottom: 15vh;
   display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 70vh;
+  background: rgb(35, 37, 40);
+  color: rgb(200, 221, 249);
 
   .login-signup-header {
     border: 1px solid red;
     text-align: center;
+    margin-bottom: 2%;
+    width: 40em;
   }
 
   .login-signup-errors {
@@ -195,8 +230,10 @@ input[type="submit"] {
     flex-direction: column;
     justify-content: space-around;
     align-content: center;
-    // align-items: center;
+  }
 
+  .login-input::placeholder {
+    color: yellow;
   }
 
   .session-submit {
@@ -205,6 +242,64 @@ input[type="submit"] {
 
   .new-user {
     border: 1px solid magenta;
+  }
+
+}
+
+
+
+// 
+// ** HOME
+// 
+
+.home {
+  // font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Spartan', sans-serif;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  width: 100vw;
+  height: 80vh;
+  // background: rgb(89, 89, 89);
+  // pic sent 1
+  // background: rgb(34, 34, 34);
+  // pic sent 2
+  background: rgb(16, 24, 30);
+  // color: rgb(177, 255, 230);
+  // pic sent 1 & 2
+  color: rgb(200, 221, 249);
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 3fr 1fr 1fr;
+
+
+  .drawing-board-index {
+    border: 1px solid white;
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+
+  .easel-show {
+    border: 1px solid white;
+    grid-column-start: 2;
+    background: rgb(35, 37, 40);
+  }
+
+  .easel-index {
+    border: 1px solid white;
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .chat-index {
+    border: 1px solid white;
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .friend-index {
+    border: 1px solid white;
+    grid-column: 3;
+    grid-row: 1 / 4;
   }
 
 }
