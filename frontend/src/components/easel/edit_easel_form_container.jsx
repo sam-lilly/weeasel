@@ -8,16 +8,16 @@ class EditEaselForm extends React.Component {
         // this.props.fetchEasel(this.props.match.params.easelId);
     }
 
-    render () {
+    render() {
 
         return (
             <div>
 
                 <EaselForm
                     whatever we need to be passing in
-                    />
+                />
                 <h1>this is the edit easel container</h1>
-                
+
             </div>
         )
 
@@ -31,8 +31,8 @@ const mSTP = (state, ownProps) => ({
 })
 
 const mDTP = (dispatch) => ({
-    fetchEasel: (easelId) => dispatch(fetchEasel(easelId)),
-    submitEasel: (easel) => dispatch(updateEasel(easel))
+    submitEasel: (boardId, easelId, easel) => dispatch(updateEasel(boardId, easelId, easel)),
+    // fetchEasel: (easelId) => dispatch(fetchEasel(easelId)),
 })
 
-export default connect (mSTP, mDTP)(EditEaselForm);
+export default connect(mSTP, mDTP)(EditEaselForm);

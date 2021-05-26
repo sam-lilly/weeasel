@@ -10,7 +10,7 @@ const mSTP = (state) => ({
 })
 
 const mDTP = (dispatch) => ({
-    submitEasel: (easel) => dispatch(createEasel(easel))
+    submitEasel: (boardId, easelId, easel) => dispatch(createEasel(boardId, easelId, easel))
 })
 
-export default connect (mSTP, mDTP)(EaselForm);
+export default connect(mSTP, mDTP)(EaselForm);
