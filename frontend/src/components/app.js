@@ -11,6 +11,7 @@ import DrawingBoardIndexContainer from './drawing_boards/drawing_board_index_con
 import DrawingBoardShowContainer from './drawing_boards/drawing_board_show_container';
 import NavBar from './nav_bar/nav_bar';
 import Footer from './footer/footer';
+import Home from './home/home';
 
 
 const App = () => (
@@ -31,6 +32,9 @@ const App = () => (
 
       <Route exact path="/drawingBoards" component={DrawingBoardIndexContainer} />
       <Route exact path="/drawingBoards/:DrawingBoardId" component={DrawingBoardShowContainer} />
+
+      <Route exact path="/home" component={Home} />
+      {/* make this an auth route */}
 
     </Switch>
 
