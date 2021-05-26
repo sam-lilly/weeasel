@@ -20,6 +20,7 @@ export const receiveUserSignIn = () => {
   });
 };
 
+
 export const logoutUser = () => {
   return ({
     type: RECEIVE_USER_LOGOUT
@@ -39,13 +40,25 @@ export const clearErrors = () => {
   });
 };
 
+// export const signup = user => dispatch => (
+//   APIUtil.signup(user)
+//     .then(
+//       () => (dispatch(receiveUserSignIn())),
+//       err => (dispatch(receiveErrors(err.response.data)))
+//     )
+// );
+// ^ what was written prior // below am experimenting with
+
 export const signup = user => dispatch => (
-  APIUtil.signup(user)
-    .then(
-      () => (dispatch(receiveUserSignIn())),
-      err => (dispatch(receiveErrors(err.response.data)))
-    )
-);
+    APIUtil.signup(user)
+      .then(
+        user => (dispatch(receiveCurrentUser(user))),
+        err => (dispatch(receiveErrors(err.response.data)))
+      )
+  );
+// what was working // but need to fix the state users slice
+// is returning config and all info as opposed to state we want
+
 
 export const login = user => dispatch => (
   APIUtil.login(user)
