@@ -1,3 +1,4 @@
+
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
@@ -24,8 +25,6 @@ app.get("/", (req, res) => res.send("Hiya World"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(passport.initialize());
-require('./config/passport')(passport);
 
 app.use("/api/users", users);
 app.use("/api/drawingBoards", drawingBoards)
@@ -46,7 +45,7 @@ let people = 0
 io.on('connection', (socket) => {
     console.log("User Online")
     people++
-    clients++
+
     console.log(people)
     io.sockets.emit("broadcast", { description: people + "clients connected!" })
 
@@ -60,13 +59,20 @@ io.on('connection', (socket) => {
     socket.on("canvas-data", (data, boardName) => {
         console.log(data)
         console.log(boardName)
-        socket.broadcast.emit(boardName, data, boardName)
+        io.sockets.emit(boardName, data, boardName)
+    })
+
+    socket.on("message", (data) => {
+        console.log(data)
+        // going to end up having chat id as well and emitting it
+        socket.broadcast.emit("message", data)
     })
 })
 
 // http.listen(port, () => {
 //     console.log("Started on :" + port)
 // })
+
 
 
 
