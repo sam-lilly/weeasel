@@ -4,9 +4,7 @@ const http = require("http").createServer(app);
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const socket = require('socket.io')
-const cors = require('cors')
 
-app.use(cors())
 
 const passport = require('passport');
 const bodyParser = require('body-parser');
