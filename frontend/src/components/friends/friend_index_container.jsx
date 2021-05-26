@@ -4,11 +4,11 @@ import FriendIndex from './friend_index';
 
 
 const mSTP = (state) => ({
-    friends: Object.values(state.entities.friends)
+    // friends: Object.values(state.entities.friends)
 })
 
 const mDTP = (dispatch) => ({
-    fetchFriends: () => dispatch(fetchFriends()),
+    // fetchFriends: () => dispatch(fetchFriends()),
     fetchFriend: (friendId) => dispatch(fetchFriend(friendId)),
     deleteFriend: (friendId) => dispatch(deleteFriend(friendId))
 })

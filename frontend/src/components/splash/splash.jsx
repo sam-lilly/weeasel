@@ -7,11 +7,8 @@ class SplashPage extends React.Component {
     render () {
         return (
             <div className="splash-page">
-                <h1>this is the splash page!</h1>
-                <h1> collaborative easel 🦦 Weeasel 🦦</h1>
-                <footer>
-                Created by Sam Lilly, Robby Balistreri, Tahj Harris, Julia Kim
-                </footer>
+                <h1>weeasel.</h1>
+                <p>a collaborative drawing message board to draw and chat with your friends!</p>
             </div>
         )
     }

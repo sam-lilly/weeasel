@@ -7,7 +7,7 @@ import SessionForm from './session_form';
 const mSTP = ({ errors }) => ({
     errors: Object.values(errors.session),
     formType: 'Create Account',
-    headerType: 'Register',
+    headerType: 'Sign Up',
     formNav: 'Have an account?',
     navLink: <Link to="/login">Login</Link>,
     navLinkInRender: "/login",

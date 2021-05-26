@@ -5,7 +5,7 @@ import EaselIndex from './easel_index';
 
 const mSTP = (state) => ({
     drawingBoards: state.entities.drawingBoards,
-    easels: drawingBoards.easels
+    easels: state.entities.drawingBoards.easels
     // easels: Object.values(state.entities.easels)
 })
 

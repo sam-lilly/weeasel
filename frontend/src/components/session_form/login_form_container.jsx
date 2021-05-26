@@ -9,8 +9,8 @@ const mSTP = ({ errors }) => ({
     errors: Object.values(errors.session),
     formType: 'Login',
     headerType: 'Login',
-    formNav: 'New User?',
-    navLink: <Link to="/signup">Create Account</Link>,
+    formNav: 'New to Weeasel?',
+    navLink: <Link to="/signup">Sign Up</Link>,
     navLinkInRender: "/signup",
     navText: 'Create Account'
 });
