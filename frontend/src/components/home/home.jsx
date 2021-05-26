@@ -8,11 +8,11 @@ class Home extends React.Component {
         return (
             <div className="home">
                 <h1>you made it home!!! (this is the homepage)</h1>
-                <DrawingBoardIndex />
+                {/* <DrawingBoardIndex />
                 <EaselShow />
                 <EaselIndex />
                 <ChatIndex />
-                <FriendsIndex />
+                <FriendsIndex /> */}
             </div>
         )
     }
