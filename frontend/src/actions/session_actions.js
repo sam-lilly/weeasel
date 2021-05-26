@@ -5,7 +5,8 @@ export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 export const RECEIVE_USER_SIGN_IN = 'RECEIVE_USER_SIGN_IN';
 export const RECEIVE_USER_LOGOUT = 'RECEIVE_USER_LOGOUT';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const RECEIVE_NEW_USER = 'RECEIVE_NEW_USER';
 
 export const receiveCurrentUser = (currentUser) => {
   return ({
@@ -13,6 +14,13 @@ export const receiveCurrentUser = (currentUser) => {
     currentUser
   });
 };
+
+export const receiveNewUser = (currentUser) => {
+  return ({
+    type: RECEIVE_NEW_USER,
+    currentUser
+  });
+}
 
 export const receiveUserSignIn = () => {
   return ({
@@ -50,12 +58,12 @@ export const clearErrors = () => {
 // ^ what was written prior // below am experimenting with
 
 export const signup = user => dispatch => (
-    APIUtil.signup(user)
-      .then(
-        user => (dispatch(receiveCurrentUser(user))),
-        err => (dispatch(receiveErrors(err.response.data)))
-      )
-  );
+  APIUtil.signup(user)
+    .then(
+      user => (dispatch(receiveNewUser(user))),
+      err => (dispatch(receiveErrors(err.response.data)))
+    )
+);
 // what was working // but need to fix the state users slice
 // is returning config and all info as opposed to state we want
 

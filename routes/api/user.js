@@ -8,6 +8,7 @@ const passport = require('passport');
 
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const drawingBoard = require("../../validation/drawingBoard");
 
 router.get('/current',
   passport.authenticate('jwt', { session: false }),
@@ -50,13 +51,16 @@ router.post('/register', (req, res) => {
                   id: user.id,
                   username: user.username,
                   email: user.email,
+                  ownedDrawingBoards: [],
+                  joinedDrawingBoards: [],
+                  friends: []
                 };
                 jwt.sign(
                   payload,
                   keys.secretOrKey,
                   { expiresIn: 3600 },
                   (err, token) => {
-                    res.json({ success: true, token: 'Bearer ' + token, ...payload });
+                    res.json({ success: true, token: 'Bearer ' + token, data: payload });
                   });
               })
               .catch(err => console.log(err));
@@ -110,29 +114,76 @@ router.post('/login', (req, res) => {
     })
 })
 
-router.get('/api/users', (req, res) => {
-    User.find().then(users => res.json(users))
-  }
+router.get('/', (req, res) => {
+  User.find({}, { ownedDrawingBoards: 1, joinedDrawingBoards: 1, friends: 1, online: 1, username: 1, email: 1, createdAt: 1 }).then(users => res.json(users))
+}
 )
 
-router.post('/api/users',
- passport.authenticate('jwt', { session: false }),
+router.post('/',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
-  let currUser = User.findOne({ _id: req.user.id })
-  currUser.friends.push(req.body.friendId);
-  currUser.update();
-  res.json(req.body.friendId)
-})
+    User.findById(req.user.id).then(currUser => {
+      currUser.friends.push(req.body.friendId);
+      currUser.save();
+    })
 
-router.post('/api/users/:userId', 
-passport.authenticate('jwt', { session: false }),
-(req,res) => {
-  let currentUser = User.findOne({ _id: req.user.id });
-  const index = currentUser.friends.indexOf(req.body.friendId);
-  currentUser.friends.splice(index, 1);
-  currentUser.update();
+    res.json(req.body.friendId)
+  })
 
-  res.json(req.body.friendId);
-})
+router.post('/drawingboards/:drawingBoardId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    User.findById(req.user.id).then(currUser => {
+      currUser.joinedDrawingBoards.push(req.params.drawingBoardId);
+      currUser.save();
+    })
+    DrawingBoard.findById(req.params.drawingBoardId).then(board => {
+      board.users.push(req.user.id);
+      board.save();
+    })
+
+    res.send({ joinedDrawingBoard: req.params.drawingBoardId })
+  })
+
+router.delete('/:userId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    User.findById(req.user.id)
+      .then(user => {
+        const index = user.friends.indexOf(req.body.friendId);
+        user.friends.splice(index, 1);
+        user.save();
+      })
+    // let currentUser = User.findOne({ _id: req.user.id });
+    // const index = currentUser.friends.indexOf(req.body.friendId);
+    // currentUser.friends.splice(index, 1);
+    // currentUser.save();
+
+    res.send({ friendId: req.params.userId });
+  })
+
+router.delete('/drawingboards/:drawingBoardId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    User.findById(req.user.id)
+      .then(user => {
+        const index = user.joinedDrawingBoards.indexOf(req.params.drawingBoardId);
+        user.joinedDrawingBoards.splice(index, 1);
+        user.save();
+      })
+    DrawingBoard.findById(req.params.drawingBoardId)
+      .then(board => {
+        const index = board.users.indexOf(req.user.id);
+        board.users.splice(index, 1);
+        board.save();
+      })
+
+    // let currentUser = User.findOne({ _id: req.user.id });
+    // const index = currentUser.friends.indexOf(req.body.friendId);
+    // currentUser.friends.splice(index, 1);
+    // currentUser.save();
+
+    res.send({ drawingBoardId: req.params.drawingBoardId });
+  })
 
 module.exports = router;

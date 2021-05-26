@@ -24,6 +24,8 @@ app.get("/", (req, res) => res.send("Hiya World"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 app.use("/api/users", users);
 app.use("/api/drawingBoards", drawingBoards)
@@ -37,7 +39,8 @@ io = socket(server, {
         origin: "http://localhost:3000",
         methods: ["GET", "POST"],
         credentials: true
-    }})
+    }
+})
 
 let people = 0
 io.on('connection', (socket) => {
@@ -45,12 +48,12 @@ io.on('connection', (socket) => {
     people++
     clients++
     console.log(people)
-    io.sockets.emit("broadcast", {description: people + "clients connected!"})
+    io.sockets.emit("broadcast", { description: people + "clients connected!" })
 
 
-    socket.on("disconnect", function(){
+    socket.on("disconnect", function () {
         people--;
-        socket.broadcast.emit("broadcast", {description: people + "clients connected!"})
+        socket.broadcast.emit("broadcast", { description: people + "clients connected!" })
     })
 
 
