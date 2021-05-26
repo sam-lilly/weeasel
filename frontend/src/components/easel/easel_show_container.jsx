@@ -7,7 +7,7 @@ const mSTP = (state, ownProps) => ({
 })
 
 const mDTP = (dispatch) => ({
-    fetchEasel: (easelId) => dispatch(fetchEasel(easelId))
+    // fetchEasel: (easelId) => dispatch(fetchEasel(easelId))
 })
 
-export default connect (mSTP, mDTP)(EaselShow);
+export default connect(mSTP, mDTP)(EaselShow);
