@@ -12,7 +12,7 @@ const easelsReducer = (oldState = {}, action) => {
             return nextState;
         case REMOVE_EASEL:
             delete nextState[action.easelId];
-                return nextState;
+            return nextState;
         default:
             return oldState;
     }

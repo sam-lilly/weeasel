@@ -5,10 +5,10 @@ import EaselIndexItem from './easel_index_item';
 class EaselIndex extends React.Component {
 
     componentDidMount() {
-        this.props.fetchEasels()
+        this.props.fetchEasels(this.props.drawingBoard.id)
     }
 
-    render () {
+    render() {
 
         let { easels, fetchEasel, deleteEasel } = this.props;
 

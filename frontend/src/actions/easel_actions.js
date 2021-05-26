@@ -19,8 +19,8 @@ const removeEasel = (easelId) => ({
     easelId
 })
 
-export const fetchEasels = () => (dispatch) => (
-    EaselApiUtil.fetchEasels()
+export const fetchEasels = (boardId) => (dispatch) => (
+    EaselApiUtil.fetchEasels(boardId)
         .then(easels => dispatch(receiveEasels(easels)))
 )
 
@@ -29,17 +29,17 @@ export const fetchEasel = (easelId) => (dispatch) => (
         .then(easel => dispatch(receiveEasel(easel)))
 )
 
-export const createEasel = (easel) => (dispatch) => (
-    EaselApiUtil.createEasel(easel)
+export const createEasel = (boardId, easel) => (dispatch) => (
+    EaselApiUtil.createEasel(boardId, easel)
         .then(easel => dispatch(receiveEasel(easel)))
 )
 
-export const updateEasel = (easel) => (dispatch) => (
-    EaselApiUtil.updateEasel(easel)
+export const updateEasel = (boardId, easelId, easel) => (dispatch) => (
+    EaselApiUtil.updateEasel(boardId, easelId, easel)
         .then(easel => dispatch(receiveEasel(easel)))
 )
 
-export const deleteEasel = (easelId) => (dispatch) => (
-    EaselApiUtil.deleteEasel(easelId)
+export const deleteEasel = (boardId, easelId) => (dispatch) => (
+    EaselApiUtil.deleteEasel(boardId, easelId)
         .then(() => dispatch(removeEasel(easelId)))
 )
