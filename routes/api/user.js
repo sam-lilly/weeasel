@@ -123,11 +123,11 @@ router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     User.findById(req.user.id).then(currUser => {
-      currUser.friends.push(req.body.friendId);
+      currUser.friends.push(req.body.userId);
       currUser.save();
     })
 
-    res.json(req.body.friendId)
+    res.json(req.body.userId)
   })
 
 router.post('/drawingboards/:drawingBoardId',

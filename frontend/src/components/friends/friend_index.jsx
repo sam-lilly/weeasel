@@ -3,28 +3,93 @@ import { Link } from 'react-router-dom';
 import FriendIndexItem from './friend_index_item';
 
 class FriendIndex extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            addDropdown: false,
 
+        }
+        this.setDropdown = this.setDropdown.bind(this);
+    }
     componentDidMount() {
-        // this.props.fetchFriends()
+        this.props.fetchUsers();
+    }
+
+    onAdd(friendId) {
+        return (e) => {
+            this.props.addFriend(friendId);
+            this.setState({
+                addDropdown: false,
+            })
+        }
+    }
+
+    setDropdown(e) {
+        this.setState({
+            addDropdown: !this.state.addDropdown
+        })
     }
 
     render () {
 
-        let { friends, fetchFriend, deleteFriend } = this.props;
+        let { users, addFriend, deleteFriend, fetchUsers, friends, currentUser } = this.props;
+        let otherUsers = users.filter(user => !this.props.currentUser.friends.includes(user._id) && this.props.currentUser.id != user._id)
+        let onlineFriends = friends.filter(friend => friend.online);
+        let offlineFriends = friends.filter(friend => !friend.online);
 
-        // if (!friends) return null;
-        // comment back in when have friends
+        const addFriendDropdown = () => {
+            return (
+                <div className='add-friend-dropdown'>
+                    <h2 className='add-friend-dropdown-title'>Add new friends!</h2>
+                    <div className='add-friend-list'>
+                        {otherUsers.map(user => {
+                            return <div key={user._id} className='add-friend-item'>
+                                    <p className='add-friend-username'>{user.username}</p> 
+                                    <i  onClick={this.onAdd(user._id)} className="fas fa-plus-circle"></i>
+                                </div>
+                        })}
+                    </div>
+                </div>
+            )
+        }
+
+
+        if (Object.values(users).length < 1) {
+            return (
+                <p>Loading your friends...</p>
+            );
+        }
+        if (friends.length < 1) {
+            return (
+                <div>
+                    <h1> Sorry, you don't have any friends :(</h1>
+                    <i className="fas fa-plus"></i>
+                </div>
+            )
+        }
 
         return (
             <div className="friend-index">
 
-                <h1>I am the friend index!</h1>
+                <div className='friend-index-header'>
+                    <h1 className='friend-index-title'>friends</h1>
+                    <i onClick={this.setDropdown} className="fas fa-plus"></i>
+                    {this.state.addDropdown ? addFriendDropdown() : null}
+                </div>
 
                 <div className="friend-items">
-                    {/* {
-                        friends.map(friend => <FriendIndexItem key={friend.id} friend={friend} fetchFriend={fetchFriend} deleteFriend={deleteFriend} />)
-                    } */}
-                    {/* comment back in when have friends / throws err */}
+                    <h2 className='friend-index-subheader'>Online</h2>
+                    {
+                        onlineFriends.length > 0 ? onlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} />) :
+                        'no friends are online'
+                    }
+                </div>
+                <div className="friend-items">
+                    <h2 className='friend-index-subheader'>Offline</h2>
+                    {
+                        offlineFriends.length > 0 ? offlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} />) :
+                        'all friends are online!'
+                    }
                 </div>
 
             </div>
