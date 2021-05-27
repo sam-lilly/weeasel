@@ -165,7 +165,7 @@ input[type="submit"] {
     .julia {
       // color: rgb(177, 255, 230);
       // pic sent 1 & 2
-      color: rgb(200, 221, 249);
+      color: rgb(185, 213, 249);
     }
     .tahj {
       // color: rgb(255, 197, 130);
@@ -184,14 +184,82 @@ input[type="submit"] {
 
 .splash-page {
   font-family: 'Spartan', sans-serif;
-  padding-top: 15vh;
-  padding-left: 2vw;
-  padding-right: 2vw;
-  padding-bottom: 15vh;
-  height: 70vh;
-  width: 96vw;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  height: 80vh;
+  width: 100vw;
   background: rgb(16, 24, 30);
   color: rgb(200, 221, 249);
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  grid-template-rows: 1fr;
+
+  .left-side {
+
+    background: rgb(255, 169, 169);
+    display: flex;
+    flex-direction: column;
+    padding-top: 4vh;
+    align-items: center;
+    .logo {
+      width: 65%;
+      filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+      text-align: center;
+    }
+    .weeasel {
+      color: black;
+      font-size: 5.5em;
+      font-weight: 700;
+      margin-top: 2vh;
+      filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+    }
+    .weeasel-logo-login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &:hover {
+        filter: drop-shadow(0 0 0.4rem rgb(255, 230, 147));
+      }
+    }
+  }
+
+
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    padding-top: 5.5vh;
+    align-items: center;
+    font-size: 2em;
+    text-align: center;
+    color: rgb(185, 213, 249);
+    strong {
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+    p {
+      padding: 0.2em;
+    }
+
+    .join-fun {
+      color: black;
+      font-weight: 600;
+      background: rgb(183, 167, 255);
+      padding: 0.5em;
+      border-radius: 0.6em;
+      margin-top: 30px;
+      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      &:hover {
+        background: rgb(252, 229, 195);
+        color: rgb(138, 185, 245);
+        border-radius: 0.6em;
+        filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255))
+      }
+    }
+  }
+
+
+
 }
 
 
@@ -203,45 +271,144 @@ input[type="submit"] {
 .session-form-container {
   font-family: 'Spartan', sans-serif;
   font-size: 16px;
-  padding-top: 15vh;
-  padding-bottom: 15vh;
-  display: flex;
-  justify-content: center;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  // display: flex;
+  // justify-content: center;
+  // can add this^ on the session form
+
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  grid-template-rows: 1fr;
   width: 100vw;
-  height: 70vh;
-  background: rgb(35, 37, 40);
-  color: rgb(200, 221, 249);
+  height: 80vh;
+  background: rgb(16, 24, 30);
+  color: rgb(185, 213, 249);
 
-  .login-signup-header {
-    border: 1px solid red;
-    text-align: center;
-    margin-bottom: 2%;
-    width: 40em;
-  }
-
-  .login-signup-errors {
-    border: 1px solid orange;
-    text-align: center;
-  }
-
-  .session-form {
-    border: 1px solid green;
+  .left-side {
+    background: rgb(255, 169, 169);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-content: center;
+    padding-top: 4vh;
+    align-items: center;
+    .logo {
+      width: 65%;
+      filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+      text-align: center;
+    }
+    .weeasel {
+      color: black;
+      font-size: 5.5em;
+      font-weight: 700;
+      margin-top: 2vh;
+      filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+    }
+    .weeasel-logo-login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &:hover {
+        filter: drop-shadow(0 0 0.4rem rgb(255, 230, 147));
+      }
+    }
   }
 
-  .login-input::placeholder {
-    color: yellow;
-  }
+  .session-form-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  .session-submit {
-    border: 1px solid cyan;
-  }
+    .login-signup-header {
+      padding-top: 4vh;
+      // border: 1px solid red;
+      text-align: center;
+      font-size: 3em;
+      font-weight: 600;
+      margin-bottom: 1.5%;
+      letter-spacing: 0.2em;
+      color: rgb(185, 213, 249);
+      filter: drop-shadow(0 0 0.1rem rgb(255, 255, 255));
+    }
 
-  .new-user {
-    border: 1px solid magenta;
+    .login-signup-errors {
+      // border: 1px solid orange;
+      text-align: center;
+      // STILL NEED TO DO CSS FOR ERRORS
+    }
+
+    .session-form {
+      // border: 1px solid green;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-content: center;
+      width: 40%;
+    }
+
+    .login-input {
+     border: 1px solid rgb(185, 213, 249);
+     margin: 0.6em 0; 
+     padding: 0.6em 0.4em;
+     border-radius: 0.6em;
+      // need to do pseudo selector for while
+      // typing in the inputs
+    }
+
+    .login-input::placeholder {
+      color: rgb(185, 213, 249);
+      letter-spacing: 0.3em;
+      padding-left: 0.3em;
+    }
+
+    .session-submit {
+      margin: 0.6em 0; 
+      padding: 0.6em 0.4em;
+      border-radius: 0.6em;
+      letter-spacing: 0.3em;
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: 600;
+      // border: 1px solid rgb(183, 167, 255);
+      background:rgb(183, 167, 255);
+      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      color: black;
+      &:hover {
+        background: rgb(252, 229, 195);
+        color: rgb(138, 185, 245);
+        border-radius: 0.6em;
+        filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255))
+      }
+    }
+
+    .button-at-bottom {
+      // border: 1px solid red;
+      margin: 0.6em 0; 
+      padding: 0.6em 0.4em;
+      border-radius: 0.6em;
+      letter-spacing: 0.3em;
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: 600;
+      // border: 1px solid rgb(183, 167, 255);
+      background:rgb(183, 167, 255);
+      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      color: black;
+      &:hover {
+        background: rgb(252, 229, 195);
+        color: rgb(138, 185, 245);
+        border-radius: 0.6em;
+        filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255))
+      }
+    }
+
+    .new-user {
+      // border: 1px solid magenta;
+      text-align: center;
+      font-size: 1.3em;
+      letter-spacing: 0.1em;
+      padding-bottom: 1vh;
+    }
   }
 
 }
