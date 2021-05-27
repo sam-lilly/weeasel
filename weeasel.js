@@ -45,7 +45,7 @@ app.use("/api/drawingBoards", drawingBoards)
 
 const port = process.env.PORT || 5000;
 
-server = app.listen(port, () => console.log(`Server is running on port ${port}`));
+const server = app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 io = socket(server, {
     cors: {
