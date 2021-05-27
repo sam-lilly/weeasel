@@ -1,4 +1,4 @@
-import {RECEIVE_COMMENT, RECEIVE_DRAWING_BOARDS, RECEIVE_DRAWING_BOARD, REMOVE_DRAWING_BOARD } from '../actions/drawing_board_actions';
+import { RECEIVE_COMMENT, RECEIVE_DRAWING_BOARDS, RECEIVE_DRAWING_BOARD, REMOVE_DRAWING_BOARD } from '../actions/drawing_board_actions';
 
 const drawingBoardsReducer = (oldState = {}, action) => {
     Object.freeze(oldState);
@@ -6,17 +6,17 @@ const drawingBoardsReducer = (oldState = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_DRAWING_BOARDS:
-            return action.drawingBoards;
+            return action.drawingBoards.data;
         case RECEIVE_DRAWING_BOARD:
-            nextState[action.drawingBoard.id] = action.drawingBoard;
+            nextState[action.drawingBoard.id] = action.drawingBoard.data;
             return nextState;
         case REMOVE_DRAWING_BOARD:
             delete nextState[action.drawingBoardId];
-                return nextState;
+            return nextState;
         case RECEIVE_COMMENT:
             const comment = action.comment;
             nextState.drawingBoards[action.comment.drawingBoardId].comments.push(comment);
-            return nextState; 
+            return nextState;
         default:
             return oldState;
     }

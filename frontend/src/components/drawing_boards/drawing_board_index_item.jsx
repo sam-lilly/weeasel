@@ -7,16 +7,16 @@ class DrawingBoardIndexItem extends React.Component {
         super(props);
     }
 
-    render () {
+    render() {
 
         let { drawingBoard, deleteDrawingBoard } = this.props;
-        
+
         if (!drawingBoard) return null;
 
 
         return (
             <div className="drawing-board-index-boxes">
-                <h1>hi! I am the drawing board index items :)</h1>
+                <h1>{drawingBoard.name}</h1>
             </div>
         )
 
