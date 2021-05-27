@@ -1,9 +1,11 @@
-import  { connect } from 'react-redux';
-import { fetchDrawingBoards, fetchDrawingBoard, createDrawingBoard, deleteDrawingBoard } from '../../actions/drawing_board_actions';
+import { connect } from 'react-redux';
+import { fetchDrawingBoards, fetchDrawingBoard, createDrawingBoard } from '../../actions/drawing_board_actions';
+import { fetchUsers } from '../../actions/user_actions'
 import DrawingBoardIndex from './drawing_board_index';
 
 
 const mSTP = (state) => ({
+    friends: state.session.user.friends,
     drawingBoards: Object.values(state.entities.drawingBoards)
 })
 
@@ -11,7 +13,7 @@ const mDTP = (dispatch) => ({
     fetchDrawingBoards: () => dispatch(fetchDrawingBoards()),
     fetchDrawingBoard: (drawingBoardId) => dispatch(fetchDrawingBoard(drawingBoardId)),
     createDrawingBoard: (drawingBoard) => dispatch(createDrawingBoard(drawingBoard)),
-    deleteDrawingBoard: (drawingBoardId) => dispatch(deleteDrawingBoard(drawingBoardId))
+    fetchUsers: () => dispatch(fetchUsers())
 })
 
-export default connect (mSTP, mDTP)(DrawingBoardIndex);
+export default connect(mSTP, mDTP)(DrawingBoardIndex);

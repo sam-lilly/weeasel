@@ -23,10 +23,10 @@ const App = () => (
 
       {/* <Route exact path="/" component={Main} /> */}
       {/* // <AuthRoute exact path="/" component={Main} /> */}
-      <Route exact path="/home" component={Home} />
 
-      <Route exact path="/" component={SplashPage} />
-      // <AuthRoute exact path="/" component={SplashPage} />
+      <ProtectedRoute exact path="/myWeeasel" component={Home} />
+      {/* <Route exact path="/" component={SplashPage} /> */}
+      <AuthRoute exact path="/" component={SplashPage} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
 
