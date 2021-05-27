@@ -26,6 +26,7 @@ class DrawingBoardShow extends React.Component {
     socket = socket
     ctx;
     componentDidMount() {
+        this.props.fetchEasels()
 
         //we're gonna need a way to fetch the easel info whenever the page loads
         //and then 

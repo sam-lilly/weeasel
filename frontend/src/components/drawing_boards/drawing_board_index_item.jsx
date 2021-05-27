@@ -17,6 +17,7 @@ class DrawingBoardIndexItem extends React.Component {
         return (
             <div className="drawing-board-index-boxes">
                 <h1>{drawingBoard.name}</h1>
+                
             </div>
         )
 
