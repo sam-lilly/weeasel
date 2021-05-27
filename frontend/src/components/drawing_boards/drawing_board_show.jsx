@@ -11,7 +11,8 @@ class DrawingBoardShow extends React.Component {
             color: "#000000",
             size: "5",
             easelDropdown: false,
-            chatDropdown: false
+            chatDropdown: false,
+            newEaselName: ''
         }
         // inside of our state we'll have to have the main board image data
         this.createEasel = this.createEasel.bind(this);
@@ -23,6 +24,8 @@ class DrawingBoardShow extends React.Component {
         this.changeSize = this.changeSize.bind(this)
         this.showEasels = this.showEasels.bind(this)
         this.makeEraser = this.makeEraser.bind(this)
+        this.onEaselNameChange = this.onEaselNameChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
 
     }
 
@@ -65,9 +68,10 @@ class DrawingBoardShow extends React.Component {
 
 
     componentDidUpdate(prevProps, prevState) {
+        if (!this.props.boardId) return;
         if (this.props.boardId != prevProps.boardId) {
             let testChat = document.getElementById(`chat${this.props.boardId}`);
-            testChat.innerHTML = '';
+            if (testChat) testChat.innerHTML = '';
         }
 
         if (Object.values(prevState.mainBoard).length < 1 && this.props.easels.length > 0) {
@@ -163,7 +167,7 @@ class DrawingBoardShow extends React.Component {
     drawOnCanvas() {
         
         const canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
-        // if (!canvas) return
+        if (!canvas) return
       
          this.ctx = canvas.getContext('2d');
         const ctx = this.ctx
@@ -313,6 +317,24 @@ class DrawingBoardShow extends React.Component {
         })
     }
 
+    onEaselNameChange(e) {
+        this.setState({
+            newEaselName: e.target.value
+        })
+    }
+
+    onSubmit(e) {
+        e.preventDefault()
+        let newEasel = {
+            name: this.state.newEaselName,
+            image: ''
+        }
+        this.props.createEasel(this.props.boardId, newEasel)
+        this.setState({
+            newEaselName: ''
+        })
+    }
+
 
 
 
@@ -321,8 +343,24 @@ class DrawingBoardShow extends React.Component {
         console.log(this.props.boardId)
         if (!this.props.boardId) {
             return (
-                <div>
-                    Please Select A Drawing board
+                <div className='no-drawing-board-selected-pane'>
+                    Select one of your drawing boards to get started!
+                </div>
+            )
+        }
+
+        if (this.props.easels.length < 1) {
+            return (
+                <div className='no-existing-easels-pane'>
+                    <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name}</h1>
+                    <div className='no-existing-easels-pane'>Looks like you don't have any easels on this board, would you like to make a new one?</div>
+                    <form onSubmit={this.onSubmit} className='create-new-easel-on-pane-form'>
+                        <label htmlFor=""> Name
+                            <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
+                        </label>
+                        <button>Create new easel</button>
+                    </form>
+                    
                 </div>
             )
         }
@@ -359,9 +397,10 @@ class DrawingBoardShow extends React.Component {
         return (
             <div className="drawing-board-show-page">
 
-
+                <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name}</h1>
                         <div  id="main-easel-display">
                             {main}
+                            <i onClick={() => this.props.setDrawingBoard()} className="far fa-times-circle"></i>
                         </div>
                 <div className='drawing-board-show-nav'>
                         <button className='show-easels-button' onClick={this.showEasels}>+ More Easels</button>
