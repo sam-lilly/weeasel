@@ -63,7 +63,7 @@ router.post('/register', (req, res) => {
                     res.json({ success: true, token: 'Bearer ' + token, data: payload });
                   });
               })
-              .catch(err => console.log(err));
+              .catch(err => res.send(err));
           })
         })
       }
@@ -123,13 +123,14 @@ router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     User.findById(req.user.id).then(currUser => {
-      currUser.friends.push(req.body.friendId);
+      currUser.friends.push(req.body.userId);
       currUser.save();
     })
 
-    res.json(req.body.friendId)
+    res.json(req.body.userId)
   })
 
+//joinDraowingBoardFor CurrentUser
 router.post('/drawingboards/:drawingBoardId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
@@ -140,6 +141,22 @@ router.post('/drawingboards/:drawingBoardId',
     DrawingBoard.findById(req.params.drawingBoardId).then(board => {
       board.users.push(req.user.id);
       board.save();
+    })
+
+    res.send({ joinedDrawingBoard: req.params.drawingBoardId })
+  })
+
+router.post('/:user_id/drawingboards/:drawingBoardId',
+  (req, res) => {
+    User.findById(req.params.user_id).then(user => {
+      user.joinedDrawingBoards.push(req.params.drawingBoardId);
+      user.save();
+    })
+    DrawingBoard.findById(req.params.drawingBoardId).then(board => {
+      if (!board.users.include(req.params.user_id)) {
+        board.users.push(req.params.user_id);
+        board.save();
+      }
     })
 
     res.send({ joinedDrawingBoard: req.params.drawingBoardId })

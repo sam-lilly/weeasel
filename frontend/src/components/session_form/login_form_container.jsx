@@ -7,12 +7,12 @@ import SessionForm from './session_form';
 
 const mSTP = ({ errors }) => ({
     errors: Object.values(errors.session),
-    formType: 'Login',
-    headerType: 'Login',
-    formNav: 'New to Weeasel?',
-    navLink: <Link to="/signup">Sign Up</Link>,
+    formType: 'login',
+    headerType: 'login',
+    formNav: 'new to weeasel?',
+    navLink: <Link to="/signup">sign up</Link>,
     navLinkInRender: "/signup",
-    navText: 'Create Account'
+    navText: 'create account'
 });
 
 const mDTP = (dispatch) => ({

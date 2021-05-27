@@ -3,6 +3,7 @@ import { login } from '../../actions/session_actions';
 // make sure correct import
 import { Link } from 'react-router-dom';
 import '../scss/styles.scss';
+import weeasel from '../../logo/weeasel_use.png';
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -68,7 +69,7 @@ class SessionForm extends React.Component {
                 {/* <label> Email: */}
                     <input
                         type="text"
-                        placeholder="Email"
+                        placeholder="email"
                         value={this.state.email}
                         onChange={this.update('email')}
                         className="login-input"
@@ -81,7 +82,7 @@ class SessionForm extends React.Component {
 
     render() {
         let signUpNameForm
-        if (this.props.formType === "Create Account") {
+        if (this.props.formType === "create account") {
             signUpNameForm = this.signupForm();
         };
 
@@ -89,56 +90,64 @@ class SessionForm extends React.Component {
             <div>
 
                 <div className="session-form-container">
-                    <form onSubmit={this.handleSubmit} className="session-form-box">
 
-                        <h1 className="login-signup-header">{this.props.headerType}</h1>
+                    <div className="left-side">
+                        <Link to="/login" className="weeasel-logo-login">
+                            <img className="logo" src={weeasel} alt="weeasel" />
+                            <h1 className="weeasel">weeasel.</h1>
+                        </Link>
+                    </div>
 
-                        <div className="login-signup-errors">{this.renderErrors()}</div>
+                    <div>
 
-                        <div className="session-form">
+                        <form onSubmit={this.handleSubmit} className="session-form-box">
 
-                            {signUpNameForm}
+                            <p className="login-signup-header">{this.props.headerType}</p>
 
-                            {/* <label> Username: */}
+                            <div className="login-signup-errors">{this.renderErrors()}</div>
+
+                            <div className="session-form">
+
+                                {signUpNameForm}
+
+                                    <input
+                                        type="text"
+                                        placeholder="username"
+                                        value={this.state.username}
+                                        onChange={this.update('username')}
+                                        className="login-input"
+                                    />
+
+                                    <input
+                                        type="password"
+                                        placeholder="password"
+                                        value={this.state.password}
+                                        onChange={this.update('password')}
+                                        className="login-input"
+                                    />
+
+
                                 <input
-                                    type="text"
-                                    placeholder="Username"
-                                    value={this.state.username}
-                                    onChange={this.update('username')}
-                                    className="login-input"
+                                    className="session-submit"
+                                    type="submit"
+                                    value={this.props.formType}
                                 />
-                            {/* </label> */}
+                                <br />
+                                <p className="new-user">{this.props.formNav}</p>
 
-                            {/* <label> Password: */}
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={this.update('password')}
-                                    className="login-input"
-                                />
-                            {/* </label> */}
+                                <p className="button-at-bottom">{this.props.navLink}</p>
 
-                            {/* <p className="forgot-password" onClick={this.handleDemoSubmit}>Forgot your Password? Login as Demo User!</p> */}
-
-                            <input
-                                className="session-submit"
-                                type="submit"
-                                value={this.props.formType}
-                            />
-                            <br />
-                            <p className="new-user">{this.props.formNav}</p>
-
-                            {this.props.navLink}
-
-                            <button className="session-submit" onClick={this.handleDemoSubmit}>
-                                Login as Demo User
-                            </button>
+                                <button className="session-submit" onClick={this.handleDemoSubmit}>
+                                    login as demo user
+                                </button>
 
 
-                        </div>
+                            </div>
 
-                    </form>
+                        </form>
+                    </div>
+
+
                 </div>
 
 

@@ -7,7 +7,15 @@ export const RECEIVE_USER_SIGN_IN = 'RECEIVE_USER_SIGN_IN';
 export const RECEIVE_USER_LOGOUT = 'RECEIVE_USER_LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const RECEIVE_NEW_USER = 'RECEIVE_NEW_USER';
+export const SET_DRAWING_BOARD= 'SET_DRAWING_BOARD'
 
+
+export const setDrawingBoard = (drawingBoardId) => {
+  return({
+    type: SET_DRAWING_BOARD,
+    drawingBoardId
+  })
+}
 export const receiveCurrentUser = (currentUser) => {
   return ({
     type: RECEIVE_CURRENT_USER,
@@ -57,16 +65,29 @@ export const clearErrors = () => {
 // );
 // ^ what was written prior // below am experimenting with
 
-export const signup = user => dispatch => (
-  APIUtil.signup(user)
-    .then(
-      user => (dispatch(receiveNewUser(user))),
-      err => (dispatch(receiveErrors(err.response.data)))
-    )
-);
+// export const signup = user => dispatch => (
+//   APIUtil.signup(user)
+//     .then(
+//       user => (dispatch(receiveNewUser(user))),
+//       err => (dispatch(receiveErrors(err.response.data)))
+//     )
+// );
 // what was working // but need to fix the state users slice
 // is returning config and all info as opposed to state we want
 
+export const signup = user => dispatch => (
+  APIUtil.signup(user)
+    .then(res => {
+      const { token } = res.data;
+      localStorage.setItem('jwtToken', token);
+      APIUtil.setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(receiveCurrentUser(decoded))
+    })
+    .catch(err => {
+      dispatch(receiveErrors(err.response.data));
+    })
+)
 
 export const login = user => dispatch => (
   APIUtil.login(user)
