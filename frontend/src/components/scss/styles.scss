@@ -442,7 +442,7 @@ input[type="submit"] {
     grid-column: 2;
   
     grid-row: 1 / 4;
-    background-color: red ;
+    
   }
 
 
@@ -623,6 +623,10 @@ input[type="submit"] {
 
 // drawing board stuff
 
+.drawing-board-show-nav {
+  position: relative;
+}
+
 #main-easel-display {
   width: 95%;
   height: 500px;
@@ -632,5 +636,21 @@ input[type="submit"] {
 .canvas {
   width: 100%;
   height: 100%;
-  z-index: 3;
+  background-color: rgb(240, 228, 209);
+  
 }
+
+.easels-dropdown {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: -150px;
+  background-color: silver;
+  height: 150px;
+}
+
+.show-easels-button{
+  z-index: 2;
+  margin-top: 15px;
+}
+

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const fetchEasels = (boardId) => {
-    return axios.get(`/api/drawingBaords/${boardId}/easels`)
+    return axios.get(`/api/drawingBoards/${boardId}/easels`)
 };
 
 export const fetchEasel = (easelId) => {
@@ -9,15 +9,15 @@ export const fetchEasel = (easelId) => {
 };
 
 export const createEasel = (boardId, easel) => {
-    return axios.post(`/api/drawingBaords/${boardId}/easels`, easel)
+    return axios.post(`/api/drawingBoards/${boardId}/easels`, easel)
 };
 
 export const updateEasel = (boardId, easelId, easel) => {
-    return axios.patch(`/api/drawingBaords/${boardId}/easels/${easelId}`, easel)
+    return axios.patch(`/api/drawingBoards/${boardId}/easels/${easelId}`, easel)
 }
 
 export const deleteEasel = (boardId, easelId) => {
-    return axios.delete(`/api/drawingBaords/${boardId}/easels/${easelId}`)
+    return axios.delete(`/api/drawingBoards/${boardId}/easels/${easelId}`)
 };
 
 

@@ -74,10 +74,10 @@ io.on('connection', (socket) => {
         io.sockets.emit(boardName, data, boardName)
     })
 
-    socket.on("message", (data) => {
+    socket.on("message", (data, username, boardId) => {
         console.log(data)
         // going to end up having chat id as well and emitting it
-        io.sockets.emit("message", data)
+        io.sockets.emit("message", data, username, boardId)
     })
 })
 
