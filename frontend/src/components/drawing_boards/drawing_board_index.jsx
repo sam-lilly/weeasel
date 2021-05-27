@@ -60,7 +60,7 @@ class DrawingBoardIndex extends React.Component {
    }
 
    render() {
-      let { drawingBoards, fetchDrawingBoard, joinDrawingBoard, deleteDrawingBoard } = this.props;
+      let { drawingBoards, fetchDrawingBoard, joinDrawingBoard, deleteDrawingBoard, setDrawingBoard } = this.props;
 
       if (!drawingBoards) return null;
 
@@ -76,7 +76,8 @@ class DrawingBoardIndex extends React.Component {
                            drawingBoard={board}
                            fetchDrawingBoard={fetchDrawingBoard}
                            joinDrawingBoard={joinDrawingBoard}
-                           deleteDrawingBoard={deleteDrawingBoard} />)
+                           deleteDrawingBoard={deleteDrawingBoard}
+                           setDrawingBoard={setDrawingBoard} />)
                   }
                </div>
             </div>
