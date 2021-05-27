@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { logout } from '../../actions/session_actions';
+import { logout, setDrawingBoard } from '../../actions/session_actions';
 import Greeting from './greeting';
 
 const mSTP = (state) => ({
@@ -9,7 +9,8 @@ const mSTP = (state) => ({
 })
 
 const mDTP = (dispatch) => ({
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    setDrawingBoard: (board) => dispatch(setDrawingBoard(board))
 })
 
 // ^need to make sure all are set up the same way
