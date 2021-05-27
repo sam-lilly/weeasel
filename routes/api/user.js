@@ -63,7 +63,7 @@ router.post('/register', (req, res) => {
                     res.json({ success: true, token: 'Bearer ' + token, data: payload });
                   });
               })
-              .catch(err => console.log(err));
+              .catch(err => res.send(err));
           })
         })
       }
@@ -130,6 +130,7 @@ router.post('/',
     res.json(req.body.userId)
   })
 
+//joinDraowingBoard
 router.post('/drawingboards/:drawingBoardId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {

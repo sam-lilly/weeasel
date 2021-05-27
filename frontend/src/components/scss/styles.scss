@@ -471,6 +471,57 @@ input[type="submit"] {
 
 }
 
+
+
+
+
+
+
+
+/*======================
+       Nav Bar Left
+=======================*/
+.show{
+  display: block; 
+}
+
+.hidden{
+  display: none;
+}
+.drawing-board-index{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.new-board-name{
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.add-friends-dropdown-container{
+  display: flex;
+  background-color: transparent;
+  flex-direction: column;
+  border: 1px solid rgb(193, 188, 174);
+  border-radius: 3px;
+  margin: 3px;
+}
+
+.create-board-friends-list{
+  display: block;
+  background-color: rgba(193, 188, 174, 0.351);
+}
+
+.create-board-btn{
+  width: 90%;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: rgb(193, 188, 174);
+  color:black;
+}
+
 //FRIENDS SIDE PANE
 
 .friend-index-header {
