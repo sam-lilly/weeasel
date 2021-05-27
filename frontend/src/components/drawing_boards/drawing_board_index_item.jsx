@@ -5,11 +5,18 @@ class DrawingBoardIndexItem extends React.Component {
 
     constructor(props) {
         super(props);
+        this.joinBoard = this.joinBoard.bind(this);
+    }
+
+    joinBoard(drawingBoardId) {
+        return e => {
+            this.props.joinDrawingBoard(drawingBoardId)
+        }
     }
 
     render() {
-
-        let { drawingBoard, deleteDrawingBoard } = this.props;
+        let { drawingBoard, joinDrawingBoard, deleteDrawingBoard } = this.props;
+        // debugger
 
         if (!drawingBoard) return null;
 
@@ -17,7 +24,8 @@ class DrawingBoardIndexItem extends React.Component {
         return (
             <div className="drawing-board-index-boxes">
                 <h1>{drawingBoard.name}</h1>
-            </div>
+                <button onClick={this.joinBoard(drawingBoard._id)}>  Join </button>
+            </div >
         )
 
     }

@@ -41,6 +41,7 @@ router.post('/',
     let newDrawingBoard = new DrawingBoard({
       name: req.body.name,
       creator: req.user.id,
+      users: req.body.users
     })
     newDrawingBoard.users.push(req.user.id);
     newDrawingBoard.save();

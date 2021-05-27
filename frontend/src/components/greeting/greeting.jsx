@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Greeting = ({ currentUser, logout }) => {
-    debugger
+
     const signUpLogInGreeting = () => (
         <div className="header-group">
             {/* <h1>redirects to login!</h1> */}
