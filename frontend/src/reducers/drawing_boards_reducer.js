@@ -1,14 +1,15 @@
 import { RECEIVE_COMMENT, RECEIVE_DRAWING_BOARDS, RECEIVE_DRAWING_BOARD, REMOVE_DRAWING_BOARD } from '../actions/drawing_board_actions';
 
-const drawingBoardsReducer = (oldState = {}, action) => {
+const drawingBoardsReducer = (oldState = [], action) => {
     Object.freeze(oldState);
-    let nextState = Object.assign({}, oldState);
+    let nextState = oldState.slice();
 
     switch (action.type) {
         case RECEIVE_DRAWING_BOARDS:
             return action.drawingBoards.data;
         case RECEIVE_DRAWING_BOARD:
-            nextState[action.drawingBoard.data.id] = action.drawingBoard.data;
+            // nextState[action.drawingBoard.data.id] = action.drawingBoard.data;
+            nextState.push(action.drawingBoard.data)
             return nextState;
         case REMOVE_DRAWING_BOARD:
             delete nextState[action.drawingBoardId];
