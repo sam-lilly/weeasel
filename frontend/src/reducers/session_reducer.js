@@ -45,7 +45,6 @@ export default function (state = initialState, action) {
     case REMOVE_JOINED_DRAWINGBOARD:
       let i = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId.data.drawingBoardId);
       newState.user.joinedDrawingBoards.splice(i, 1);
-      debugger
       return newState;
 
     case RECEIVE_DRAWING_BOARD:

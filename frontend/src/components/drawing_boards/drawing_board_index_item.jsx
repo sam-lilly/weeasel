@@ -49,7 +49,6 @@ class DrawingBoardIndexItem extends React.Component {
 
    render() {
       let { friends, drawingBoard, updateDrawingBoard, deleteDrawingBoard } = this.props;
-      // debugger
 
       if (!drawingBoard) return null;
 
