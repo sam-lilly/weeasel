@@ -91,7 +91,6 @@ input[type="submit"] {
 
 
 .nav-container {
-    // font-family: 'Josefin Sans', sans-serif;
     font-family: 'Spartan', sans-serif;
     display: flex;
     justify-content: space-between;
@@ -99,17 +98,22 @@ input[type="submit"] {
     position: fixed;
     width: 100%;
     height: 10vh;
-    // background: rgb(57, 57, 57);
-    // pic sent 1
-    // background: rgb(23, 23, 23);
-    // pic sent 2
     background: rgb(7, 7, 9);
-    // color: rgb(203, 191, 255);
-    // pic sent 1 & 2
     color: rgb(252, 229, 195);
 
-  .header-left {
-    margin-left: 2vw;
+    
+    .home-nav {
+      margin-left: 1vw;
+      display: flex;
+      flex-direction: row;
+
+      .nav-logo {
+        // width: 6%;
+        padding-top: 0.5vh;
+        height: 7vh;
+        width: auto;
+        filter: invert(84%) sepia(15%) saturate(539%) hue-rotate(344deg) brightness(108%) contrast(98%);
+      }
   }
 
   .header-right {
