@@ -1,8 +1,6 @@
 const path = require('path');
-
 const express = require("express");
 const app = express();
-const http = require("http").createServer(app);
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const socket = require('socket.io')
