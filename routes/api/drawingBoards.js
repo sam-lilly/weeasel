@@ -18,6 +18,12 @@ router.get('/',
       .catch(err => res.status(404).json({ error: 'No DrawingBoard found' }));
   })
 
+router.get('/all',
+  (req, res) => {
+    DrawingBoard.find()
+      .then(boards => res.json(boards))
+      .catch(err => res.status(404).json({ error: 'No DrawingBoard found' }));
+  })
 
 // fetchDrawingBoard(drawingBoardId)
 router.get('/:id', (req, res) => {
@@ -41,7 +47,6 @@ router.post('/',
     let newDrawingBoard = new DrawingBoard({
       name: req.body.name,
       creator: req.user.id,
-      users: req.body.users
     })
     newDrawingBoard.users.push(req.user.id);
     newDrawingBoard.save();
@@ -54,7 +59,7 @@ router.post('/',
   }
 )
 
-//-updateDrawingBoard(drawingBoard)
+
 router.put('/:id',
   (req, res) => {
     DrawingBoard.findById(req.params.id)

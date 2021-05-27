@@ -119,47 +119,55 @@ router.get('/', (req, res) => {
 }
 )
 
+//Addfriend
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     User.findById(req.user.id).then(currUser => {
-      currUser.friends.push(req.body.userId);
-      currUser.save();
+      if (!currUser.friends.includes(req.body.userId)) {
+        currUser.friends.push(req.body.userId);
+        currUser.save();
+      }
     })
 
     res.json(req.body.userId)
   })
 
 //joinDraowingBoardFor CurrentUser
-router.post('/drawingboards/:drawingBoardId',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    User.findById(req.user.id).then(currUser => {
-      currUser.joinedDrawingBoards.push(req.params.drawingBoardId);
-      currUser.save();
-    })
-    DrawingBoard.findById(req.params.drawingBoardId).then(board => {
-      board.users.push(req.user.id);
-      board.save();
-    })
+// router.post('/drawingboards/:drawingBoardId',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     User.findById(req.user.id).then(currUser => {
+//       currUser.joinedDrawingBoards.push(req.params.drawingBoardId);
+//       currUser.save();
+//     })
+//     DrawingBoard.findById(req.params.drawingBoardId).then(board => {
+//       board.users.push(req.user.id);
+//       board.save();
+//     })
 
-    res.send({ joinedDrawingBoard: req.params.drawingBoardId })
-  })
+//     res.send({ joinedDrawingBoard: req.params.drawingBoardId })
+//   })
 
+//joinDrawingBoard
 router.post('/:user_id/drawingboards/:drawingBoardId',
   (req, res) => {
     User.findById(req.params.user_id).then(user => {
-      user.joinedDrawingBoards.push(req.params.drawingBoardId);
-      user.save();
-    })
-    DrawingBoard.findById(req.params.drawingBoardId).then(board => {
-      if (!board.users.include(req.params.user_id)) {
-        board.users.push(req.params.user_id);
-        board.save();
+      if (!user.joinedDrawingBoards.includes(req.params.drawingBoardId)) {
+        user.joinedDrawingBoards.push(req.params.drawingBoardId);
+        user.save();
       }
     })
 
-    res.send({ joinedDrawingBoard: req.params.drawingBoardId })
+    DrawingBoard.findById(req.params.drawingBoardId).then(board => {
+      if (!board.users.includes(req.params.user_id)) {
+        board.users.push(req.params.user_id);
+        board.save();
+      }
+      res.send({ joinedDrawingBoards: board._id })
+    })
+
+    // res.send({ joinedDrawingBoard: req.params.drawingBoardId, name: boardName })
   })
 
 router.delete('/:userId',

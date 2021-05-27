@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import DrawingBoardIndexItem from './drawing_board_index_item';
+import JoinedDrawingBoardsItem from './joined_drawing_boards_item'
 
 class DrawingBoardIndex extends React.Component {
 
@@ -14,13 +15,14 @@ class DrawingBoardIndex extends React.Component {
       this.createDrawingBoard = this.createDrawingBoard.bind(this);
       this.toggleDropdown = this.toggleDropdown.bind(this);
       this.handleBoardName = this.handleBoardName.bind(this);
-      this.handleFriend = this.handleFriend.bind(this);
+
    }
 
    componentDidMount() {
       this.setState({ isOpen: false })
       this.props.fetchDrawingBoards();
       this.props.fetchUsers().then(this.setState());
+      this.props.fetchAllDrawingBoards()
    }
 
    componentDidUpdate(prevProps) {
@@ -31,36 +33,27 @@ class DrawingBoardIndex extends React.Component {
 
    handleBoardName() {
       return e => {
+         e.stopPropagation();
          this.setState({ name: e.currentTarget.value })
       }
    }
 
-   handleFriend(friend) {
-      let userArr = this.state.users
-      if (!userArr.includes(friend)) {
-         userArr.concat(friend);
-      }
-      return e => {
-         e.preventDefault()
-
-         this.setState({ users: userArr })
-      }
-   }
 
    createDrawingBoard(e) {
+
       e.preventDefault()
       // this would taking in friends to add to board as arg (add later)
       this.setState({ isOpen: false })
-      this.props.createDrawingBoard(this.state);
+      this.props.createDrawingBoard(this.state).then();
    }
 
    toggleDropdown(e) {
       e.stopPropagation();
-      this.setState({ isOpen: true })
+      this.setState({ isOpen: !this.state.isOpen })
    }
 
    render() {
-      let { drawingBoards, fetchDrawingBoard, joinDrawingBoard, deleteDrawingBoard, setDrawingBoard } = this.props;
+      let { currentUser, friends, drawingBoards, joinedBoards, updateDrawingBoard, fetchDrawingBoard, joinDrawingBoard, leaveDrawingBoard, setDrawingBoard } = this.props;
 
       if (!drawingBoards) return null;
 
@@ -76,10 +69,26 @@ class DrawingBoardIndex extends React.Component {
                            drawingBoard={board}
                            fetchDrawingBoard={fetchDrawingBoard}
                            joinDrawingBoard={joinDrawingBoard}
-                           deleteDrawingBoard={deleteDrawingBoard}
-                           setDrawingBoard={setDrawingBoard} />)
+                           leaveDrawingBoard={leaveDrawingBoard}
+                           updateDrawingBoard={updateDrawingBoard}
+                           setDrawingBoard={setDrawingBoard}
+                           currentUser={currentUser}
+                           friends={friends}
+                        />)
                   }
                </div>
+
+               <h1>My Joined Drawing Boards</h1>
+               {
+                  joinedBoards.map((board, i) =>
+                     <JoinedDrawingBoardsItem key={i}
+                        drawingBoard={board}
+                        setDrawingBoard={setDrawingBoard}
+                        currentUser={currentUser}
+                        leaveDrawingBoard={leaveDrawingBoard}
+                     />)
+
+               }
             </div>
 
             {/* <div><p>above are the existing drawing boards you are a part of=========</p></div> */}
@@ -90,21 +99,21 @@ class DrawingBoardIndex extends React.Component {
                <div className={this.state.isOpen ? "show" : "hidden"}>
                   <input type="text" className="new-board-name" placeholder="Enter Board Name" onChange={this.handleBoardName()} />
                   <button onClick={this.createDrawingBoard}> Create! </button>
-
-                  <div className='add-friends-dropdown-container'>
-                     <label htmlFor="">Add Friends
-                        <section className='create-board-friends-list'>
-                           {this.props.friends.map((friend, i) => {
-                              return <button key={i} value={friend} onClick={this.handleFriend(friend)}>{friend}</button>
-                           })}
-                        </section>
-                     </label>
-                  </div>
-
-
                </div>
                Create a new Board!
             </a>
+
+
+            {/* <div className='add-friends-dropdown-container'>
+               <label htmlFor="">Add Friends
+                  <section className='create-board-friends-list'>
+                     {this.props.friends.map((friend, i) => {
+                        return <button key={i} value={friend} onClick={this.handleFriend(friend._id)}>{friend.username}</button>
+                     })}
+                  </section>
+               </label>
+            </div> */}
+
          </div >
       )
 
