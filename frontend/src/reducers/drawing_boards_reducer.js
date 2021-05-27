@@ -8,7 +8,7 @@ const drawingBoardsReducer = (oldState = {}, action) => {
         case RECEIVE_DRAWING_BOARDS:
             return action.drawingBoards.data;
         case RECEIVE_DRAWING_BOARD:
-            nextState[action.drawingBoard.id] = action.drawingBoard.data;
+            nextState[action.drawingBoard.data.id] = action.drawingBoard.data;
             return nextState;
         case REMOVE_DRAWING_BOARD:
             delete nextState[action.drawingBoardId];

@@ -16,8 +16,12 @@ export const deleteFriend = (friendId) => {
     return axios.delete(`/api/users/${friendId}`)
 };
 
-export const joinDrawingBoard = (drawingBoardId) => {
-    return axios.post(`/api/users/drawingboards/${drawingBoardId}`)
+// export const joinDrawingBoard = (drawingBoardId) => {
+//     return axios.post(`/api/users//drawingboards/${drawingBoardId}`)
+// }
+
+export const joinDrawingBoard = (userId, drawingBoardId) => {
+    return axios.post(`/api/users/${userId}/drawingboards/${drawingBoardId}`)
 }
 
 export const leaveDrawingBoard = (drawingBoardId) => {

@@ -1,5 +1,6 @@
 import * as DrawingBoardApiUtil from '../util/drawing_board_api_util';
 
+export const RECEIVE_ALL_DRAWING_BOARDS = 'RECEIVE_ALL_DRAWING_BOARDS'
 export const RECEIVE_DRAWING_BOARDS = "RECEIVE_DRAWING_BOARDS"
 export const RECEIVE_DRAWING_BOARD = "RECEIVE_DRAWING_BOARD"
 export const REMOVE_DRAWING_BOARD = "REMOVE_DRAWING_BOARD"
@@ -8,6 +9,11 @@ export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 const receiveDrawingBoards = (drawingBoards) => ({
     type: RECEIVE_DRAWING_BOARDS,
     drawingBoards
+})
+
+const receiveAllDrawingBoards = (allDrawingBoards) => ({
+    type: RECEIVE_ALL_DRAWING_BOARDS,
+    allDrawingBoards
 })
 
 const receiveDrawingBoard = (drawingBoard) => ({
@@ -53,4 +59,9 @@ export const deleteDrawingBoard = (drawingBoardId) => (dispatch) => (
 export const addComment = (drawingBoardsId, comment) => dispatch => (
     DrawingBoardApiUtil.addComment(drawingBoardsId, comment)
         .then(comment => dispatch(receiveComment(comment)))
+)
+
+export const fetchAllDrawingBoards = () => (dispatch) => (
+    DrawingBoardApiUtil.fetchAllDrawingBoards()
+        .then(drawingBoards => dispatch(receiveAllDrawingBoards(drawingBoards)))
 )

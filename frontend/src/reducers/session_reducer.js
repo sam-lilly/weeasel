@@ -36,13 +36,16 @@ export default function (state = initialState, action) {
       newState.user.friends.splice(index, 1);
       return newState;
 
-    case JOIN_DRAWINGBOARD:
-      newState.user.joinedDrawingBoards.push(action.drawingBoardId.data);
-      return newState;
+    // case JOIN_DRAWINGBOARD:
+    //   if (!newState.user.joinedDrawingBoards.includes(action.drawingBoardId.data)) {
+    //     newState.user.joinedDrawingBoards.push(action.drawingBoardId.data);
+    //   }
+    //   return newState;
 
     case REMOVE_JOINED_DRAWINGBOARD:
-      index = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId.data);
-      newState.user.joinedDrawingBoards.splice(index, 1);
+      let i = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId.data.drawingBoardId);
+      newState.user.joinedDrawingBoards.splice(i, 1);
+      debugger
       return newState;
 
     case RECEIVE_DRAWING_BOARD:
@@ -69,4 +72,5 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
+
 }

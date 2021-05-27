@@ -54,8 +54,8 @@ export const deleteFriend = (friendId) => (dispatch) => (
         .then(() => dispatch(removeFriend(friendId)))
 )
 
-export const joinDrawingBoard = (drawingBoardId) => dispatch => (
-    UserAPiUtil.joinDrawingBoard(drawingBoardId)
+export const joinDrawingBoard = (userId, drawingBoardId) => dispatch => (
+    UserAPiUtil.joinDrawingBoard(userId, drawingBoardId)
         .then(drawingBoardId => dispatch(receiveJoinedDrawingboard(drawingBoardId)))
 )
 
