@@ -152,7 +152,7 @@ router.post('/:id/easels', (req, res) => {
 
 
 // - updateEasel(Easel)
-router.put('/:board_id/easels/:easel_id', (req, res) => {
+router.patch('/:board_id/easels/:easel_id', (req, res) => {
   Easel.findById(req.params.easel_id)
     .then(easel => {
       if (!easel) {

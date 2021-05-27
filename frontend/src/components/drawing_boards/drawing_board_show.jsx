@@ -6,10 +6,12 @@ class DrawingBoardShow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            mainBoard: "board1",
+            mainBoard: {},
             input: "",
             color: "#000000",
-            size: "5"
+            size: "5",
+            easelDropdown: false,
+            chatDropdown: false
         }
         // inside of our state we'll have to have the main board image data
         this.createEasel = this.createEasel.bind(this);
@@ -19,6 +21,8 @@ class DrawingBoardShow extends React.Component {
         this.handleEmitInput = this.handleEmitInput.bind(this);
         this.changeColor = this.changeColor.bind(this)
         this.changeSize = this.changeSize.bind(this)
+        this.showEasels = this.showEasels.bind(this)
+        this.makeEraser = this.makeEraser.bind(this)
 
     }
 
@@ -26,29 +30,13 @@ class DrawingBoardShow extends React.Component {
     ctx;
     componentDidMount() {
         if (!this.props.boardId) {
-            return (
-                <div>
-                    Please Select A Drawing board
-                </div>
-            )
+            return ;
         }
         // this.props.fetchEasels()
 
         //we're gonna need a way to fetch the easel info whenever the page loads
         //and then 
-        this.socket.on("broadcast", function (data) {
-            document.getElementById("clients").innerHTML = data.description;
 
-        })
-
-        this.socket.on("message", function (data) {
-            const p = document.createElement("p")
-            p.innerHTML = data
-            const chat = document.getElementById("chat")
-            chat.append(p)
-            // chat.append(data)
-
-        });
 
         // let image = new Image()
         // let canvas = document.getElementById(this.state.mainBoard)
@@ -58,10 +46,10 @@ class DrawingBoardShow extends React.Component {
         // }
         // image.src = data
         //this will end up being the image data we pass down from our props
-        this.socket.on(this.state.mainBoard, function (data, boardName) {
+        this.socket.on(this.state.mainBoard._id, function (data, boardName) {
 
             let image = new Image();
-            let canvas = document.querySelector(`#${boardName}`)
+            let canvas = document.querySelector(`#board${boardName}`)
 
             let ctx = canvas.getContext("2d");
 
@@ -77,8 +65,41 @@ class DrawingBoardShow extends React.Component {
 
 
     componentDidUpdate(prevProps, prevState) {
+        if (this.props.boardId != prevProps.boardId) {
+            let testChat = document.getElementById(`chat${this.props.boardId}`);
+            testChat.innerHTML = '';
+        }
+
+        if (Object.values(prevState.mainBoard).length < 1 && this.props.easels.length > 0) {
+            console.log(this.props.easels)
+            this.setState({
+                mainBoard: this.props.easels[0]
+            })
+            this.socket.on("broadcast", function (data) {
+                document.getElementById("clients").innerHTML = data.description;
+
+            })
+            const that = this;
+            this.socket.off('message')
+            this.socket.on(`message`, function (data, username, boardId) {
+                const p = document.createElement("p")
+                p.innerHTML = `${username}: ${data}`
+                const chat = document.getElementById(`chat${boardId}`)
+                if (!chat) return;
+                chat.append(p)
+                // chat.append(data)
+
+            });
+        }
+        if ((this.props.boardId) && (this.props.boardId != prevProps.boardId)) {
+            this.props.fetchEasels(this.props.boardId)
+            this.setState({
+                mainBoard: {}
+            })
+            this.drawOnCanvas()
+        }
         
-        this.socket.off(prevState.mainBoard)
+        this.socket.off(`board${prevState.mainBoard._id}`)
         if (!this.props.boardId) {
             return (
                 <div>
@@ -88,18 +109,21 @@ class DrawingBoardShow extends React.Component {
         }
 
         let image = new Image()
-        let canvas = document.getElementById(this.state.mainBoard)
+        let canvas = document.getElementById(`board${this.state.mainBoard._id}`)
+        if (!canvas) return;
         const base64Imagedata = canvas.toDataURL("image/png")
         let ctx = canvas.getContext("2d");
         image.onload = function () {
             ctx.drawImage(image, 0, 0)
         }
-        if ( this.state.mainBoard == prevState.mainBoard) {
+        if ( this.state.mainBoard.image == prevState.mainBoard.image) {
             // image.src =this.state.mainBoard.image
             image.src = base64Imagedata
+        } else {
+            image.src = this.state.mainBoard.image;
         }
 
-        this.socket.on(this.state.mainBoard, function (data, boardName) {
+        this.socket.on(`board${this.state.mainBoard._id}`, function (data, boardName) {
             console.log(5)
 
             const image = new Image();
@@ -138,7 +162,7 @@ class DrawingBoardShow extends React.Component {
 
     drawOnCanvas() {
         
-        const canvas = document.querySelector(`#${this.state.mainBoard}`);
+        const canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
         // if (!canvas) return
       
          this.ctx = canvas.getContext('2d');
@@ -180,16 +204,27 @@ class DrawingBoardShow extends React.Component {
             ctx.closePath();
             ctx.stroke();
             if (root.timeout !== undefined) clearTimeout(root.timeout)
+            if (root.timeout2 !== undefined) clearTimeout(root.timeout2)
             root.timeout = setTimeout(function () {
                 const base64Imagedata = canvas.toDataURL("image/png")
                 //maybe we have the string in state as well and pass that down instead of selecting the canvas element
                 //maybe even a conditional 
-                root.socket.emit("canvas-data", base64Imagedata, root.state.mainBoard
+                root.socket.emit("canvas-data", base64Imagedata, `board${root.state.mainBoard._id}`
                 )
+
+                const newBoard = root.state.mainBoard;
+                newBoard.image = base64Imagedata;
+                root.setState({
+                    mainBoard: newBoard
+                })
                 //can we just add update board here and give it the right info?
                 //maybe store the name and things in state as well ? 
                 // and change it when we change boards
             }, 1000)
+
+            root.timeout2 = setTimeout(function() {
+                root.props.updateEasel(root.props.boardId, root.state.mainBoard._id, root.state.mainBoard);
+            }, 3000)
           
         };
 
@@ -221,7 +256,10 @@ class DrawingBoardShow extends React.Component {
         //         return
         //     }
         // })
-        this.setState({ mainBoard: e.target.id })
+        this.setState({ 
+            mainBoard: this.props.easels.find(easel => easel._id == e.target.id),
+            easelDropdown: false,
+         })
         // im thinking we already have the id in there 
         // let url;
         // this.setState({
@@ -241,7 +279,10 @@ class DrawingBoardShow extends React.Component {
     handleEmitInput(e) {
         e.preventDefault()
         //will end up also emitting which chat element more than likely saved in state
-        this.socket.emit("message", this.state.input, )
+        this.socket.emit("message", this.state.input, this.props.currentUsername, this.props.boardId )
+        this.setState({
+            input: '',
+        })
     }
 
     changeColor(e){
@@ -256,6 +297,23 @@ class DrawingBoardShow extends React.Component {
             size: e.target.value
         })
     }
+
+    showEasels(e) {
+        console.log('helloooo')
+        this.setState({
+            easelDropdown: !this.state.easelDropdown,
+        })
+        e.stopPropagation()
+    }
+
+    makeEraser(e) {
+        this.setState({
+            color: '#F0E4D1',
+            size: '100'
+        })
+    }
+
+
 
 
 
@@ -279,63 +337,88 @@ class DrawingBoardShow extends React.Component {
             {id: 2},
             {id:3}
         ]
+        console.log(this.props)
+        const mapped = () =>{ this.props.easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel._id}`} />)}
 
-        const mapped = easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel.id}`} />)
+        const main = (<canvas className="canvas" id={`board${this.state.mainBoard._id}`} style={{ border: '1px solid black' }} ></canvas>)
 
-        const main = (<canvas className="canvas" id={this.state.mainBoard} style={{ border: '1px solid black' }} ></canvas>)
+        const displayEasels= () =>{
+            return(
+            <div className='easels-dropdown'>
+                {this.props.easels.map(easel => { 
+                    return(
+                        <div>
+                            <h3>{easel.name}</h3>
+                            <canvas width='100' height='100' className='mini-canvas-option' onClick={this.changeBoard} key={easel._id} id={easel._id}/>
+                        </div>
+                )})}
+            </div>
+            )
+        }
 
         return (
             <div className="drawing-board-show-page">
 
 
-                <div  id="main-easel-display">
-                    {main}
-                </div>
+                        <div  id="main-easel-display">
+                            {main}
+                        </div>
+                <div className='drawing-board-show-nav'>
+                        <button className='show-easels-button' onClick={this.showEasels}>+ More Easels</button>
+                        {this.state.easelDropdown ? displayEasels() : null}
+                        <div className="tools-section">
+                            <div className="color-picker-container">
+                                Select Brush Color
+                                <input onChange={this.changeColor} type="color" value={this.state.color} />
+                            </div>
 
-                <button onClick={this.createEasel}>Create an Easel!</button>
-                <div className="tools-section">
-                    <div className="color-picker-container">
-                        Select Brush Color
-                        <input onChange={this.changeColor} type="color" value={this.state.color} />
-                    </div>
+                            <div className="brushsize-container">
+                                Select Brush Size
+                            <select value={this.state.size} onChange={this.changeSize} >
+                                    <option> 5</option>
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                    <option>25</option>
+                                    <option>30</option>
 
-                    <div className="brushsize-container">
-                        Select Brush Size
-                    <select value={this.state.size} onChange={this.changeSize} >
-                            <option> 5</option>
-                            <option>10</option>
-                            <option>15</option>
-                            <option>20</option>
-                            <option>25</option>
-                            <option>30</option>
+                                </select>
+                            </div>
+                            <div className='eraser-container'>
+                                <button onClick={this.makeEraser}>Eraser</button>
+                            </div>
 
-                        </select>
-                    </div>
+                        </div>
 
-                </div>
-
-                <div id="clients">
+                        <div id="clients">
 
 
-                </div>
+                        </div>
 
-                < h1> {this.state.mainBoard}</h1>
-                
-                <form>
-                    <input onChange={this.handleInput} type="text" value={this.state.input} />
-                    <button onClick={this.handleEmitInput}>send</button>
-                </form>
+                        < h1> {this.state.mainBoard.name}</h1>
+                        
+                        <form>
+                            <input onChange={this.handleInput} type="text" value={this.state.input} />
+                            <button onClick={this.handleEmitInput}>send</button>
+                        </form>
+                        <div className='chat-container'>
+                            <h1>CHAT</h1>
+                            <div id={`chat${this.props.boardId}`}>
+                                
+                            </div>
+                        </div>
 
-                <div id="chat">
-                    <h1>CHAT</h1>
-                </div>
+                        <div>
+                        <button onClick={(e) =>{ 
+                            this.props.fetchEasels(this.props.boardId);
+                            this.setState(this.state)
+                        }
+                            }>button that regrabs all boards </button>
+                            <h1>other boards</h1>
 
-                <div>
-                    <button>button that regrabs all boards </button>
-                    <h1>other boards</h1>
+                            {this.props.easels.length > 0 ? mapped() : null}
 
-                    {mapped}
-
+                        </div>
                 </div>
 
             </div>
