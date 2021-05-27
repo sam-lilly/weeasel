@@ -6,6 +6,8 @@ import ChatIndexContainer from '../chat/chat_index_container';
 import FriendIndexContainer from '../friends/friend_index_container';
 import { Link } from 'react-router-dom';
 import '../scss/styles.scss';
+import io from "socket.io-client";
+
 
 class Home extends React.Component {
 
@@ -25,3 +27,4 @@ class Home extends React.Component {
 }
 
 export default Home;
+export const socket = io()
