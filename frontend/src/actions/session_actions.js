@@ -7,7 +7,15 @@ export const RECEIVE_USER_SIGN_IN = 'RECEIVE_USER_SIGN_IN';
 export const RECEIVE_USER_LOGOUT = 'RECEIVE_USER_LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const RECEIVE_NEW_USER = 'RECEIVE_NEW_USER';
+export const SET_DRAWING_BOARD= 'SET_DRAWING_BOARD'
 
+
+export const setDrawingBoard = (drawingBoardId) => {
+  return({
+    type: SET_DRAWING_BOARD,
+    drawingBoardId
+  })
+}
 export const receiveCurrentUser = (currentUser) => {
   return ({
     type: RECEIVE_CURRENT_USER,
