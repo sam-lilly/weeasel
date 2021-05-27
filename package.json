@@ -4,8 +4,8 @@
   "description": "Weeasel",
   "main": "weeasel.js",
   "scripts": {
-    "start": "node app.js",
-    "server": "nodemon app.js --ignore frontend",
+    "start": "node weeasel.js",
+    "server": "nodemon weeasel.js --ignore frontend",
     "frontend-install": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
