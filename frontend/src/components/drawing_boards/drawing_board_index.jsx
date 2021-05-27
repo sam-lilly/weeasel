@@ -36,9 +36,13 @@ class DrawingBoardIndex extends React.Component {
    }
 
    handleFriend(friend) {
-      let userArr = this.state.users.concat(friend);
+      let userArr = this.state.users
+      if (!userArr.includes(friend)) {
+         userArr.concat(friend);
+      }
       return e => {
          e.preventDefault()
+
          this.setState({ users: userArr })
       }
    }
