@@ -1,5 +1,5 @@
 import React from 'react';
-import io from "socket.io-client"
+import {socket} from "../home/home"
 
 class DrawingBoardShow extends React.Component {
 
@@ -22,7 +22,7 @@ class DrawingBoardShow extends React.Component {
 
     }
 
-    socket = io.connect("http://localhost:5000",)
+    socket = socket
     ctx;
     componentDidMount() {
         //we're gonna need a way to fetch the easel info whenever the page loads
