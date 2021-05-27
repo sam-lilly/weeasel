@@ -9,7 +9,8 @@ class DrawingBoardShow extends React.Component {
             mainBoard: "board1",
             input: "",
             color: "#000000",
-            size: "5"
+            size: "5",
+            canvas: "",
         }
         // inside of our state we'll have to have the main board image data
         this.createEasel = this.createEasel.bind(this);
@@ -25,6 +26,7 @@ class DrawingBoardShow extends React.Component {
     socket = socket
     ctx;
     componentDidMount() {
+
         //we're gonna need a way to fetch the easel info whenever the page loads
         //and then 
         this.socket.on("broadcast", function (data) {
@@ -67,7 +69,7 @@ class DrawingBoardShow extends React.Component {
     }
 
 
-    componentDidUpdate(prevProps, prevState) {
+    componentUpdate(prevProps, prevState) {
         
         this.socket.off(prevState.mainBoard)
 
@@ -78,9 +80,10 @@ class DrawingBoardShow extends React.Component {
         image.onload = function () {
             ctx.drawImage(image, 0, 0)
         }
-        if (this.state.mainBoard == prevState.mainBoard) {
+     
             image.src = base64Imagedata 
-        }
+        
+        
 
         this.socket.on(this.state.mainBoard, function (data, boardName) {
             console.log(5)
@@ -96,7 +99,7 @@ class DrawingBoardShow extends React.Component {
             image.src = data;
 
         })
-        this.drawOnCanvas();
+        
     }
 
 
@@ -172,6 +175,7 @@ class DrawingBoardShow extends React.Component {
                 //maybe store the name and things in state as well ? 
                 // and change it when we change boards
             }, 1000)
+          
         };
 
         ;
@@ -179,17 +183,24 @@ class DrawingBoardShow extends React.Component {
 
 
     changeBoard(e) {
+        
         this.setState({ mainBoard: e.target.id })
-
+        this.setState({
+            canvas: document.getElementById(this.state.mainBoard)
+        })
+        this.drawOnCanvas()
+        //if we grab the entire canvas element it mi
     }
 
     handleInput(e) {
+
         this.setState({
             input: e.target.value
         })
     }
 
-    handleEmitInput() {
+    handleEmitInput(e) {
+        e.preventDefault()
         //will end up also emitting which chat element more than likely saved in state
         this.socket.emit("message", this.state.input, )
     }
@@ -220,7 +231,7 @@ class DrawingBoardShow extends React.Component {
             { id: 3 },
 
         ]
-
+        
         // const mapped = easels.map(easel => <canvas id={`${easel.id}`}  />)
 
         const mapped = easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel.id}`} />)
