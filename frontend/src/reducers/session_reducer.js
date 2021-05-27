@@ -32,16 +32,16 @@ export default function (state = initialState, action) {
       return newState;
 
     case REMOVE_FRIEND:
-      let index = newState.user.friends.indexOf(action.friendId);
+      let index = newState.user.friends.indexOf(action.friendId.data);
       newState.user.friends.splice(index, 1);
       return newState;
 
     case JOIN_DRAWINGBOARD:
-      newState.user.joinedDrawingBoards.push(action.drawingBoardId);
+      newState.user.joinedDrawingBoards.push(action.drawingBoardId.data);
       return newState;
 
     case REMOVE_JOINED_DRAWINGBOARD:
-      index = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId);
+      index = newState.user.joinedDrawingBoards.indexOf(action.drawingBoardId.data);
       newState.user.joinedDrawingBoards.splice(index, 1);
       return newState;
 
