@@ -438,6 +438,13 @@ input[type="submit"] {
   grid-template-columns: 1fr 4fr 1fr;
   grid-template-rows: 3fr 1fr 1fr;
 
+  .drawing-board-show-page {
+    grid-column: 2;
+    z-index: 1;
+    grid-row: 1 / 4;
+    background-color: red ;
+  }
+
 
   .drawing-board-index {
     border: 1px solid white;
