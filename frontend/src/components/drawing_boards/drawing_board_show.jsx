@@ -25,6 +25,15 @@ class DrawingBoardShow extends React.Component {
     socket = socket
     ctx;
     componentDidMount() {
+        if (!this.props.boardId) {
+            return (
+                <div>
+                    Please Select A Drawing board
+                </div>
+            )
+        }
+        // this.props.fetchEasels()
+
         //we're gonna need a way to fetch the easel info whenever the page loads
         //and then 
         this.socket.on("broadcast", function (data) {
@@ -70,6 +79,13 @@ class DrawingBoardShow extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         
         this.socket.off(prevState.mainBoard)
+        if (!this.props.boardId) {
+            return (
+                <div>
+                    Please Select A Drawing board
+                </div>
+            )
+        }
 
         let image = new Image()
         let canvas = document.getElementById(this.state.mainBoard)
@@ -78,8 +94,9 @@ class DrawingBoardShow extends React.Component {
         image.onload = function () {
             ctx.drawImage(image, 0, 0)
         }
-        if (this.state.mainBoard == prevState.mainBoard) {
-            image.src = base64Imagedata 
+        if ( this.state.mainBoard == prevState.mainBoard) {
+            // image.src =this.state.mainBoard.image
+            image.src = base64Imagedata
         }
 
         this.socket.on(this.state.mainBoard, function (data, boardName) {
@@ -96,7 +113,7 @@ class DrawingBoardShow extends React.Component {
             image.src = data;
 
         })
-        this.drawOnCanvas();
+        this.drawOnCanvas()
     }
 
 
@@ -120,6 +137,7 @@ class DrawingBoardShow extends React.Component {
     // then change the main image to that selected
 
     drawOnCanvas() {
+        
         const canvas = document.querySelector(`#${this.state.mainBoard}`);
         // if (!canvas) return
       
@@ -172,24 +190,56 @@ class DrawingBoardShow extends React.Component {
                 //maybe store the name and things in state as well ? 
                 // and change it when we change boards
             }, 1000)
+          
         };
 
         ;
     }
 
+   
+    loadEaselImages(){
+        this.props.easels.forEach(easel => {
+            const image = new Image 
+            let ctx = canvas.getContext("2d")
+
+            const canvas = document.getElementById(easel._id)
+                ctx = canvas.getContext("2d")
+
+            image.onload = function () {
+                ctx.drawImage(image, 0, 0)
+            }
+
+            image.src = easel.image
+        })
+    }
 
     changeBoard(e) {
+        let newEasel;
+        // this.props.easels.forEach(easel => {
+        //     if (easel._id == e.target.id) {
+        //         newEasel = easel
+        //         return
+        //     }
+        // })
         this.setState({ mainBoard: e.target.id })
-
+        // im thinking we already have the id in there 
+        // let url;
+        // this.setState({
+        //     image: url
+        // })
+       
+        //if we grab the entire canvas element it mi
     }
 
     handleInput(e) {
+
         this.setState({
             input: e.target.value
         })
     }
 
-    handleEmitInput() {
+    handleEmitInput(e) {
+        e.preventDefault()
         //will end up also emitting which chat element more than likely saved in state
         this.socket.emit("message", this.state.input, )
     }
@@ -210,31 +260,35 @@ class DrawingBoardShow extends React.Component {
 
 
     render() {
-
+        console.log(this.props.boardId)
+        if (!this.props.boardId) {
+            return (
+                <div>
+                    Please Select A Drawing board
+                </div>
+            )
+        }
         // let { drawingBoard, easels } = this.props;
 
         // if (!drawingBoard) return null;
-        const easels = [
-            { id: 1 },
-            { id: 2 },
-            { id: 3 },
-
-        ]
-
+        
         // const mapped = easels.map(easel => <canvas id={`${easel.id}`}  />)
+        // if (!easels) return
+        const easels = [
+            {id: 1},
+            {id: 2},
+            {id:3}
+        ]
 
         const mapped = easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel.id}`} />)
 
-        const main = (<canvas id={this.state.mainBoard} width="700" height="700" style={{ border: '1px solid black' }} ></canvas>)
+        const main = (<canvas className="canvas" id={this.state.mainBoard} style={{ border: '1px solid black' }} ></canvas>)
 
         return (
             <div className="drawing-board-show-page">
-                <h1>I am the drawing board show page!</h1>
-               
 
 
-                <div style={{ height: "700px", width: "700px" }} id="main-easel-display">
-
+                <div  id="main-easel-display">
                     {main}
                 </div>
 

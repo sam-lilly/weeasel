@@ -1,8 +1,6 @@
 const path = require('path');
-
 const express = require("express");
 const app = express();
-const http = require("http").createServer(app);
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const socket = require('socket.io')
@@ -12,7 +10,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 
 const users = require('./routes/api/user');
-const drawingBoards = require('./routes/api/drawingBoards')
+const drawingBoards = require('./routes/api/drawingBoards');
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -79,7 +77,7 @@ io.on('connection', (socket) => {
     socket.on("message", (data) => {
         console.log(data)
         // going to end up having chat id as well and emitting it
-        socket.broadcast.emit("message", data)
+        io.sockets.emit("message", data)
     })
 })
 
