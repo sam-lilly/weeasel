@@ -9,6 +9,8 @@ class SplashPage extends React.Component {
             <div className="splash-page">
                 <h1>weeasel.</h1>
                 <p>a collaborative drawing message board to draw and chat with your friends!</p>
+
+                <img></img>
             </div>
         )
     }
