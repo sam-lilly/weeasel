@@ -5,7 +5,8 @@ import DrawingBoardShow from './drawing_board_show';
 import { fetchEasels, createEasel, deleteEasel } from '../../actions/easel_actions'
 
 const mSTP = (state, ownProps) => ({
-     easels: state.entities.easels
+     easels: state.entities.easels,
+     boardId: state.session.currentBoard
 })
 
 const mDTP = (dispatch) => ({
