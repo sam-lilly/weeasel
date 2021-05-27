@@ -30,7 +30,7 @@ class FriendIndex extends React.Component {
         })
     }
 
-    render () {
+    render() {
 
         let { users, addFriend, deleteFriend, fetchUsers, friends, currentUser } = this.props;
         let otherUsers = users.filter(user => !this.props.currentUser.friends.includes(user._id) && this.props.currentUser.id != user._id)
@@ -44,9 +44,9 @@ class FriendIndex extends React.Component {
                     <div className='add-friend-list'>
                         {otherUsers.map(user => {
                             return <div key={user._id} className='add-friend-item'>
-                                    <p className='add-friend-username'>{user.username}</p> 
-                                    <i  onClick={this.onAdd(user._id)} className="fas fa-plus-circle"></i>
-                                </div>
+                                <p className='add-friend-username'>{user.username}</p>
+                                <i onClick={this.onAdd(user._id)} className="fas fa-plus-circle"></i>
+                            </div>
                         })}
                     </div>
                 </div>
@@ -61,9 +61,10 @@ class FriendIndex extends React.Component {
         }
         if (friends.length < 1) {
             return (
-                <div>
+                <div className='friend-index-header'>
                     <h1> Sorry, you don't have any friends :(</h1>
-                    <i className="fas fa-plus"></i>
+                    <i onClick={this.setDropdown} className="fas fa-plus"></i>
+                    {this.state.addDropdown ? addFriendDropdown() : null}
                 </div>
             )
         }
@@ -81,14 +82,14 @@ class FriendIndex extends React.Component {
                     <h2 className='friend-index-subheader'>Online</h2>
                     {
                         onlineFriends.length > 0 ? onlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} />) :
-                        'no friends are online'
+                            'no friends are online'
                     }
                 </div>
                 <div className="friend-items">
                     <h2 className='friend-index-subheader'>Offline</h2>
                     {
                         offlineFriends.length > 0 ? offlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} />) :
-                        'all friends are online!'
+                            'all friends are online!'
                     }
                 </div>
 
