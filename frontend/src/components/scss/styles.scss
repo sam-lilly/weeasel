@@ -517,11 +517,6 @@ input[type="submit"] {
 
 
 
-
-
-
-
-
 /*======================
        Nav Bar Left
 =======================*/
@@ -573,7 +568,10 @@ input[type="submit"] {
 // RIGHT NAV
 // 
 
-.friend-index-header {
+//FRIENDS SIDE PANE
+
+
+.friend-index-header , .boards-index-header{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -603,6 +601,17 @@ input[type="submit"] {
        color: white;
      }
   }
+
+}
+
+.boards-index-header{
+  border-bottom: none;
+  margin: 1px 0 1px 0;
+  i {
+     padding-right: 0px;
+     cursor: pointer;
+  }
+
 }
 
 .add-friend-dropdown {
@@ -638,7 +647,7 @@ input[type="submit"] {
   }
 }
 
-.friend-items {
+.friend-items, .boards-items {
     padding: 10px 0 10px 0;
     width: 90%;
     margin: auto;
@@ -651,6 +660,7 @@ input[type="submit"] {
       filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
       color:rgb(183, 167, 255);
     }
+
 
     // .friend-index-item {
     //   display: flex;
@@ -668,6 +678,9 @@ input[type="submit"] {
     // }
 
     .online {
+
+    .friend-index-item, .boards-index-item{
+
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -700,6 +713,7 @@ input[type="submit"] {
         }
       }
     }
+
 
 
     .offline {
@@ -744,19 +758,148 @@ input[type="submit"] {
 
 
 // 
+
+/*============================================
+       DB Nav Bar Left
+=============================================*/
+
+.show{
+  display: block; 
+}
+
+.hidden{
+  display: none;
+}
+
+.boards-list-title{
+   padding: 10px;
+   font-weight: bold;
+}
+
+.drawing-board-index{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.new-board-name{
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.add-friends-dropdown-container{
+  display: flex;
+  background-color: transparent;
+  flex-direction: column;
+  border: 1px solid rgb(193, 188, 174);
+  border-radius: 3px;
+  margin: 3px;
+}
+
+.create-board-friends-list{
+  display: block;
+  background-color: rgba(193, 188, 174, 0.351);
+}
+
+.create-board-btn{
+  width: 90%;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: rgb(193, 188, 174);
+  color:black;
+  text-align: center;
+}
+
+.board-list-nav{
+  right: -200px;
+}
+
+.new-baord-name-input{
+  display: flex;
+  justify-content: space-between;
+.new-board-name{
+  width: 80%;
+}
+  i{
+    font-size: 25px;
+    justify-content: center;
+  }
+}
+
+
+
 // drawing board stuff
 // 
 
 
 .drawing-board-show-nav {
   position: relative;
+  display: grid;
+  height: 30%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+  "nav chat"
+  "nav chat"
+
+  ;
 }
 
+.chat-container {
+  grid-area: chat;
+  // width: 200px;
+  height: 90%;
+  display: grid;
+  grid-template-rows: 20px 1fr 50px ;
+  grid-template-columns: 1fr;
+  justify-self: center;
+  width: 100%;
+      h1 {
+        font-weight: 30px;
+        grid-row-start: 1;
+        padding-top: 20px;
+        align-self: center;
+        justify-self: center;
+      }
+      .chat-box {
+        box-sizing: border-box;
+        grid-row-start: 2;
+        justify-self: center;
+        width: 100%;
+        overflow: scroll;
+        background-color: rgb(7, 7, 9);
+        margin-top: 10px;
+        border-radius: 2%;
+        padding: 5px 5px 5px 5px;
+        font-size: 12px;
+        color: rgb(252, 229, 195);
+      }
+      .chat-input{
+        display: flex;
+        height: 20px;
+        justify-content: space-between;
+        grid-row-start: 3;
+        overflow: auto;
+          input {
+            border-bottom: 1px solid rgb(185, 213, 249);
+            width: 80%;
+            font-size: 12px;
+          }
+          button {
+            padding-right: 10px;
+          }
+      }
+
+}
+
+
 #main-easel-display {
-  width: 95%;
-  height: 500px;
+  width: 100%;
+  height: 75%;
   margin: auto;
-  position: relative;
+  
 
   i {
     position: absolute;
@@ -775,17 +918,49 @@ input[type="submit"] {
   
 }
 
+.tools-section {
+  grid-area: nav;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // align-items: center;
+  font-size: 15px;
+  height: 80%;
+  padding-left: 10px;
+}
+
+
+
 .easels-dropdown {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: absolute;
-  top: -150px;
+  width: 25%;
+  height: 30% ;
+  top: 5px;
+  right: 50%;
+
   background-color: silver;
   height: 150px;
+  overflow: auto;
+    p {
+      text-align: center;
+    }
+  canvas {
+    height: 70px;
+    width: 70px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
 }
 
 .show-easels-button{
   z-index: 2;
   margin-top: 15px;
 }
+
+
 
