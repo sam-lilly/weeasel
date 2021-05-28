@@ -32,6 +32,10 @@ class DrawingBoardShow extends React.Component {
     socket = socket
     ctx;
     componentDidMount() {
+        this.socket.on("broadcast", function (data) {
+            document.getElementById("clients").innerHTML = data.description;
+
+        })
         if (!this.props.boardId) {
             return ;
         }
@@ -69,6 +73,7 @@ class DrawingBoardShow extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.boardId) return;
+      
         if (this.props.boardId != prevProps.boardId) {
             let testChat = document.getElementById(`chat${this.props.boardId}`);
             if (testChat) testChat.innerHTML = '';
@@ -79,10 +84,7 @@ class DrawingBoardShow extends React.Component {
             this.setState({
                 mainBoard: this.props.easels[0]
             })
-            this.socket.on("broadcast", function (data) {
-                document.getElementById("clients").innerHTML = data.description;
-
-            })
+          
             const that = this;
             this.socket.off('message')
             this.socket.on(`message`, function (data, username, boardId) {
@@ -345,6 +347,7 @@ class DrawingBoardShow extends React.Component {
             return (
                 <div className='no-drawing-board-selected-pane'>
                     Select one of your drawing boards to get started!
+                    <div id="clients"> </div>
                 </div>
             )
         }
@@ -361,6 +364,7 @@ class DrawingBoardShow extends React.Component {
                         <button>Create new easel</button>
                     </form>
                     
+
                 </div>
             )
         }
@@ -370,11 +374,7 @@ class DrawingBoardShow extends React.Component {
         
         // const mapped = easels.map(easel => <canvas id={`${easel.id}`}  />)
         // if (!easels) return
-        const easels = [
-            {id: 1},
-            {id: 2},
-            {id:3}
-        ]
+
         const mapped = () =>{ this.props.easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel._id}`} />)}
 
         const main = (<canvas className="canvas" id={`board${this.state.mainBoard._id}`} style={{ border: '1px solid black' }} ></canvas>)
@@ -410,10 +410,13 @@ class DrawingBoardShow extends React.Component {
                             {main}
                             <i onClick={() => this.props.setDrawingBoard()} className="far fa-times-circle"></i>
                         </div>
+                
                 <div className='drawing-board-show-nav'>
+                        
+
+                        <div className="tools-section">
                         <button className='show-easels-button' onClick={this.showEasels}>+ More Easels</button>
                         {this.state.easelDropdown ? displayEasels() : null}
-                        <div className="tools-section">
                             <div className="color-picker-container">
                                 Select Brush Color
                                 <input onChange={this.changeColor} type="color" value={this.state.color} />
@@ -435,38 +438,29 @@ class DrawingBoardShow extends React.Component {
                                 <button onClick={this.makeEraser}>Eraser</button>
                             </div>
 
-                        </div>
-
-                        <div id="clients">
-
-
-                        </div>
-
-                        < h1> {this.state.mainBoard.name}</h1>
-                        
-                        <form>
-                            <input onChange={this.handleInput} type="text" value={this.state.input} />
-                            <button onClick={this.handleEmitInput}>send</button>
-                        </form>
-                        <div className='chat-container'>
-                            <h1>CHAT</h1>
-                            <div id={`chat${this.props.boardId}`}>
-                                
-                            </div>
-                        </div>
-
-                        <div>
-                        <button onClick={(e) =>{ 
+                        <button onClick={(e) => {
                             this.props.fetchEasels(this.props.boardId);
                             this.setState(this.state)
                         }
-                            }>button that regrabs all boards </button>
-                            <h1>other boards</h1>
+                        }>Update your Boards</button>
 
-                            {this.props.easels.length > 0 ? mapped() : null}
+                        {this.props.easels.length > 0 ? mapped() : null}
+
+                    </div>
+                   
+                    <div className='chat-container'>
+                        <h1>CHAT WITH THE OTHER WEASELS</h1>
+                        <div className="chat-box" id={`chat${this.props.boardId}`}>
 
                         </div>
+                        <form className="chat-input">
+                            <input placeholder="you need an easel to chat, silly weasel :)" onChange={this.handleInput} type="text" value={this.state.input} />
+                            <button onClick={this.handleEmitInput}>send</button>
+                        </form>
+                    </div>
+                       
                 </div>
+                
 
             </div>
         )
