@@ -56,13 +56,13 @@ class FriendIndex extends React.Component {
 
         if (Object.values(users).length < 1) {
             return (
-                <p>Loading your friends...</p>
+                <p>loading your friends...</p>
             );
         }
         if (friends.length < 1) {
             return (
                 <div className='friend-index-header'>
-                    <h1> Sorry, you don't have any friends :(</h1>
+                    <h1> sorry, you don't have any friends :(</h1>
                     <i onClick={this.setDropdown} className="fas fa-plus"></i>
                     {this.state.addDropdown ? addFriendDropdown() : null}
                 </div>
@@ -79,18 +79,22 @@ class FriendIndex extends React.Component {
                 </div>
 
                 <div className="friend-items">
-                    <h2 className='friend-index-subheader'>Online</h2>
-                    {
-                        onlineFriends.length > 0 ? onlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} />) :
-                            'no friends are online'
-                    }
+                    <h2 className='friend-index-subheader'>online</h2>
+                        <div className="online-friends">
+                            {
+                                onlineFriends.length > 0 ? onlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} status="online" />) :
+                                    'no friends are online'
+                            }
+                        </div>
                 </div>
                 <div className="friend-items">
-                    <h2 className='friend-index-subheader'>Offline</h2>
-                    {
-                        offlineFriends.length > 0 ? offlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} />) :
-                            'all friends are online!'
-                    }
+                    <h2 className='friend-index-subheader'>offline</h2>
+                        <div className="offline-friends">
+                            {
+                                offlineFriends.length > 0 ? offlineFriends.map(friend => <FriendIndexItem key={friend._id} friend={friend} deleteFriend={deleteFriend} status="offline" />) :
+                                    'all friends are online!'
+                            }
+                        </div>
                 </div>
 
             </div>
