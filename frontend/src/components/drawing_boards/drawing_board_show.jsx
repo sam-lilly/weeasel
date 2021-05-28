@@ -401,7 +401,7 @@ class DrawingBoardShow extends React.Component {
                 {this.props.easels.map(easel => { 
                     return(
                         <div className='easel-dropdown-component'>
-                            <h3 onClick={this.changeBoard} className={easel._id === this.state.mainBoard._id ? "main-mini-canvas" : "mini-canvas"}>{easel.name}</h3>
+                            <h3 onClick={this.changeBoard} id={easel._id} className={easel._id === this.state.mainBoard._id ? "main-mini-canvas" : "mini-canvas"}>{easel.name}</h3>
                         </div>
                 )})}
                 <div className='easel-dropdown-create-easel'>
