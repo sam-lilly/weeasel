@@ -375,7 +375,6 @@ class DrawingBoardShow extends React.Component {
             {id: 2},
             {id:3}
         ]
-        console.log(this.props)
         const mapped = () =>{ this.props.easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel._id}`} />)}
 
         const main = (<canvas className="canvas" id={`board${this.state.mainBoard._id}`} style={{ border: '1px solid black' }} ></canvas>)
@@ -385,11 +384,20 @@ class DrawingBoardShow extends React.Component {
             <div className='easels-dropdown'>
                 {this.props.easels.map(easel => { 
                     return(
-                        <div>
-                            <h3>{easel.name}</h3>
+                        <div className='easel-dropdown-component'>
+                            <h3 className='easel-dropdown-easel-name'>{easel.name}</h3>
                             <canvas width='100' height='100' className='mini-canvas-option' onClick={this.changeBoard} key={easel._id} id={easel._id}/>
                         </div>
                 )})}
+                <div className='easel-dropdown-create-easel'>
+                    <form onSubmit={this.onSubmit} className='create-new-easel-on-dropdown-form'>
+                        <label htmlFor=""> Name
+                        <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
+                        </label>
+                        <button>Create new easel</button>
+                    </form>
+
+                </div>
             </div>
             )
         }
