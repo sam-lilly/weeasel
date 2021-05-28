@@ -1,6 +1,7 @@
 import React from 'react';
 import {socket} from "../home/home"
 import weeasel from '../../logo/weeasel_use.png';
+import easel_index_container from '../easel/easel_index_container';
 
 class DrawingBoardShow extends React.Component {
 
@@ -106,6 +107,7 @@ class DrawingBoardShow extends React.Component {
             this.drawOnCanvas()
         }
         
+        
         this.socket.off(`board${prevState.mainBoard._id}`)
         if (!this.props.boardId) {
             return (
@@ -114,6 +116,8 @@ class DrawingBoardShow extends React.Component {
                 </div>
             )
         }
+
+        
 
         let image = new Image()
         let canvas = document.getElementById(`board${this.state.mainBoard._id}`)
@@ -129,6 +133,7 @@ class DrawingBoardShow extends React.Component {
         } else {
             image.src = this.state.mainBoard.image;
         }
+
 
         this.socket.on(`board${this.state.mainBoard._id}`, function (data, boardName) {
             console.log(5)
@@ -238,22 +243,6 @@ class DrawingBoardShow extends React.Component {
         ;
     }
 
-   
-    loadEaselImages(){
-        this.props.easels.forEach(easel => {
-            const image = new Image 
-            let ctx = canvas.getContext("2d")
-
-            const canvas = document.getElementById(easel._id)
-                ctx = canvas.getContext("2d")
-
-            image.onload = function () {
-                ctx.drawImage(image, 0, 0)
-            }
-
-            image.src = easel.image
-        })
-    }
 
     changeBoard(e) {
         let newEasel;
@@ -342,6 +331,7 @@ class DrawingBoardShow extends React.Component {
 
 
 
+
     render() {
         console.log(this.props.boardId)
         if (!this.props.boardId) {
@@ -403,14 +393,13 @@ class DrawingBoardShow extends React.Component {
                 {this.props.easels.map(easel => { 
                     return(
                         <div className='easel-dropdown-component'>
-                            <h3 className='easel-dropdown-easel-name'>{easel.name}</h3>
-                            <canvas width='100' height='100' className='mini-canvas-option' onClick={this.changeBoard} key={easel._id} id={easel._id}/>
+                            <h3 onClick={this.changeBoard} className={easel._id === this.state.mainBoard._id ? "main-mini-canvas" : "mini-canvas"}>{easel.name}</h3>
                         </div>
                 )})}
                 <div className='easel-dropdown-create-easel'>
                     <form onSubmit={this.onSubmit} className='create-new-easel-on-dropdown-form'>
                         <label htmlFor=""> Name
-                        <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
+                        <input placeholder="weasel easel hahah :)" className="easel-form-input" onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
                         </label>
                         <button>create new easel</button>
                     </form>
