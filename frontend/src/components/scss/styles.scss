@@ -111,6 +111,9 @@ input[type="submit"] {
       letter-spacing: 3px;
       i {
         filter: drop-shadow(0 0 0.3rem rgb(255, 255, 255));
+        &:hover {
+          filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+        }
       }
       
       .current-user-nav-bar {
@@ -128,6 +131,9 @@ input[type="submit"] {
           0 0 15px rgb(255, 169, 169),
           0 0 10px rgb(255, 169, 169),
           0 0 42px rgb(255, 169, 169);
+          &:hover {
+            filter: drop-shadow(0 0 0.3rem rgb(255, 255, 255));
+          }
       }
       .nav-logo {
         // width: 6%;
@@ -136,6 +142,9 @@ input[type="submit"] {
         height: 7vh;
         width: auto;
         filter: invert(84%) sepia(15%) saturate(539%) hue-rotate(344deg) brightness(108%) contrast(98%) drop-shadow(0 0 0.3rem rgb(255, 255, 255));
+        &:hover {
+          filter: invert(84%) sepia(15%) saturate(539%) hue-rotate(344deg) brightness(108%) contrast(98%) drop-shadow(0 0 0.1rem rgb(255, 255, 255));
+        }
         // filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255));
       }
   }
@@ -144,11 +153,20 @@ input[type="submit"] {
     margin-right: 1.5vw;
     letter-spacing: 3px;
     // filter: drop-shadow(0 0 0.3rem rgba(255, 255, 255, 0.714));
+    #user-right:hover {
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+    }
     #brush {
       filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.714));
+      &:hover {
+        filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+      }
     }
     #palette {
       filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.714));
+      &:hover {
+        filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+      }
     }
     .logout {
       font-weight: 600;
@@ -226,6 +244,9 @@ input[type="submit"] {
         0 0 10px rgb(128, 244, 242),
         0 0 42px rgb(128, 244, 242);
       letter-spacing: 5px;
+      &:hover {
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      }
     }
     .robby {
       // color: rgb(220, 198, 196);
@@ -239,6 +260,9 @@ input[type="submit"] {
         0 0 15px rgb(255, 169, 169),
         0 0 10px rgb(255, 169, 169),
         0 0 42px rgb(255, 169, 169);
+        &:hover {
+          filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+        }
     }
     .sam {
       // color: rgb(203, 191, 255);
@@ -252,6 +276,9 @@ input[type="submit"] {
       0 0 15px rgb(159, 105, 213),
       0 0 10px rgb(159, 105, 213),
       0 0 42px rgb(159, 105, 213);
+      &:hover {
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      }
     }
     .tahj {
       // color: rgb(255, 197, 130);
@@ -265,6 +292,9 @@ input[type="submit"] {
         0 0 15px rgb(255, 230, 147),
         0 0 10px rgb(255, 230, 147),
         0 0 42px rgb(255, 230, 147);
+        &:hover {
+          filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+        }
     }
   }
 
@@ -306,6 +336,12 @@ input[type="submit"] {
       font-weight: 700;
       margin-top: 2vh;
       filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+      color: rgb(0, 0, 0);
+      text-shadow:
+        0 0 7px rgb(255, 255, 255),
+        0 0 15px rgb(255, 255, 255),
+        0 0 10px rgb(255, 255, 255),
+        0 0 42px rgb(255, 255, 255);
     }
     .weeasel-logo-login {
       display: flex;
@@ -324,28 +360,52 @@ input[type="submit"] {
     // justify-content: center;
     padding-top: 5.5vh;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
     color: rgb(185, 213, 249);
     strong {
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.5em;
+      color: rgb(255, 255, 255);
+      text-shadow:
+        0 0 7px rgb(128, 244, 242),
+        0 0 15px rgb(128, 244, 242),
+        0 0 10px rgb(128, 244, 242),
+        // 0 0 42px rgb(128, 244, 242);
     }
     p {
-      padding: 0.2em;
+      padding: 0.3em;
+      color: rgb(255, 255, 255);
+      text-shadow:
+        0 0 7px rgb(128, 244, 242),
+        0 0 15px rgb(128, 244, 242),
+        0 0 10px rgb(128, 244, 242),
+        // 0 0 42px rgb(128, 244, 242);
     }
 
     .join-fun {
-      color: black;
-      font-weight: 600;
-      background: rgb(183, 167, 255);
-      padding: 0.5em;
+      margin: 0.6em 0; 
+      padding: 0.6em 0.4em;
       border-radius: 0.6em;
-      margin-top: 30px;
-      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      letter-spacing: 0.1em;
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: 600;
+      width: 30%;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: rgb(190, 175, 255);
+      color:black;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #fff;
+      border-radius: 0.6em;
+      padding: 0.4em;
+      box-shadow: 0 0 .2rem #fff,
+                0 0 0.5rem #ce6af5,
+                inset 0 0 1rem #ce6af5;
       &:hover {
         background: rgb(252, 229, 195);
-        color: rgb(138, 185, 245);
         border-radius: 0.6em;
         filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255))
       }
@@ -406,6 +466,12 @@ input[type="submit"] {
       font-weight: 700;
       margin-top: 2vh;
       filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+      color: rgb(0, 0, 0);
+      text-shadow:
+        0 0 7px rgb(255, 255, 255),
+        0 0 15px rgb(255, 255, 255),
+        0 0 10px rgb(255, 255, 255),
+        0 0 42px rgb(255, 255, 255);
     }
     .weeasel-logo-login {
       display: flex;
@@ -431,13 +497,20 @@ input[type="submit"] {
       font-weight: 600;
       margin-bottom: 1.5%;
       letter-spacing: 0.2em;
-      color: rgb(185, 213, 249);
-      filter: drop-shadow(0 0 0.1rem rgb(255, 255, 255));
+      // color: rgb(185, 213, 249);
+      // filter: drop-shadow(0 0 0.1rem rgb(255, 255, 255));
+      color: rgb(255, 255, 255);
+      text-shadow:
+        0 0 7px rgb(128, 244, 242),
+        0 0 7px rgb(128, 244, 242),
+        0 0 7px rgb(128, 244, 242),
     }
 
     .login-signup-errors {
       // border: 1px solid orange;
       text-align: center;
+      font-size: 12px;
+      color:rgb(255, 169, 169);
       // STILL NEED TO DO CSS FOR ERRORS
     }
 
@@ -455,6 +528,9 @@ input[type="submit"] {
      margin: 0.6em 0; 
      padding: 0.6em 0.4em;
      border-radius: 0.6em;
+     &:hover {
+      filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+     }
       // need to do pseudo selector for while
       // typing in the inputs
     }
@@ -473,20 +549,45 @@ input[type="submit"] {
       text-align: center;
       font-size: 1.1em;
       font-weight: 600;
-      // border: 1px solid rgb(183, 167, 255);
-      background:rgb(183, 167, 255);
-      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
-      color: black;
+      width: 95%;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: rgb(190, 175, 255);
+      color:black;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #fff;
+      border-radius: 0.6em;
+      padding: 0.4em;
+      box-shadow: 0 0 .2rem #fff,
+                0 0 0.5rem #ce6af5,
+                inset 0 0 1rem #ce6af5;
       &:hover {
         background: rgb(252, 229, 195);
-        color: rgb(138, 185, 245);
         border-radius: 0.6em;
         filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255))
       }
+      // margin: 0.6em 0; 
+      // padding: 0.6em 0.4em;
+      padding-top: 10px;
+      // border-radius: 0.6em;
+      // letter-spacing: 0.3em;
+      // text-align: center;
+      // font-size: 1.1em;
+      // font-weight: 600;
+      // // border: 1px solid rgb(183, 167, 255);
+      // background:rgb(183, 167, 255);
+      // filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      // color: black;
+      // &:hover {
+      //   background: rgb(252, 229, 195);
+      //   color: rgb(138, 185, 245);
+      //   border-radius: 0.6em;
+      //   filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255))
+      // }
     }
 
     .button-at-bottom {
-      // border: 1px solid red;
       margin: 0.6em 0; 
       padding: 0.6em 0.4em;
       border-radius: 0.6em;
@@ -494,13 +595,21 @@ input[type="submit"] {
       text-align: center;
       font-size: 1.1em;
       font-weight: 600;
-      // border: 1px solid rgb(183, 167, 255);
-      background:rgb(183, 167, 255);
-      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
-      color: black;
+      width: 95%;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: rgb(190, 175, 255);
+      color:black;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #fff;
+      border-radius: 0.6em;
+      padding: 0.4em;
+      box-shadow: 0 0 .2rem #fff,
+                0 0 0.5rem #ce6af5,
+                inset 0 0 1rem #ce6af5;
       &:hover {
         background: rgb(252, 229, 195);
-        color: rgb(138, 185, 245);
         border-radius: 0.6em;
         filter: drop-shadow(0 0 0.4rem rgb(255, 255, 255))
       }
@@ -512,6 +621,12 @@ input[type="submit"] {
       font-size: 1.3em;
       letter-spacing: 0.1em;
       padding-bottom: 1vh;
+      color: rgb(255, 255, 255);
+      text-shadow:
+        0 0 7px rgb(128, 244, 242),
+        0 0 7px rgb(128, 244, 242),
+        0 0 7px rgb(128, 244, 242),
+
     }
   }
 
@@ -694,23 +809,35 @@ input[type="submit"] {
 .add-friend-dropdown {
   position: absolute;
   z-index: 1;
-  width: 250px;
+  width: 300px;
   top: 50px;
+  top: 50px;
+
   right: 15px;
-  box-shadow: 2px 2px 5px rgb(252, 229, 195);
-  border-radius: 20px;
-  background-color: rgb(35, 37, 40);
+  box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.591);
+  border-radius: 8px;
+  background-color: rgba(35, 37, 40, 0.755);
   height: 175px;
   overflow-y: scroll;
 
   .add-friend-dropdown-title{
     padding: 10px 0 0 10px;
-    font-weight: bolder;
+    font-weight: 400;
     font-size: 16px;
+    margin-top: 5px;
+    // color: rgb(190, 175, 255);
+    color: rgb(255, 255, 255);
+    text-shadow:
+    0 0 7px rgb(159, 105, 213),
+    0 0 15px rgb(159, 105, 213),
+    0 0 10px rgb(159, 105, 213),
+    0 0 42px rgb(159, 105, 213);
+
   }
 
   .add-friend-list {
     padding: 0 10px 10px 10px;
+    color: rgb(190, 175, 255);
 
     .add-friend-item {
       padding-top: 15px;
@@ -719,8 +846,21 @@ input[type="submit"] {
       font-size: 14px;
       &:hover {
         font-weight: bolder;
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+        cursor: pointer;
       } 
     }
+  }
+}
+
+.board-list-nav{
+  right: -120%;
+  top: 60%;
+  .friend-index-title {
+    margin-left: 10px;
+  }
+  .add-friend-username {
+    color:rgb(190, 175, 255);
   }
 }
 
@@ -873,6 +1013,10 @@ input[type="submit"] {
   font-size: 15px;
   margin-bottom: 8px;
   color:rgb(205, 222, 244);
+  cursor: pointer;
+  &:hover {
+    filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+  }
 }
 
 .fa-user-plus {
@@ -927,9 +1071,12 @@ input[type="submit"] {
   border: 1px solid #fff;
 // border-radius: 1rem;
 // padding: 0.4em;
-box-shadow: 0 0 .2rem #fff,
+  box-shadow: 0 0 .2rem #fff,
             0 0 0.5rem #ce6af5,
             inset 0 0 1rem #ce6af5;
+  &:hover {
+    filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+  }
 }
 
 .new-board-name {
@@ -950,10 +1097,6 @@ box-shadow: 0 0 .2rem #fff,
     color: rgb(250, 104, 104);
     filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
   }
-}
-
-.board-list-nav{
-  right: -200px;
 }
 
 .new-baord-name-input{
@@ -1141,6 +1284,7 @@ box-shadow: 0 0 .2rem #fff,
   padding-left: 5px;
   padding-top: 25px;
   border-top: 0.5px solid rgb(16, 24, 30);
+  cursor: pointer ;
 
   .painting-tools {
     display: flex;
@@ -1149,13 +1293,17 @@ box-shadow: 0 0 .2rem #fff,
     margin-right: 25px;
     margin-left: 15px;
     color: rgb(185, 213, 249);
+    cursor: pointer ;
     i {
       color: rgb(247, 243, 210);
       filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      cursor: pointer ;
     }
     .color-picker-container {
       &:hover{
-        filter: brightness(70%);
+        // filter: brightness(70%);
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+        cursor: pointer ;
       }
       input {
           &:hover {
@@ -1166,17 +1314,18 @@ box-shadow: 0 0 .2rem #fff,
 
     .brushsize-container {
       &:hover{
-        filter: brightness(70%);
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255))
       }
       select {
           &:hover {
-            cursor: pointer ;
+            cursor: pointer;
+            // filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255))
           }
         }
     }
     .eraser-container {
       &:hover{
-        filter: brightness(70%);
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255))
       }
   
     }
@@ -1192,10 +1341,8 @@ box-shadow: 0 0 .2rem #fff,
     align-items: baseline;
     margin-top: 20px;
     button {
-       
       &:hover {
-      filter: brightness(70%);
-      
+        filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255))
     }
  
     }
@@ -1215,10 +1362,13 @@ box-shadow: 0 0 .2rem #fff,
   position: absolute;
   width: 25%;
   height: 30% ;
-  top: -80%;
-  right: 50%;
-
-  background-color: rgb(7, 7, 9);
+  // top: -80%;
+  // right: 50%;
+  top: -48%;
+  right: 66%;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.591);
+  background-color: rgba(35, 37, 40, 0.755);
   height: 150px;
   overflow: auto;
     p {
@@ -1252,11 +1402,12 @@ box-shadow: 0 0 .2rem #fff,
   align-items: center;
   width: 100%;
   height: 80vh;
+  padding-top: 8vh;
   background: rgb(47, 60, 75);
 
 
   .logo-logged-in {
-    padding-top: 1vh;
+    // padding-top: 1vh;
     width: 40%;
     filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
     padding-bottom: 5px;
@@ -1267,20 +1418,25 @@ box-shadow: 0 0 .2rem #fff,
 
   .select-board {
     font-family: 'Spartan', sans-serif;
-    font-size: 25px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
     // margin-right: 35px;
     margin-top: 5px;
     text-align: center;
-    margin-bottom: 9px;
-    letter-spacing: 5px;
-    color: rgb(185, 213, 249);
+    margin-bottom: 5px;
+    letter-spacing: 0.3em;
+    color: rgb(255, 255, 255);
+    text-shadow:
+      0 0 7px rgb(128, 244, 242),
   }
 
   #clients {
-    color: rgb(249, 240, 211);
+    // color: rgb(249, 240, 211);
     margin-top: 12px;
     letter-spacing: 3px;
+    color: rgb(255, 255, 255);
+    text-shadow:
+      0 0 7px rgb(255, 247, 164),
   }
 
 
@@ -1316,8 +1472,8 @@ box-shadow: 0 0 .2rem #fff,
   height: 80vh;
   overflow: none;
   background: rgb(47, 60, 75);
-  margin: 0;
-  padding: 0;
+  padding-top: 8vh;
+  // padding: 0;
   // margin-bottom: 15vh;
 
   .no-exist-ease {
@@ -1330,6 +1486,14 @@ box-shadow: 0 0 .2rem #fff,
       color: rgb(185, 213, 249);
       text-align: center;
       margin-top:  5px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: rgb(255, 255, 255);
+      text-shadow:
+        0 0 7px rgb(128, 244, 242),
+        // 0 0 15px rgb(128, 244, 242),
+        // 0 0 10px rgb(128, 244, 242),
+        // 0 0 42px rgb(128, 244, 242);
     }
   }
 
@@ -1337,7 +1501,7 @@ box-shadow: 0 0 .2rem #fff,
     color:rgb(247, 243, 210);
     border: 1px solid white;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 7px;
     &:hover {
       filter: drop-shadow(0 0 0.6rem rgb(255, 252, 233));

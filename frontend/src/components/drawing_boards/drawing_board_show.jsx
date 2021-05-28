@@ -406,7 +406,7 @@ class DrawingBoardShow extends React.Component {
                 )})}
                 <div className='easel-dropdown-create-easel'>
                     <form onSubmit={this.onSubmit} className='create-new-easel-on-dropdown-form'>
-                        <label htmlFor=""> Name
+                        <label htmlFor=""> new easel name
                         <input placeholder="weasel easel hahah :)" className="easel-form-input" onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
                         </label>
                         <button>create new easel</button>

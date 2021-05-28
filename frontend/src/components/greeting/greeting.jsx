@@ -18,7 +18,7 @@ const Greeting = ({ currentUser, logout, setDrawingBoard }) => {
             <div className="header-right">
                 <div className="header-group">
                 {/* <h1>redirects to login!</h1> */}
-                <Link to="/login" className="user-icon"><i className="far fa-user"></i></Link>
+                <Link to="/login" className="user-icon"><i id="user-right" className="far fa-user"></i></Link>
                 </div>
             </div>
 
