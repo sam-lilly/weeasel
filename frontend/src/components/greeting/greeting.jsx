@@ -41,7 +41,7 @@ const Greeting = ({ currentUser, logout, setDrawingBoard }) => {
                 <div className="header-group">
                     {/* <h1>log in greeting!</h1> */}
                     <Link to="/myWeeasel" onClick={() => setDrawingBoard("")} className="user-icon">
-                        <i class="fas fa-palette"></i>&nbsp;<i class="fas fa-paint-brush"></i>
+                        <i id="palette" className="fas fa-palette"></i>&nbsp;<i id="brush" className="fas fa-paint-brush"></i>
                     </Link>
                     {/* <h2 className="header-greeting">&nbsp;&nbsp;&nbsp;|&nbsp; {currentUser.username}&nbsp;</h2> */}
                     <p>&nbsp;|&nbsp;</p>

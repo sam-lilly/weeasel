@@ -1,5 +1,6 @@
 import React from 'react';
 import {socket} from "../home/home"
+import weeasel from '../../logo/weeasel_use.png';
 
 class DrawingBoardShow extends React.Component {
 
@@ -346,11 +347,28 @@ class DrawingBoardShow extends React.Component {
         if (!this.props.boardId) {
             return (
                 <div className='no-drawing-board-selected-pane'>
-                    Select one of your drawing boards to get started!
+
+                            <img className="logo-logged-in" src={weeasel} alt="weeasel" />
+
+                    <p className="select-board"> 
+                        select one of your drawing
+                    </p>
+                    <p className="select-board"> 
+                        boards to get started!
+                    </p>
+
                     <div id="clients"> </div>
+
                 </div>
             )
         }
+
+
+
+
+
+
+
 
         if (this.props.easels.length < 1) {
             return (
@@ -361,7 +379,7 @@ class DrawingBoardShow extends React.Component {
                         <label htmlFor=""> Name
                             <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
                         </label>
-                        <button>Create new easel</button>
+                        <button>create new easel</button>
                     </form>
                     
 
@@ -394,7 +412,7 @@ class DrawingBoardShow extends React.Component {
                         <label htmlFor=""> Name
                         <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
                         </label>
-                        <button>Create new easel</button>
+                        <button>create new easel</button>
                     </form>
 
                 </div>
@@ -415,47 +433,59 @@ class DrawingBoardShow extends React.Component {
                         
 
                         <div className="tools-section">
-                        <button className='show-easels-button' onClick={this.showEasels}>+ More Easels</button>
-                        {this.state.easelDropdown ? displayEasels() : null}
-                            <div className="color-picker-container">
-                                Select Brush Color
-                                <input onChange={this.changeColor} type="color" value={this.state.color} />
+
+
+                                <div className="painting-tools">
+
+                                    <div className="color-picker-container">
+                                        color &nbsp; <i className="fas fa-palette"></i> &nbsp;
+                                        <input onChange={this.changeColor} type="color" value={this.state.color} />
+                                    </div>
+
+                                    <div className="brushsize-container">
+                                        size &nbsp;<i className="fas fa-paint-brush"></i>  &nbsp;
+                                        <select value={this.state.size} onChange={this.changeSize} >
+                                            <option> 5</option>
+                                            <option>10</option>
+                                            <option>15</option>
+                                            <option>20</option>
+                                            <option>25</option>
+                                            <option>30</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div className='eraser-container'>
+                                        <button onClick={this.makeEraser}>eraser &nbsp;<i className="fas fa-eraser"></i></button>
+                                    </div>
+
+                                </div>
+                            
+                            <div className="lower-tools">
+
+                                    <button className='show-easels-button' onClick={this.showEasels}><i className="fas fa-plus"></i>&nbsp; more easels</button>
+                                    {this.state.easelDropdown ? displayEasels() : null}
+
+                                <button onClick={(e) => {
+                                    this.props.fetchEasels(this.props.boardId);
+                                    this.setState(this.state)
+                                }
+                                }>update your boards</button>
+
+                                {this.props.easels.length > 0 ? mapped() : null}
+
                             </div>
-
-                            <div className="brushsize-container">
-                                Select Brush Size
-                            <select value={this.state.size} onChange={this.changeSize} >
-                                    <option> 5</option>
-                                    <option>10</option>
-                                    <option>15</option>
-                                    <option>20</option>
-                                    <option>25</option>
-                                    <option>30</option>
-
-                                </select>
-                            </div>
-                            <div className='eraser-container'>
-                                <button onClick={this.makeEraser}>Eraser</button>
-                            </div>
-
-                        <button onClick={(e) => {
-                            this.props.fetchEasels(this.props.boardId);
-                            this.setState(this.state)
-                        }
-                        }>Update your Boards</button>
-
-                        {this.props.easels.length > 0 ? mapped() : null}
 
                     </div>
                    
                     <div className='chat-container'>
-                        <h1>CHAT WITH THE OTHER WEASELS</h1>
+                        <h1 className="weasel-chat">chat with other weasels</h1>
                         <div className="chat-box" id={`chat${this.props.boardId}`}>
 
                         </div>
                         <form className="chat-input">
-                            <input placeholder="you need an easel to chat, silly weasel :)" onChange={this.handleInput} type="text" value={this.state.input} />
-                            <button onClick={this.handleEmitInput}>send</button>
+                            <input placeholder="message ..." onChange={this.handleInput} type="text" value={this.state.input} />
+                            <button className="send-button" onClick={this.handleEmitInput}><i className="fas fa-arrow-up"></i></button>
                         </form>
                     </div>
                        

@@ -52,11 +52,14 @@ class DrawingBoardIndexItem extends React.Component {
 
       return (
          <div onClick={this.onClick(drawingBoard._id)} className="boards-index-header">
-            <h1 className='friend-index-title '>{drawingBoard.name}</h1>
-            <i onClick={this.toggleDropdown} className="fas fa-user-plus"></i>
+            {/* <div className="my-db-index-item"> */}
+               <h1 className='drawing-board-name'>{drawingBoard.name}</h1>
+               <h1 className="inside"><i onClick={this.toggleDropdown} className="fas fa-user-plus"></i></h1>
+            {/* </div> */}
+
             {this.state.isOpen ?
                <div className='add-friend-dropdown board-list-nav'>
-                  <h2 className='friend-index-title'> Invite your friends!</h2>
+                  <h2 className='friend-index-title'> invite your friends!</h2>
                   <div className='add-friend-list'>
                      {friends.map((friend) => {
                         return <div key={friend._id} className='add-friend-item'>

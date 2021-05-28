@@ -54,7 +54,7 @@ class DrawingBoardIndex extends React.Component {
       return (
          <div className="drawing-board-index">
             <div>
-               <h1 className='boards-list-title'>My Drawing Boards</h1>
+               <h1 className='boards-list-title'>my drawing boards</h1>
                <div className="drawing-board-items">
                   {drawingBoards.map((board, i) =>
                      <DrawingBoardIndexItem key={i}
@@ -71,8 +71,8 @@ class DrawingBoardIndex extends React.Component {
             </div>
 
             <div className='joined-drawing-board-index'>
-               <h1 className='boards-list-title'>My Joined Drawing Boards</h1>
-               <div className="boards-items">
+               <h1 className='boards-list-title'>joined drawing boards</h1>
+               <div className="drawing-board-items">
                   {joinedBoards.map((board, i) =>
                      <JoinedDrawingBoardsItem key={i}
                         drawingBoard={board}
@@ -89,11 +89,11 @@ class DrawingBoardIndex extends React.Component {
             <a onClick={this.toggleDropdown} className='create-board-btn'>
                <div className={this.state.isOpen ? "show" : "hidden"} onClick={e => e.stopPropagation()}>
                   <div className="new-baord-name-input">
-                     <input type="text" className="new-board-name" placeholder="Enter Board Name" onChange={this.handleBoardName()} />
-                     <i className="far fa-arrow-alt-circle-right" onClick={this.createDrawingBoard}></i>
+                     <input type="text" className="new-board-name" placeholder="enter board name" onChange={this.handleBoardName()} />
+                     <i id="create-board-name" className="fas fa-plus" onClick={this.createDrawingBoard}></i>
                   </div>
                </div>
-               Create a new Board
+               create a new board
             </a>
          </div >
       )
