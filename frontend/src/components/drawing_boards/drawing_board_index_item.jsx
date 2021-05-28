@@ -35,16 +35,14 @@ class DrawingBoardIndexItem extends React.Component {
       }
 
       return e => {
-         e.preventDefault();
-         e.stopPropagation();
          this.props.joinDrawingBoard(friendId, boardId);
-         this.setState({ users: userArr })
+         this.setState({ users: userArr, isOpen: false })
       }
    }
 
    toggleDropdown(e) {
       e.stopPropagation();
-      this.setState({ isOpen: true })
+      this.setState({ isOpen: !this.state.isOpen })
    }
 
    render() {
@@ -52,28 +50,26 @@ class DrawingBoardIndexItem extends React.Component {
 
       if (!drawingBoard) return null;
 
-
       return (
-         <div onClick={this.onClick(drawingBoard._id)} className="drawing-board-index-boxes">
-            <h1>{drawingBoard.name}</h1>
-            <a onClick={this.toggleDropdown} className='create-board-btn'>
-               <div className={this.state.isOpen ? "show" : "hidden"} >
-                  <div className='add-friends-dropdown-container'>
-                     <section className='create-board-friends-list'>
-                        {friends.map((friend, i) => {
-                           return <button key={i} value={friend} onClick={this.handleFriend(friend._id, drawingBoard._id)}>{friend.username}</button>
-                        })}
-                     </section>
-                     <button onClick={() => updateDrawingBoard(this.state)}>  Done </button>
+         <div onClick={this.onClick(drawingBoard._id)} className="boards-index-header">
+            <h1 className='friend-index-title '>{drawingBoard.name}</h1>
+            <i onClick={this.toggleDropdown} className="fas fa-user-plus"></i>
+            {this.state.isOpen ?
+               <div className='add-friend-dropdown board-list-nav'>
+                  <h2 className='friend-index-title'> Invite your friends!</h2>
+                  <div className='add-friend-list'>
+                     {friends.map((friend) => {
+                        return <div key={friend._id} className='add-friend-item'>
+                           <p className='add-friend-username'>{friend.username}</p>
+                           <i onClick={this.handleFriend(friend._id, drawingBoard._id)} className="fas fa-plus-circle"></i>
+                        </div>
+                     })}
                   </div>
                </div>
-               Add Friends
-            </a>
+               : null}
          </div >
       )
-
    }
-
 }
 
 export default DrawingBoardIndexItem;
