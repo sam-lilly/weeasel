@@ -1152,7 +1152,37 @@ box-shadow: 0 0 .2rem #fff,
       color: rgb(247, 243, 210);
       filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
     }
+    .color-picker-container {
+      &:hover{
+        filter: brightness(70%);
+      }
+      input {
+          &:hover {
+            cursor: pointer ;
+          }
+        }
+    }
+
+    .brushsize-container {
+      &:hover{
+        filter: brightness(70%);
+      }
+      select {
+          &:hover {
+            cursor: pointer ;
+          }
+        }
+    }
+    .eraser-container {
+      &:hover{
+        filter: brightness(70%);
+      }
+  
+    }
+
   }
+
+  
 
 
   .lower-tools {
@@ -1160,12 +1190,21 @@ box-shadow: 0 0 .2rem #fff,
     justify-content: space-evenly;
     align-items: baseline;
     margin-top: 20px;
+    button {
+       
+      &:hover {
+      filter: brightness(70%);
+      
+    }
+ 
+    }
+    
   }
 
 
-
-
 }
+
+
 
 
 .easels-dropdown {
@@ -1175,10 +1214,10 @@ box-shadow: 0 0 .2rem #fff,
   position: absolute;
   width: 25%;
   height: 30% ;
-  top: 5px;
+  top: -80%;
   right: 50%;
 
-  background-color: silver;
+  background-color: rgb(7, 7, 9);
   height: 150px;
   overflow: auto;
     p {
@@ -1246,6 +1285,26 @@ box-shadow: 0 0 .2rem #fff,
 
 }
 
+ .main-mini-canvas {
+   color: rgb(252, 229, 195);
+   filter: drop-shadow(0 0 0.3rem rgb(255, 255, 255));
+    margin: 10px;
+ }
+
+ .mini-canvas {
+  margin: 10px;
+ }
+
+ .easel-form-input {
+   border: 1px solid rgb(185, 213, 249);
+    filter: drop-shadow(0 0 0.2rem rgb(185, 213, 249));
+    &:focus {
+      filter: drop-shadow(0 0 0.5rem rgb(255, 255, 255));
+    }
+ }
+
+
+
 
 .no-existing-easels-pane {
   position: relative;
@@ -1296,4 +1355,5 @@ box-shadow: 0 0 .2rem #fff,
 
 
 }
+
 
