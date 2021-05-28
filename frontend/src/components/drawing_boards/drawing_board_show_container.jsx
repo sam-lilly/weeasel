@@ -9,7 +9,7 @@ const mSTP = (state, ownProps) => ({
      easels: state.entities.easels || [],
      boardId: state.session.currentBoard,
      currentUsername: state.session.user.username,
-     currentBoard: state.entities.drawingBoards.find(db => db._id == state.session.currentBoard)
+     currentBoard: state.entities.allDrawingBoards.find(db => db._id == state.session.currentBoard)
 })
 
 const mDTP = (dispatch) => ({

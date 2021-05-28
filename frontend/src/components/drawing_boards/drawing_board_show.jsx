@@ -34,7 +34,8 @@ class DrawingBoardShow extends React.Component {
     ctx;
     componentDidMount() {
         this.socket.on("broadcast", function (data) {
-            document.getElementById("clients").innerHTML = data.description;
+            let clientDiv = document.getElementById('clients');
+            if (clientDiv) clientDiv.innerHTML = data.description
 
         })
         if (!this.props.boardId) {
