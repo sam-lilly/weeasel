@@ -164,7 +164,7 @@ router.post('/:user_id/drawingboards/:drawingBoardId',
         board.users.push(req.params.user_id);
         board.save();
       }
-      res.send({ joinedDrawingBoards: board._id })
+      res.send({ joinedDrawingBoards: board._id, userId: req.params.user_id })
     })
 
     // res.send({ joinedDrawingBoard: req.params.drawingBoardId, name: boardName })

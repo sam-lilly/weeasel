@@ -36,7 +36,7 @@ class DrawingBoardIndexItem extends React.Component {
 
       return e => {
          this.props.joinDrawingBoard(friendId, boardId);
-         this.setState({ users: userArr, isOpen: false })
+         this.setState({ users: userArr})
       }
    }
 
@@ -62,6 +62,7 @@ class DrawingBoardIndexItem extends React.Component {
                   <h2 className='friend-index-title'> invite your friends!</h2>
                   <div className='add-friend-list'>
                      {friends.map((friend) => {
+                         if (this.props.drawingBoard.users.includes(friend._id)) return;
                         return <div key={friend._id} className='add-friend-item'>
                            <p className='add-friend-username'>{friend.username}</p>
                            <i onClick={this.handleFriend(friend._id, drawingBoard._id)} className="fas fa-plus-circle"></i>
