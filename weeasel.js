@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
     people++
 
     console.log(people)
-    io.sockets.emit("broadcast", { description: people + "clients connected!" })
+    io.sockets.emit("broadcast", { description: people + " weeasels connected" })
 
 
     socket.on("disconnect", function () {

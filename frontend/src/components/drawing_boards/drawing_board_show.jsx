@@ -374,14 +374,20 @@ class DrawingBoardShow extends React.Component {
             return (
                 <div className='no-existing-easels-pane'>
                     <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name}</h1>
-                    <div className='no-existing-easels-pane'>Looks like you don't have any easels on this board, would you like to make a new one?</div>
-                    <form onSubmit={this.onSubmit} className='create-new-easel-on-pane-form'>
-                        <label htmlFor=""> Name
-                            <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
-                        </label>
-                        <button>create new easel</button>
-                    </form>
 
+
+                    <div className="no-exist-ease">
+
+                        <img className="logo-logged-in" src={weeasel} alt="weeasel" />
+                        <div className='no-existing-easels-pane-header'><p>you don't have any easels on this board</p> <p>would you like to make a new one?</p></div>
+                        <form onSubmit={this.onSubmit} className='create-new-easel-on-pane-form'>
+                            {/* <label htmlFor=""> name */}
+                                <input placeholder="name" onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
+                            {/* </label> */}
+                            <button>create new easel</button>
+                        </form>
+
+                    </div>
 
                 </div>
             )
