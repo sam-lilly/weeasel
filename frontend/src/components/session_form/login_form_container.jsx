@@ -17,7 +17,8 @@ const mSTP = ({ errors }) => ({
 
 const mDTP = (dispatch) => ({
     processForm: (user) => dispatch(login(user)),
-    clearErrors: () => dispatch(clearErrors())
+    clearErrors: () => dispatch(clearErrors()),
+    login: (user) => dispatch(login(user))
     // make sure these are the same names we are using
 })
 

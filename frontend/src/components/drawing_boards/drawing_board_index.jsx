@@ -38,7 +38,7 @@ class DrawingBoardIndex extends React.Component {
 
    createDrawingBoard(e) {
       e.preventDefault()
-      this.setState({ isOpen: false })
+      this.setState({ isOpen: false, name: '' })
       this.props.createDrawingBoard(this.state).then();
    }
 
@@ -89,7 +89,7 @@ class DrawingBoardIndex extends React.Component {
             <a onClick={this.toggleDropdown} className='create-board-btn'>
                <div className={this.state.isOpen ? "show" : "hidden"} onClick={e => e.stopPropagation()}>
                   <div className="new-baord-name-input">
-                     <input type="text" className="new-board-name" placeholder="enter board name" onChange={this.handleBoardName()} />
+                     <input type="text" className="new-board-name" placeholder="enter board name" onChange={this.handleBoardName()} value={this.state.name} />
                      <i id="create-board-name" className="fas fa-plus" onClick={this.createDrawingBoard}></i>
                   </div>
                </div>

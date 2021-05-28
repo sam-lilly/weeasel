@@ -35,7 +35,7 @@ class SessionForm extends React.Component {
 
     handleDemoSubmit(e) {
         e.preventDefault();
-        // dispatch(login({ email: "demoUserEmail", username: "demoUsername", password: "demoPassword"}))
+        this.props.login({ email: "bobross@weeasel.com", username: "bobross", password: "password"})
     }
 
     renderErrors() {

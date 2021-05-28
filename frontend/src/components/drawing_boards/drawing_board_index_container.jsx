@@ -19,7 +19,7 @@ const mSTP = (state) => {
         }
         return {
             friends: friendObjects,
-            drawingBoards: Object.values(state.entities.drawingBoards),
+            drawingBoards: state.entities.drawingBoards,
             users: state.entities.users,
             joinedBoards: joinedBoardsObj,
             currentUser: state.session.user

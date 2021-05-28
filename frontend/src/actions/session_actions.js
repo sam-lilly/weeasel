@@ -11,7 +11,7 @@ export const SET_DRAWING_BOARD= 'SET_DRAWING_BOARD'
 
 
 export const setDrawingBoard = (drawingBoardId) => {
-  debugger
+
   return({
     type: SET_DRAWING_BOARD,
     drawingBoardId
