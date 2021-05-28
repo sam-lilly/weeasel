@@ -1,26 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import { receiveCurrentUser } from '../../actions/session_actions';
 import GreetingContainer from '../greeting/greeting_container';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../scss/styles.scss';
 
 
 class NavBar extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+    }
+
 
     render() {
+
         return (
-            <div className="nav-container">
+            // <div className="nav-container">
+            <div>
 
-                {/* <h1>this is the nav bar<i class="far fa-user"></i></h1> */}
-
-                <div className="header-left">
+                {/* <div className="header-left">
                     <Link to="/myWeeasel" className="home-nav" >HOME</Link>
-                </div>
+                </div> */}
 
-                <div className="header-right">
+                {/* <div className="header-right"> */}
                     <GreetingContainer />
-                </div>
+                {/* </div> */}
 
             </div>
         )

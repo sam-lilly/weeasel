@@ -10,7 +10,7 @@ const easelsReducer = (oldState = [], action) => {
         case RECEIVE_EASEL:
             let easel = nextState.find(easel => easel._id == action.easel.data._id)
             let index = nextState.indexOf(easel);
-            nextState.splice(index,1);
+            // nextState.splice(index,1);
             nextState.push(action.easel.data)
             return nextState;
         case REMOVE_EASEL:

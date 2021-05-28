@@ -16,7 +16,6 @@ export const createDrawingBoard = (drawingBoard) => {
 };
 
 export const updateDrawingBoard = (drawingBoard) => {
-    // debugger
     return axios.put(`/api/drawingBoards/${drawingBoard.id}`, drawingBoard)
 }
 
