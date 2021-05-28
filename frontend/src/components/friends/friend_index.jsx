@@ -61,7 +61,7 @@ class FriendIndex extends React.Component {
         }
         if (friends.length < 1) {
             return (
-                <div className='friend-index-header no-friend'>
+                <div className='friend-index-header-no-friend'>
                     <h1> sorry, you don't have any friends :(</h1>
                     <i onClick={this.setDropdown} className="fas fa-plus"></i>
                     {this.state.addDropdown ? addFriendDropdown() : null}
