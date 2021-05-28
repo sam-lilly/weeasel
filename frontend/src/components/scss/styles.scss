@@ -973,6 +973,19 @@ box-shadow: 0 0 .2rem #fff,
   // padding-bottom: 10vh;
   margin-bottom: 10vh;
   height: 80vh;
+  //================//
+  position:relative
+}
+
+.drawing-board-show-page-name{
+   position: absolute;
+    width: 70vw;
+    top: -5vh;
+    left: 0;
+    color: white;
+    text-shadow: 0 0 7px #80f4f2, 0 0 15px #80f4f2, 0 0 10px #80f4f2, 0 0 42px #80f4f2;
+    letter-spacing: 5px;
+    text-align: center;
 }
 
 
