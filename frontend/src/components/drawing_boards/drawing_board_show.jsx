@@ -431,7 +431,7 @@ class DrawingBoardShow extends React.Component {
         return (
             <div className="drawing-board-show-page">
 
-                <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name} :{this.state.mainBoard.name} </h1>
+                <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name}: {this.state.mainBoard.name} </h1>
                 <div id="main-easel-display">
                     {main}
                     <i onClick={() => this.props.setDrawingBoard()} className="far fa-times-circle"></i>
