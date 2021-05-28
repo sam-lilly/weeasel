@@ -1,5 +1,5 @@
 import React from 'react';
-import {socket} from "../home/home"
+import { socket } from "../home/home"
 import weeasel from '../../logo/weeasel_use.png';
 
 class DrawingBoardShow extends React.Component {
@@ -38,7 +38,7 @@ class DrawingBoardShow extends React.Component {
 
         })
         if (!this.props.boardId) {
-            return ;
+            return;
         }
         // this.props.fetchEasels()
 
@@ -74,7 +74,7 @@ class DrawingBoardShow extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.boardId) return;
-      
+
         if (this.props.boardId != prevProps.boardId) {
             let testChat = document.getElementById(`chat${this.props.boardId}`);
             if (testChat) testChat.innerHTML = '';
@@ -85,7 +85,7 @@ class DrawingBoardShow extends React.Component {
             this.setState({
                 mainBoard: this.props.easels[0]
             })
-          
+
             const that = this;
             this.socket.off('message')
             this.socket.on(`message`, function (data, username, boardId) {
@@ -105,7 +105,7 @@ class DrawingBoardShow extends React.Component {
             })
             this.drawOnCanvas()
         }
-        
+
         this.socket.off(`board${prevState.mainBoard._id}`)
         if (!this.props.boardId) {
             return (
@@ -123,7 +123,7 @@ class DrawingBoardShow extends React.Component {
         image.onload = function () {
             ctx.drawImage(image, 0, 0)
         }
-        if ( this.state.mainBoard.image == prevState.mainBoard.image) {
+        if (this.state.mainBoard.image == prevState.mainBoard.image) {
             // image.src =this.state.mainBoard.image
             image.src = base64Imagedata
         } else {
@@ -168,11 +168,11 @@ class DrawingBoardShow extends React.Component {
     // then change the main image to that selected
 
     drawOnCanvas() {
-        
+
         const canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
         if (!canvas) return
-      
-         this.ctx = canvas.getContext('2d');
+
+        this.ctx = canvas.getContext('2d');
         const ctx = this.ctx
         const display = document.querySelector('#main-easel-display');
         const display_style = getComputedStyle(display);
@@ -229,23 +229,23 @@ class DrawingBoardShow extends React.Component {
                 // and change it when we change boards
             }, 1000)
 
-            root.timeout2 = setTimeout(function() {
+            root.timeout2 = setTimeout(function () {
                 root.props.updateEasel(root.props.boardId, root.state.mainBoard._id, root.state.mainBoard);
             }, 3000)
-          
+
         };
 
         ;
     }
 
-   
-    loadEaselImages(){
+
+    loadEaselImages() {
         this.props.easels.forEach(easel => {
-            const image = new Image 
+            const image = new Image
             let ctx = canvas.getContext("2d")
 
             const canvas = document.getElementById(easel._id)
-                ctx = canvas.getContext("2d")
+            ctx = canvas.getContext("2d")
 
             image.onload = function () {
                 ctx.drawImage(image, 0, 0)
@@ -263,16 +263,16 @@ class DrawingBoardShow extends React.Component {
         //         return
         //     }
         // })
-        this.setState({ 
+        this.setState({
             mainBoard: this.props.easels.find(easel => easel._id == e.target.id),
             easelDropdown: false,
-         })
+        })
         // im thinking we already have the id in there 
         // let url;
         // this.setState({
         //     image: url
         // })
-       
+
         //if we grab the entire canvas element it mi
     }
 
@@ -286,20 +286,20 @@ class DrawingBoardShow extends React.Component {
     handleEmitInput(e) {
         e.preventDefault()
         //will end up also emitting which chat element more than likely saved in state
-        this.socket.emit("message", this.state.input, this.props.currentUsername, this.props.boardId )
+        this.socket.emit("message", this.state.input, this.props.currentUsername, this.props.boardId)
         this.setState({
             input: '',
         })
     }
 
-    changeColor(e){
+    changeColor(e) {
         console.log(e.target.value)
         this.setState({
             color: e.target.value
         })
     }
 
-    changeSize(e){
+    changeSize(e) {
         this.setState({
             size: e.target.value
         })
@@ -348,12 +348,12 @@ class DrawingBoardShow extends React.Component {
             return (
                 <div className='no-drawing-board-selected-pane'>
 
-                            <img className="logo-logged-in" src={weeasel} alt="weeasel" />
+                    <img className="logo-logged-in" src={weeasel} alt="weeasel" />
 
-                    <p className="select-board"> 
+                    <p className="select-board">
                         select one of your drawing
                     </p>
-                    <p className="select-board"> 
+                    <p className="select-board">
                         boards to get started!
                     </p>
 
@@ -375,6 +375,7 @@ class DrawingBoardShow extends React.Component {
                 <div className='no-existing-easels-pane'>
                     <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name}</h1>
 
+
                     <div className="no-exist-ease">
 
                         <img className="logo-logged-in" src={weeasel} alt="weeasel" />
@@ -394,95 +395,96 @@ class DrawingBoardShow extends React.Component {
         // let { drawingBoard, easels } = this.props;
 
         // if (!drawingBoard) return null;
-        
+
         // const mapped = easels.map(easel => <canvas id={`${easel.id}`}  />)
         // if (!easels) return
 
-        const mapped = () =>{ this.props.easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel._id}`} />)}
+        const mapped = () => { this.props.easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel._id}`} />) }
 
         const main = (<canvas className="canvas" id={`board${this.state.mainBoard._id}`} style={{ border: '1px solid black' }} ></canvas>)
 
-        const displayEasels= () =>{
-            return(
-            <div className='easels-dropdown'>
-                {this.props.easels.map(easel => { 
-                    return(
-                        <div className='easel-dropdown-component'>
-                            <h3 className='easel-dropdown-easel-name'>{easel.name}</h3>
-                            <canvas width='100' height='100' className='mini-canvas-option' onClick={this.changeBoard} key={easel._id} id={easel._id}/>
-                        </div>
-                )})}
-                <div className='easel-dropdown-create-easel'>
-                    <form onSubmit={this.onSubmit} className='create-new-easel-on-dropdown-form'>
-                        <label htmlFor=""> Name
-                        <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
-                        </label>
-                        <button>create new easel</button>
-                    </form>
+        const displayEasels = () => {
+            return (
+                <div className='easels-dropdown'>
+                    {this.props.easels.map(easel => {
+                        return (
+                            <div className='easel-dropdown-component'>
+                                <h3 className='easel-dropdown-easel-name'>{easel.name}</h3>
+                                <canvas width='100' height='100' className='mini-canvas-option' onClick={this.changeBoard} key={easel._id} id={easel._id} />
+                            </div>
+                        )
+                    })}
+                    <div className='easel-dropdown-create-easel'>
+                        <form onSubmit={this.onSubmit} className='create-new-easel-on-dropdown-form'>
+                            <label htmlFor=""> Name
+                                <input onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
+                            </label>
+                            <button>create new easel</button>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
             )
         }
 
         return (
             <div className="drawing-board-show-page">
 
-                <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name}</h1>
-                        <div  id="main-easel-display">
-                            {main}
-                            <i onClick={() => this.props.setDrawingBoard()} className="far fa-times-circle"></i>
-                        </div>
-                
+                <h1 className="drawing-board-show-page-name">{this.props.currentBoard.name} :{this.state.mainBoard.name} </h1>
+                <div id="main-easel-display">
+                    {main}
+                    <i onClick={() => this.props.setDrawingBoard()} className="far fa-times-circle"></i>
+                </div>
+
                 <div className='drawing-board-show-nav'>
-                        
-
-                        <div className="tools-section">
 
 
-                                <div className="painting-tools">
+                    <div className="tools-section">
 
-                                    <div className="color-picker-container">
-                                        color &nbsp; <i className="fas fa-palette"></i> &nbsp;
-                                        <input onChange={this.changeColor} type="color" value={this.state.color} />
-                                    </div>
 
-                                    <div className="brushsize-container">
-                                        size &nbsp;<i className="fas fa-paint-brush"></i>  &nbsp;
-                                        <select value={this.state.size} onChange={this.changeSize} >
-                                            <option> 5</option>
-                                            <option>10</option>
-                                            <option>15</option>
-                                            <option>20</option>
-                                            <option>25</option>
-                                            <option>30</option>
+                        <div className="painting-tools">
 
-                                        </select>
-                                    </div>
-
-                                    <div className='eraser-container'>
-                                        <button onClick={this.makeEraser}>eraser &nbsp;<i className="fas fa-eraser"></i></button>
-                                    </div>
-
-                                </div>
-                            
-                            <div className="lower-tools">
-
-                                    <button className='show-easels-button' onClick={this.showEasels}><i className="fas fa-plus"></i>&nbsp; more easels</button>
-                                    {this.state.easelDropdown ? displayEasels() : null}
-
-                                <button onClick={(e) => {
-                                    this.props.fetchEasels(this.props.boardId);
-                                    this.setState(this.state)
-                                }
-                                }>update your boards</button>
-
-                                {this.props.easels.length > 0 ? mapped() : null}
-
+                            <div className="color-picker-container">
+                                color &nbsp; <i className="fas fa-palette"></i> &nbsp;
+                                <input onChange={this.changeColor} type="color" value={this.state.color} />
                             </div>
 
+                            <div className="brushsize-container">
+                                size &nbsp;<i className="fas fa-paint-brush"></i>  &nbsp;
+                                <select value={this.state.size} onChange={this.changeSize} >
+                                    <option> 5</option>
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                    <option>25</option>
+                                    <option>30</option>
+
+                                </select>
+                            </div>
+
+                            <div className='eraser-container'>
+                                <button onClick={this.makeEraser}>eraser &nbsp;<i className="fas fa-eraser"></i></button>
+                            </div>
+
+                        </div>
+
+                        <div className="lower-tools">
+
+                            <button className='show-easels-button' onClick={this.showEasels}><i className="fas fa-plus"></i>&nbsp; more easels</button>
+                            {this.state.easelDropdown ? displayEasels() : null}
+
+                            <button onClick={(e) => {
+                                this.props.fetchEasels(this.props.boardId);
+                                this.setState(this.state)
+                            }
+                            }>update your boards</button>
+
+                            {this.props.easels.length > 0 ? mapped() : null}
+
+                        </div>
+
                     </div>
-                   
+
                     <div className='chat-container'>
                         <h1 className="weasel-chat">chat with other weasels</h1>
                         <div className="chat-box" id={`chat${this.props.boardId}`}>
@@ -493,9 +495,9 @@ class DrawingBoardShow extends React.Component {
                             <button className="send-button" onClick={this.handleEmitInput}><i className="fas fa-arrow-up"></i></button>
                         </form>
                     </div>
-                       
+
                 </div>
-                
+
 
             </div>
         )
