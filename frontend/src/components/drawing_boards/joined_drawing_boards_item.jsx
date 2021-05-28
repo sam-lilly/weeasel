@@ -17,9 +17,9 @@ class JoinedDrawingBoardsItem extends React.Component {
     let { drawingBoard, leaveDrawingBoard, setDrawingBoard } = this.props;
     return (
 
-      <div onClick={this.onClick(drawingBoard._id)} className="boards-index-item">
-        <p className='friend-username'> {drawingBoard.name}</p>
-        <i onClick={() => leaveDrawingBoard(drawingBoard._id)} className="fas fa-minus-circle"></i>
+      <div onClick={this.onClick(drawingBoard._id)} className="boards-index-header">
+        <h1 className='drawing-board-name'> {drawingBoard.name}</h1>
+        <i id="left-leave-easel" onClick={() => leaveDrawingBoard(drawingBoard._id)} className="fas fa-minus-circle"></i>
       </div >
     )
   }
