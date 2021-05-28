@@ -15,19 +15,24 @@ class FriendIndexItem extends React.Component {
 
     render () {
 
-        let { friend, deleteFriend } = this.props;
-        
+        let { friend, deleteFriend, status } = this.props;
+
         if (!friend) return null;
 
         return (
-            <div className="friend-index-item">
-                
-                    <p className='friend-username'>{friend.username}</p>
-                    
-                    <i onClick={this.handleDelete(friend._id)} className="fas fa-minus-circle"></i>
+            // <div className={status}>
+                <div className={status}>
+                    <div className="on-and-off-button">
+                        <i className="fas fa-circle"></i>
 
+                        <p className='friend-username'>{friend.username}</p>
+                    </div>
+
+                    <i onClick={this.handleDelete(friend._id)} className="fas fa-minus-circle"></i>
+                    {/* <i class="fas fa-minus"></i> */}
+                </div>
                 
-            </div>
+            // </div>
         )
 
     }
