@@ -483,59 +483,9 @@ input[type="submit"] {
 }
 
 
-
-
-
-
-
-
-/*======================
-       Nav Bar Left
-=======================*/
-.show{
-  display: block; 
-}
-
-.hidden{
-  display: none;
-}
-.drawing-board-index{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.new-board-name{
-  border-bottom: 1px solid gray;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-
-.add-friends-dropdown-container{
-  display: flex;
-  background-color: transparent;
-  flex-direction: column;
-  border: 1px solid rgb(193, 188, 174);
-  border-radius: 3px;
-  margin: 3px;
-}
-
-.create-board-friends-list{
-  display: block;
-  background-color: rgba(193, 188, 174, 0.351);
-}
-
-.create-board-btn{
-  width: 90%;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 3px;
-  background-color: rgb(193, 188, 174);
-  color:black;
-}
-
 //FRIENDS SIDE PANE
 
-.friend-index-header {
+.friend-index-header , .boards-index-header{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -547,7 +497,6 @@ input[type="submit"] {
 
   .friend-index-title {
       padding: 10px;
-
   }
 
   i {
@@ -558,9 +507,15 @@ input[type="submit"] {
        color: rgb(252, 229, 195);;
      }
   }
+}
 
-  
-
+.boards-index-header{
+  border-bottom: none;
+  margin: 1px 0 1px 0;
+  i {
+     padding-right: 0px;
+     cursor: pointer;
+  }
 }
 
 .add-friend-dropdown {
@@ -597,7 +552,7 @@ input[type="submit"] {
   }
 }
 
-.friend-items {
+.friend-items, .boards-items {
     padding: 10px 0 10px 0;
     width: 90%;
     margin: auto;
@@ -608,7 +563,7 @@ input[type="submit"] {
       font-weight: bolder;
     }
 
-    .friend-index-item {
+    .friend-index-item, .boards-index-item{
       display: flex;
       justify-content: space-between;
       padding: 5px 0 5px 0;
@@ -624,6 +579,76 @@ input[type="submit"] {
     }
 
   }
+
+/*============================================
+       DB Nav Bar Left
+=============================================*/
+
+.show{
+  display: block; 
+}
+
+.hidden{
+  display: none;
+}
+
+.boards-list-title{
+   padding: 10px;
+   font-weight: bold;
+}
+
+.drawing-board-index{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.new-board-name{
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.add-friends-dropdown-container{
+  display: flex;
+  background-color: transparent;
+  flex-direction: column;
+  border: 1px solid rgb(193, 188, 174);
+  border-radius: 3px;
+  margin: 3px;
+}
+
+.create-board-friends-list{
+  display: block;
+  background-color: rgba(193, 188, 174, 0.351);
+}
+
+.create-board-btn{
+  width: 90%;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: rgb(193, 188, 174);
+  color:black;
+  text-align: center;
+}
+
+.board-list-nav{
+  right: -200px;
+}
+
+.new-baord-name-input{
+  display: flex;
+  justify-content: space-between;
+.new-board-name{
+  width: 80%;
+}
+  i{
+    font-size: 25px;
+    justify-content: center;
+  }
+}
+
 
 // drawing board stuff
 
@@ -667,4 +692,6 @@ input[type="submit"] {
   z-index: 2;
   margin-top: 15px;
 }
+
+
 

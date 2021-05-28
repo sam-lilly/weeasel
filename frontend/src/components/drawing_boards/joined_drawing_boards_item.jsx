@@ -17,10 +17,10 @@ class JoinedDrawingBoardsItem extends React.Component {
     let { drawingBoard, leaveDrawingBoard, setDrawingBoard } = this.props;
     return (
 
-      <div onClick={this.onClick(drawingBoard._id)}>
-        {drawingBoard.name}
-        <button onClick={() => leaveDrawingBoard(drawingBoard._id)}> Leave </button>
-      </div>
+      <div onClick={this.onClick(drawingBoard._id)} className="boards-index-item">
+        <p className='friend-username'> {drawingBoard.name}</p>
+        <i onClick={() => leaveDrawingBoard(drawingBoard._id)} className="fas fa-minus-circle"></i>
+      </div >
     )
   }
 }
