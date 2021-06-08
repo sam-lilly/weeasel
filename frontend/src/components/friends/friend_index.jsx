@@ -10,6 +10,7 @@ class FriendIndex extends React.Component {
 
         }
         this.setDropdown = this.setDropdown.bind(this);
+        this.closeClick = this.closeClick.bind(this);
     }
     componentDidMount() {
         this.props.fetchUsers();
@@ -25,8 +26,20 @@ class FriendIndex extends React.Component {
     }
 
     setDropdown(e) {
+        e.stopPropagation();
+        e.preventDefault();
         this.setState({
             addDropdown: !this.state.addDropdown
+        }, document.addEventListener('click', this.closeClick))
+    }
+
+    closeClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState({
+            addDropdown: false
+        }, () => {
+            document.removeEventListener('click', this.closeClick)
         })
     }
 
