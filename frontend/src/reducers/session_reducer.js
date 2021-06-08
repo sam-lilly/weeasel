@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
       }
 
     case RECEIVE_FRIEND:
-      newState.user.friends.push(action.friendId.data);
+      newState.user.friends.push(action.friendInfo.data.friendId);
       return newState;
 
     case REMOVE_FRIEND:

@@ -130,7 +130,8 @@ router.post('/',
       }
     })
 
-    res.json(req.body.userId)
+    // res.json(req.body.userId)
+    res.send({ friendId: req.body.userId, currentUserId: req.user.id });
   })
 
 //joinDraowingBoardFor CurrentUser

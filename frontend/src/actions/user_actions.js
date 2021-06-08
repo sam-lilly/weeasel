@@ -11,9 +11,9 @@ const receiveUsers = (users) => ({
     users
 })
 
-const receiveFriend = (friendId) => ({
+const receiveFriend = (friendInfo) => ({
     type: RECEIVE_FRIEND,
-    friendId
+    friendInfo
 })
 
 const removeFriend = (friendId) => ({
@@ -46,7 +46,7 @@ export const fetchUsers = () => (dispatch) => (
 
 export const addFriend = (friendId) => (dispatch) => (
     UserAPiUtil.createFriend(friendId)
-        .then(friendId => dispatch(receiveFriend(friendId)))
+        .then(friendInfo => dispatch(receiveFriend(friendInfo)))
 )
 
 export const deleteFriend = (friendId) => (dispatch) => (
