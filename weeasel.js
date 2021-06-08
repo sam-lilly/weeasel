@@ -55,10 +55,10 @@ io = socket(server, {
 
 let people = 0
 io.on('connection', (socket) => {
-    console.log("User Online")
+  
     people++
 
-    console.log(people)
+ 
     io.sockets.emit("broadcast", { description: people + " weeasels connected" })
 
 
@@ -69,23 +69,16 @@ io.on('connection', (socket) => {
 
 
     socket.on("canvas-data", (data, boardName) => {
-        console.log(data)
-        console.log(boardName)
+ 
         io.sockets.emit(boardName, data, boardName)
     })
 
     socket.on("message", (data, username, boardId) => {
-        console.log(data)
-        console.log(boardId)
-        console.log(username)
+ 
         // going to end up having chat id as well and emitting it
         io.sockets.emit("message", data, username, boardId)
     })
 })
-
-// http.listen(port, () => {
-//     console.log("Started on :" + port)
-// })
 
 
 

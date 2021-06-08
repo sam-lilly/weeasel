@@ -1,7 +1,7 @@
 import React from 'react';
 import { socket } from "../home/home"
 import weeasel from '../../logo/weeasel_use.png';
-import easel_index_container from '../easel/easel_index_container';
+import ChatIndexItem from '../chat/chat_index'
 
 class DrawingBoardShow extends React.Component {
 
@@ -20,8 +20,6 @@ class DrawingBoardShow extends React.Component {
         this.createEasel = this.createEasel.bind(this);
         this.changeBoard = this.changeBoard.bind(this);
         this.drawOnCanvas = this.drawOnCanvas.bind(this);
-        this.handleInput = this.handleInput.bind(this);
-        this.handleEmitInput = this.handleEmitInput.bind(this);
         this.changeColor = this.changeColor.bind(this)
         this.changeSize = this.changeSize.bind(this)
         this.showEasels = this.showEasels.bind(this)
@@ -42,20 +40,6 @@ class DrawingBoardShow extends React.Component {
         if (!this.props.boardId) {
             return;
         }
-        // this.props.fetchEasels()
-
-        //we're gonna need a way to fetch the easel info whenever the page loads
-        //and then 
-
-
-        // let image = new Image()
-        // let canvas = document.getElementById(this.state.mainBoard)
-        // let ctx = canvas.getContext("2d");
-        // image.onload = function () {
-        //     ctx.drawImage(image, 0, 0)
-        // }
-        // image.src = data
-        //this will end up being the image data we pass down from our props
         this.socket.on(this.state.mainBoard._id, function (data, boardName) {
 
             let image = new Image();
@@ -83,22 +67,10 @@ class DrawingBoardShow extends React.Component {
         }
 
         if (Object.values(prevState.mainBoard).length < 1 && this.props.easels.length > 0) {
-            console.log(this.props.easels)
+       
             this.setState({
                 mainBoard: this.props.easels[0]
             })
-
-            const that = this;
-            this.socket.off('message')
-            this.socket.on(`message`, function (data, username, boardId) {
-                const p = document.createElement("p")
-                p.innerHTML = `${username}: ${data}`
-                const chat = document.getElementById(`chat${boardId}`)
-                if (!chat) return;
-                chat.append(p)
-                // chat.append(data)
-
-            });
         }
         if ((this.props.boardId) && (this.props.boardId != prevProps.boardId)) {
             this.props.fetchEasels(this.props.boardId)
@@ -136,7 +108,7 @@ class DrawingBoardShow extends React.Component {
 
 
         this.socket.on(`board${this.state.mainBoard._id}`, function (data, boardName) {
-            console.log(5)
+          
 
             const image = new Image();
             const canvas = document.querySelector(`#${boardName}`)
@@ -157,20 +129,8 @@ class DrawingBoardShow extends React.Component {
 
     createEasel() {
         this.props.createEasel();
-        // need to pass in the name, and ID of the drawing board it belongs to
-
-
-        // creates an easel to be added to the drawing board
-        // this easel becomes the easel on the SHOW page
-        // becomes the MAIN easel
 
     }
-
-    // main easel will be displayed above
-    // inside of main easel / will have document.querySelector
-    // onClick of an item in index , will set state ({mainID: easelID})
-    // to main easels ID will trigger rerender
-    // then change the main image to that selected
 
     drawOnCanvas() {
 
@@ -265,25 +225,8 @@ class DrawingBoardShow extends React.Component {
 
         //if we grab the entire canvas element it mi
     }
-
-    handleInput(e) {
-
-        this.setState({
-            input: e.target.value
-        })
-    }
-
-    handleEmitInput(e) {
-        e.preventDefault()
-        //will end up also emitting which chat element more than likely saved in state
-        this.socket.emit("message", this.state.input, this.props.currentUsername, this.props.boardId)
-        this.setState({
-            input: '',
-        })
-    }
-
     changeColor(e) {
-        console.log(e.target.value)
+       
         this.setState({
             color: e.target.value
         })
@@ -296,7 +239,7 @@ class DrawingBoardShow extends React.Component {
     }
 
     showEasels(e) {
-        console.log('helloooo')
+       
         this.setState({
             easelDropdown: !this.state.easelDropdown,
         })
@@ -306,7 +249,7 @@ class DrawingBoardShow extends React.Component {
     makeEraser(e) {
         this.setState({
             color: '#F0E4D1',
-            size: '100'
+            size: '50'
         })
     }
 
@@ -334,7 +277,7 @@ class DrawingBoardShow extends React.Component {
 
 
     render() {
-        console.log(this.props.boardId)
+      
         if (!this.props.boardId) {
             return (
                 <div className='no-drawing-board-selected-pane'>
@@ -372,7 +315,6 @@ class DrawingBoardShow extends React.Component {
                         <img className="logo-logged-in" src={weeasel} alt="weeasel" />
                         <div className='no-existing-easels-pane-header'><p>you don't have any easels on this board</p> <p>would you like to make a new one?</p></div>
                         <form onSubmit={this.onSubmit} className='create-new-easel-on-pane-form'>
-                            {/* <label htmlFor=""> name */}
                                 <input placeholder="name" onChange={this.onEaselNameChange} type="text" value={this.state.newEaselName}></input>
                             {/* </label> */}
                             <button>create new easel</button>
@@ -475,8 +417,8 @@ class DrawingBoardShow extends React.Component {
                         </div>
 
                     </div>
-
-                    <div className='chat-container'>
+                        <ChatIndexItem socket={socket} boardId={this.props.boardId} currentUsername={this.props.currentUsername}/>
+                    {/* <div className='chat-container'>
                         <h1 className="weasel-chat">chat with other weasels</h1>
                         <div className="chat-box" id={`chat${this.props.boardId}`}>
 
@@ -485,7 +427,7 @@ class DrawingBoardShow extends React.Component {
                             <input placeholder="message ..." onChange={this.handleInput} type="text" value={this.state.input} />
                             <button className="send-button" onClick={this.handleEmitInput}><i className="fas fa-arrow-up"></i></button>
                         </form>
-                    </div>
+                    </div> */}
 
                 </div>
 
