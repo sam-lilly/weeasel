@@ -40,6 +40,7 @@ class FriendIndex extends React.Component {
         const addFriendDropdown = () => {
             return (
                 <div className='add-friend-dropdown'>
+                {/* <div> */}
                     <h2 className='add-friend-dropdown-title'>Add new friends!</h2>
                     <div className='add-friend-list'>
                         {otherUsers.map(user => {
@@ -61,8 +62,8 @@ class FriendIndex extends React.Component {
         }
         if (friends.length < 1) {
             return (
-                <div className='friend-index-header-no-friend'>
-                    <h1> sorry, you don't have any friends :(</h1>
+                <div className='no-friend'>
+                    <h1> add new friends</h1>
                     <i onClick={this.setDropdown} className="fas fa-plus"></i>
                     {this.state.addDropdown ? addFriendDropdown() : null}
                 </div>
