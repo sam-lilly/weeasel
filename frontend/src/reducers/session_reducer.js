@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
       return newState;
 
     case REMOVE_FRIEND:
-      let index = newState.user.friends.indexOf(action.friendId.data);
+      let index = newState.user.friends.indexOf(action.friendInfo.data.friendId);
       newState.user.friends.splice(index, 1);
       return newState;
 

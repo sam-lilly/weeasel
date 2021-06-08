@@ -8,12 +8,13 @@ const UsersReducer = (state = [], action) => {
         case RECEIVE_USERS:
             return action.users.data;
         case RECEIVE_FRIEND:
-            debugger;
             currentUserIndex = newState.findIndex(user => user._id == action.friendInfo.data.currentUserId);
             newState[currentUserIndex].friends.push(action.friendInfo.data.friendId);
             return newState;
         case REMOVE_FRIEND:
-
+            currentUserIndex = newState.findIndex(user => user._id == action.friendInfo.data.currentUserId);
+            newState[currentUserIndex].friends = newState[currentUserIndex].friends.filter(friend => friend != action.friendInfo.data.friendId);
+            return newState;
         default: 
             return state;
     }
