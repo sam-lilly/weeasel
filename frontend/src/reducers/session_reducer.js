@@ -28,11 +28,11 @@ export default function (state = initialState, action) {
       }
 
     case RECEIVE_FRIEND:
-      newState.user.friends.push(action.friendId.data);
+      newState.user.friends.push(action.friendInfo.data.friendId);
       return newState;
 
     case REMOVE_FRIEND:
-      let index = newState.user.friends.indexOf(action.friendId.data);
+      let index = newState.user.friends.indexOf(action.friendInfo.data.friendId);
       newState.user.friends.splice(index, 1);
       return newState;
 
