@@ -70,7 +70,7 @@ class DrawingBoardIndexItem extends React.Component {
                      })}
                   </div>
                </div>
-               : null}
+               : null }
          </div >
       )
    }

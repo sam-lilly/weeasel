@@ -35,15 +35,15 @@ class SplashPage extends React.Component {
                     <p>with your friends</p>
                     <p>through easels</p> */}
 
-                    <p>
+                    <div>
                         <p><strong>weeasel</strong> is a</p>
-                        <p>collaborative drawing and</p>
-                        <p>messaging board to stay</p>
-                        <p>to stay connected with your</p>
+                        <p>collaborative drawing</p>
+                        <p>and messaging board to</p>
+                        <p>stay connected with your</p>
                         <p>friends through easels.</p>
                         <p>come out of your hole and</p>
                         <p>onto the drawing board!</p>
-                    </p>
+                    </div>
 
 
                 <Link className="join-fun" to="/login">join the fun!</Link>

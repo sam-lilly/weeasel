@@ -461,14 +461,14 @@ class DrawingBoardShow extends React.Component {
 
                         <div className="lower-tools">
 
-                            <button className='show-easels-button' onClick={this.showEasels}><i className="fas fa-plus"></i>&nbsp; more easels</button>
+                            <button className='show-easels-button' onClick={this.showEasels}><i className="fas fa-plus"></i>&nbsp; create easels/ switch easel</button>
                             {this.state.easelDropdown ? displayEasels() : null}
 
                             <button onClick={(e) => {
                                 this.props.fetchEasels(this.props.boardId);
                                 this.setState(this.state)
                             }
-                            }>update your boards</button>
+                            } className="update-boards">update your boards</button>
 
                             {this.props.easels.length > 0 ? mapped() : null}
 
