@@ -49,6 +49,9 @@ class DrawingBoardIndex extends React.Component {
       this.setState({
          isOpen: !this.state.isOpen 
       }, document.addEventListener('click', this.closeClick))
+      if (this.state.isOpen) {
+         document.removeEventListener('click', this.closeClick)
+      }
    }
 
    closeClick(e) {

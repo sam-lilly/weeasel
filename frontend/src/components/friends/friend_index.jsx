@@ -31,6 +31,9 @@ class FriendIndex extends React.Component {
         this.setState({
             addDropdown: !this.state.addDropdown
         }, document.addEventListener('click', this.closeClick))
+        if (this.state.addDropdown) {
+            document.removeEventListener('click', this.closeClick)
+        }
     }
 
     closeClick(e) {

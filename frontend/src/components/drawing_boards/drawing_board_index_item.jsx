@@ -41,16 +41,15 @@ class DrawingBoardIndexItem extends React.Component {
       }
    }
 
-   // toggleDropdown(e) {
-   //    e.stopPropagation();
-   //    this.setState({ isOpen: !this.state.isOpen })
-   // }
    toggleDropdown(e) {
       e.preventDefault();
-      e.stopPropagation()
+      e.stopPropagation();
       this.setState({
          isOpen: !this.state.isOpen
       }, document.addEventListener('click', this.closeClick))
+      if (this.state.isOpen) {
+         document.removeEventListener('click', this.closeClick)
+      }
    }
 
    closeClick(e) {

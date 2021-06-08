@@ -6,14 +6,14 @@ import {addFriend, deleteFriend, fetchUsers} from '../../actions/user_actions'
 
 const mSTP = (state) => {
     if (state.session.user && state.entities.users) {
-    let users = state.entities.users;
-    let currentUserId = state.session.user.id;
-    let friendsArray = users.length > 0 ? users.find(user => currentUserId == user._id).friends : [];
-    let friendObjects = users.filter(user => friendsArray.includes(user._id))
-    return {
-        users: users,
-        friends: friendObjects,
-        currentUser: state.session.user
+        let users = state.entities.users;
+        let currentUserId = state.session.user.id;
+        let friendsArray = users.length > 0 ? users.find(user => currentUserId == user._id).friends : [];
+        let friendObjects = users.filter(user => friendsArray.includes(user._id))
+        return {
+            users: users,
+            friends: friendObjects,
+            currentUser: state.session.user
     }
 }
 else return {}
