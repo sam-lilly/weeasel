@@ -13,6 +13,7 @@ class DrawingBoardIndexItem extends React.Component {
       this.joinBoard = this.joinBoard.bind(this);
       this.handleFriend = this.handleFriend.bind(this);
       this.toggleDropdown = this.toggleDropdown.bind(this);
+      this.closeClick = this.closeClick.bind(this);
    }
 
    onClick(drawingBoardId) {
@@ -40,9 +41,26 @@ class DrawingBoardIndexItem extends React.Component {
       }
    }
 
+   // toggleDropdown(e) {
+   //    e.stopPropagation();
+   //    this.setState({ isOpen: !this.state.isOpen })
+   // }
    toggleDropdown(e) {
+      e.preventDefault();
+      e.stopPropagation()
+      this.setState({
+         isOpen: !this.state.isOpen
+      }, document.addEventListener('click', this.closeClick))
+   }
+
+   closeClick(e) {
+      e.preventDefault();
       e.stopPropagation();
-      this.setState({ isOpen: !this.state.isOpen })
+      this.setState({
+         isOpen: false
+      }, () => {
+         document.removeEventListener('click', this.closeClick)
+      })
    }
 
    render() {

@@ -15,6 +15,7 @@ class DrawingBoardIndex extends React.Component {
       this.createDrawingBoard = this.createDrawingBoard.bind(this);
       this.toggleDropdown = this.toggleDropdown.bind(this);
       this.handleBoardName = this.handleBoardName.bind(this);
+      this.closeClick = this.closeClick.bind(this);
 
    }
 
@@ -43,10 +44,26 @@ class DrawingBoardIndex extends React.Component {
    }
 
    toggleDropdown(e) {
-      this.setState({ isOpen: !this.state.isOpen })
+      e.preventDefault();
+      e.stopPropagation()
+      this.setState({
+         isOpen: !this.state.isOpen 
+      }, document.addEventListener('click', this.closeClick))
    }
 
+   closeClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.setState({
+         isOpen: false
+      }, () => {
+         document.removeEventListener('click', this.closeClick)
+      })
+   }
+   
+
    render() {
+      
       let { currentUser, friends, drawingBoards, joinedBoards, updateDrawingBoard, fetchDrawingBoard, joinDrawingBoard, leaveDrawingBoard, setDrawingBoard } = this.props;
 
       if (!drawingBoards) return null;
