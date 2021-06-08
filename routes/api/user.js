@@ -193,7 +193,7 @@ router.post('/:user_id/drawingboards/:drawingBoardId',
 router.delete('/:userId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    debugger;
+    
     User.findById(req.user.id)
       .then(user => {
         const index = user.friends.findIndex(friend => friend._id == req.params.userId);
