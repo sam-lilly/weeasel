@@ -55,7 +55,7 @@ class DrawingBoardIndex extends React.Component {
    }
 
    closeClick(e) {
-      e.preventDefault();
+      // e.preventDefault();
       e.stopPropagation();
       this.setState({
          isOpen: false
