@@ -3,7 +3,7 @@
 [Link to live site](http://weeasel.herokuapp.com/#/)
 
 ## Overview
-Weeasel is a colloborative drawing board app that updates users in real time.
+Weeasel is a collaborative drawing board app that updates users in real time.
 
 ![Screenshot](readme_img.png)
 
@@ -35,7 +35,7 @@ Weeasel is MERN-stack web application, that takes advantage of websockets. MERN 
 The web app makes use of the 'socket.io' and 'socket.io client' dependencies. The first sets up a bi-directional communcation system to our already established express server. The seconds allows us to establish a connection on the frontend to essentially just emit messages to the server and then to all clients connected.
 
 ### MERN Stack
-The web app utilizes MongoDB, Express.js, React.js and Node.js. User's info as well as image data is stored using a non-relational database with documents that are essentially just javascript while react renders everything to the screen through a single page model. 
+The web app utilizes MongoDB, Express.js, React.js and Node.js. User's info as well as image data is stored using a non-relational database with documents that are essentially just javascript objects while react renders everything to the screen through a single page model. 
 
 ## Implementation details
 
