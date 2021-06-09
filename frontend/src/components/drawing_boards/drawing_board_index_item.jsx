@@ -13,7 +13,11 @@ class DrawingBoardIndexItem extends React.Component {
       this.joinBoard = this.joinBoard.bind(this);
       this.handleFriend = this.handleFriend.bind(this);
       this.toggleDropdown = this.toggleDropdown.bind(this);
+
       this.handleDelete = this.handleDelete.bind(this);
+
+      this.closeClick = this.closeClick.bind(this);
+
    }
 
    onClick(drawingBoardId) {
@@ -42,8 +46,24 @@ class DrawingBoardIndexItem extends React.Component {
    }
 
    toggleDropdown(e) {
+      e.preventDefault();
       e.stopPropagation();
-      this.setState({ isOpen: !this.state.isOpen })
+      this.setState({
+         isOpen: !this.state.isOpen
+      }, document.addEventListener('click', this.closeClick))
+      if (this.state.isOpen) {
+         document.removeEventListener('click', this.closeClick)
+      }
+   }
+
+   closeClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.setState({
+         isOpen: false
+      }, () => {
+         document.removeEventListener('click', this.closeClick)
+      })
    }
 
    handleDelete(drawingBoardId) {
@@ -66,7 +86,7 @@ class DrawingBoardIndexItem extends React.Component {
 
             {this.state.isOpen ?
                <div className='add-friend-dropdown board-list-nav'>
-                  <h2 className='friend-index-title'> invite your friends!</h2>
+                  <h2 className='friend-index-title'> invite your friends to {drawingBoard.name} Board!</h2>
                   <div className='add-friend-list'>
                      {friends.map((friend) => {
                         if (this.props.drawingBoard.users.includes(friend._id)) return;
@@ -77,11 +97,14 @@ class DrawingBoardIndexItem extends React.Component {
                      })}
                   </div>
                </div>
-               : null}
+
+               : null }
+               
 
             <div>
                <i onClick={this.handleDelete(drawingBoard._id)} className="fas fa-minus-circle"></i>
             </div>
+
          </div >
       )
    }

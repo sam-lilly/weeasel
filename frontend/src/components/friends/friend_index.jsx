@@ -10,6 +10,7 @@ class FriendIndex extends React.Component {
 
         }
         this.setDropdown = this.setDropdown.bind(this);
+        this.closeClick = this.closeClick.bind(this);
     }
     componentDidMount() {
         this.props.fetchUsers();
@@ -25,8 +26,23 @@ class FriendIndex extends React.Component {
     }
 
     setDropdown(e) {
+        e.stopPropagation();
+        e.preventDefault();
         this.setState({
             addDropdown: !this.state.addDropdown
+        }, document.addEventListener('click', this.closeClick))
+        if (this.state.addDropdown) {
+            document.removeEventListener('click', this.closeClick)
+        }
+    }
+
+    closeClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState({
+            addDropdown: false
+        }, () => {
+            document.removeEventListener('click', this.closeClick)
         })
     }
 
@@ -40,6 +56,7 @@ class FriendIndex extends React.Component {
         const addFriendDropdown = () => {
             return (
                 <div className='add-friend-dropdown'>
+                {/* <div> */}
                     <h2 className='add-friend-dropdown-title'>Add new friends!</h2>
                     <div className='add-friend-list'>
                         {otherUsers.map(user => {
@@ -61,8 +78,8 @@ class FriendIndex extends React.Component {
         }
         if (friends.length < 1) {
             return (
-                <div className='friend-index-header-no-friend'>
-                    <h1> sorry, you don't have any friends :(</h1>
+                <div className='no-friend'>
+                    <h1> add new friends</h1>
                     <i onClick={this.setDropdown} className="fas fa-plus"></i>
                     {this.state.addDropdown ? addFriendDropdown() : null}
                 </div>

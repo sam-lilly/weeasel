@@ -213,6 +213,7 @@ input[type="submit"] {
     // background: rgb(23, 23, 23);
     // pic sent 2
     background: rgb(7, 7, 9);
+    z-index: 5;
       div {
         margin-left: 1vw;
         margin-right: 1.5vw;
@@ -642,9 +643,10 @@ input[type="submit"] {
   // font-family: 'Josefin Sans', sans-serif;
   font-family: 'Spartan', sans-serif;
   padding-top: 10vh;
-  padding-bottom: 10vh;
+  // padding-bottom: 10vh;
   width: 100vw;
   height: 80vh;
+  // margin-bottom: 8vh;
   // background: rgb(89, 89, 89);
   // pic sent 1
   // background: rgb(34, 34, 34);
@@ -661,6 +663,7 @@ input[type="submit"] {
     grid-column: 2;
     // border-left: 1px solid rgb(185, 213, 249);
     grid-row: 1 / 4;
+    z-index: 0;
   }
 
 
@@ -668,7 +671,11 @@ input[type="submit"] {
     // border-right: 1px solid white;
     grid-column: 1;
     grid-row: 1 / 4;
-    // overflow-y: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 80vh;
+    z-index: 5;
+    // margin-bottom: 8vh;
     // border-right:1px solid rgb(185, 213, 249);
   }
 
@@ -676,12 +683,14 @@ input[type="submit"] {
     // border: 1px solid white;
     grid-column-start: 2;
     background: rgb(35, 37, 40);
+    z-index: -1;
   }
 
   .easel-index {
     // border: 1px solid white;
     grid-column: 2;
     grid-row: 2;
+    z-index: -1;
   }
 
   .chat-index {
@@ -694,6 +703,11 @@ input[type="submit"] {
     // border-left: 1px solid rgb(185, 213, 249);;
     grid-column: 3;
     grid-row: 1 / 4;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 8vh;
+    height: 80vh;
+    z-index: 4;
   }
 
 }
@@ -714,6 +728,7 @@ input[type="submit"] {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  // margin-bottom: 8vh;
 }
 .new-board-name{
   border-bottom: 1px solid gray;
@@ -728,6 +743,7 @@ input[type="submit"] {
   border: 1px solid rgb(193, 188, 174);
   border-radius: 3px;
   margin: 3px;
+  z-index: 4;
 }
 
 .create-board-friends-list{
@@ -754,16 +770,56 @@ input[type="submit"] {
 //FRIENDS SIDE PANE
 
 
-.friend-index-header , .boards-index-header{
+.friend-index-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgb(185, 213, 249);
   width: 90%;
   margin: auto;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
+  // position: relative;
+  color:rgb(183, 167, 255);
+  // z-index: 400;
+
+  .friend-index-title {
+      // padding: 10px;
+      padding: 15px 0;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 5px;
+      color: rgb(255, 255, 255);
+      text-shadow:
+      0 0 7px rgb(159, 105, 213),
+      0 0 15px rgb(159, 105, 213),
+      0 0 10px rgb(159, 105, 213),
+      0 0 42px rgb(159, 105, 213);
+  }
+
+  i {
+     padding-right: 10px;
+     cursor: pointer;
+     color: rgb(240, 228, 209);
+     filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+
+     &:hover {
+       color: white;
+       filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+     }
+  }
+}
+
+.boards-index-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(185, 213, 249);
+  width: 90%;
+  margin: auto;
+  // margin-bottom: 10px;
   position: relative;
   color:rgb(183, 167, 255);
+  // z-index: 400;
 
   .friend-index-title {
       // padding: 10px;
@@ -794,6 +850,12 @@ input[type="submit"] {
 
 .no-friend{
     top: -90%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+
 }
 
 .boards-index-header{
@@ -808,15 +870,14 @@ input[type="submit"] {
 
 .add-friend-dropdown {
   position: absolute;
-  z-index: 1;
+  z-index: 4;
   width: 300px;
-  top: 50px;
-  top: 50px;
+  top: 16vh;
 
   right: 15px;
   box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.591);
   border-radius: 8px;
-  background-color: rgba(35, 37, 40, 0.755);
+  background-color: rgba(35, 37, 40, 0.8);
   height: 175px;
   overflow-y: scroll;
 
@@ -838,6 +899,7 @@ input[type="submit"] {
   .add-friend-list {
     padding: 0 10px 10px 10px;
     color: rgb(190, 175, 255);
+    z-index: 10;
 
     .add-friend-item {
       padding-top: 15px;
@@ -853,11 +915,19 @@ input[type="submit"] {
   }
 }
 
+.friend-username {
+  font-size: 15px;
+}
+
 .board-list-nav{
-  right: -120%;
-  top: 60%;
+  left: 28px;
+  // top: 12vh;
+  top: 20px;
+  width: 200px;
+  opacity: 1;
   .friend-index-title {
     margin-left: 10px;
+    line-height: 25px;
   }
   .add-friend-username {
     color:rgb(190, 175, 255);
@@ -1048,6 +1118,7 @@ input[type="submit"] {
   border: 1px solid rgb(193, 188, 174);
   border-radius: 3px;
   margin: 3px;
+  z-index: 4;
 }
 
 .create-board-friends-list{
@@ -1119,7 +1190,8 @@ input[type="submit"] {
 .drawing-board-show-page {
   // padding-top: 10vh;
   // padding-bottom: 10vh;
-  margin-bottom: 10vh;
+  // margin-bottom: 10vh;
+  // ^this doesn't do anything
   height: 80vh;
   //================//
   // position:relative
@@ -1128,7 +1200,7 @@ input[type="submit"] {
 .drawing-board-show-page-name{
    position: absolute;
     width: 100vw;
-    top: 5vh;
+    top: 4vh;
     left: 0;
     color: white;
     text-shadow: 0 0 7px #80f4f2, 0 0 15px #80f4f2, 0 0 10px #80f4f2, 0 0 42px #80f4f2;
@@ -1216,7 +1288,7 @@ input[type="submit"] {
             }
           }
           .send-button {
-            padding-right: 3px;
+            padding-right: 8px;
             i {
               font-size: 14px;
               margin-bottom: 3px;
@@ -1224,27 +1296,47 @@ input[type="submit"] {
           }
       }
 
+        /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(47, 60, 75);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(172, 177, 184);
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(244, 231, 205);
+  }
+
 }
 
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(47, 60, 75);
+  background: rgb(16, 24, 30);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(79, 94, 111);
+  background: rgb(172, 177, 184);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(0, 0, 0);
+  background: rgb(244, 231, 205);
 }
 
 
@@ -1269,6 +1361,7 @@ input[type="submit"] {
   width: 100%;
   height: 100%;
   background-color: rgb(240, 228, 209);
+  z-index: 0;
   
 }
 
@@ -1340,6 +1433,11 @@ input[type="submit"] {
     justify-content: space-evenly;
     align-items: baseline;
     margin-top: 20px;
+    i {
+      color: rgb(247, 243, 210);
+      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+      cursor: pointer ;
+    }
     button {
       &:hover {
         filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255))
@@ -1360,12 +1458,12 @@ input[type="submit"] {
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  width: 25%;
+  width: 35%;
   height: 30% ;
   // top: -80%;
   // right: 50%;
-  top: -48%;
-  right: 66%;
+  top: -45%;
+  right: 61%;
   border-radius: 3px;
   box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.591);
   background-color: rgba(35, 37, 40, 0.755);
@@ -1403,7 +1501,8 @@ input[type="submit"] {
   width: 100%;
   height: 80vh;
   padding-top: 8vh;
-  background: rgb(47, 60, 75);
+  // background: rgb(47, 60, 75);
+  background: rgb(255, 169, 169);
 
 
   .logo-logged-in {
@@ -1412,7 +1511,7 @@ input[type="submit"] {
     filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
     padding-bottom: 5px;
     &:hover {
-      filter: drop-shadow(0 0 0.2rem rgb(255, 252, 233));
+      filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
     }
   }
 
@@ -1428,6 +1527,11 @@ input[type="submit"] {
     color: rgb(255, 255, 255);
     text-shadow:
       0 0 7px rgb(128, 244, 242),
+  }
+
+  .new-board {
+    font-size: 15px;
+    margin-top: 10px;
   }
 
   #clients {
@@ -1454,10 +1558,34 @@ input[type="submit"] {
 
  .easel-form-input {
    border: 1px solid rgb(185, 213, 249);
-    filter: drop-shadow(0 0 0.2rem rgb(185, 213, 249));
-    &:focus {
-      filter: drop-shadow(0 0 0.5rem rgb(255, 255, 255));
-    }
+    // filter: drop-shadow(0 0 0.2rem rgb(185, 213, 249));
+    // &:focus {
+      // filter: drop-shadow(0 0 0.5rem rgb(255, 255, 255));
+    // }
+    margin-right: 40px;
+    margin-left: 30px;
+    // margin-top: 5px;
+    // margin-bottom: 5px;
+    width: 150px;
+ }
+
+ .easel-form-input::placeholder {
+   color: rgba(185, 213, 249, 0.851);;
+   padding-left: 5px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   font-size: 12px;
+ }
+
+ .new-easel-button {
+   margin-top: 10px;
+   margin-left: 38px;
+   color: rgb(247, 243, 210);
+   filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+   &:hover {
+    filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+    color: rgb(254, 251, 247);
+   }
  }
 
 
@@ -1471,10 +1599,12 @@ input[type="submit"] {
   // width: 100vw;
   height: 80vh;
   overflow: none;
-  background: rgb(47, 60, 75);
+  // background: rgb(47, 60, 75);
+  background: rgb(255, 169, 169);
   padding-top: 8vh;
   // padding: 0;
-  // margin-bottom: 15vh;
+  // margin-bottom: 8vh;
+  z-index: 0;
 
   .no-exist-ease {
     display: flex;

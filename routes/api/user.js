@@ -130,7 +130,8 @@ router.post('/',
       }
     })
 
-    res.json(req.body.userId)
+    // res.json(req.body.userId)
+    res.send({ friendId: req.body.userId, currentUserId: req.user.id });
   })
 
 //joinDraowingBoardFor CurrentUser
@@ -169,13 +170,33 @@ router.post('/:user_id/drawingboards/:drawingBoardId',
 
     // res.send({ joinedDrawingBoard: req.params.drawingBoardId, name: boardName })
   })
+// OLD DELETE
+// router.delete('/:userId',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     User.findById(req.user.id)
+//       .then(user => {
+//         const index = user.friends.indexOf(req.body.friendId);
+//         user.friends.splice(index, 1);
+//         user.save();
+//       })
+//     // let currentUser = User.findOne({ _id: req.user.id });
+//     // const index = currentUser.friends.indexOf(req.body.friendId);
+//     // currentUser.friends.splice(index, 1);
+//     // currentUser.save();
 
+//     res.send({ friendId: req.params.userId });
+//   })
+
+
+//NEW DELETE
 router.delete('/:userId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+    
     User.findById(req.user.id)
       .then(user => {
-        const index = user.friends.indexOf(req.body.friendId);
+        const index = user.friends.findIndex(friend => friend._id == req.params.userId);
         user.friends.splice(index, 1);
         user.save();
       })
@@ -184,7 +205,7 @@ router.delete('/:userId',
     // currentUser.friends.splice(index, 1);
     // currentUser.save();
 
-    res.send({ friendId: req.params.userId });
+    res.send({ friendId: req.params.userId, currentUserId: req.user.id });
   })
 
 router.delete('/drawingboards/:drawingBoardId',

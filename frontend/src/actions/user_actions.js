@@ -11,14 +11,14 @@ const receiveUsers = (users) => ({
     users
 })
 
-const receiveFriend = (friendId) => ({
+const receiveFriend = (friendInfo) => ({
     type: RECEIVE_FRIEND,
-    friendId
+    friendInfo
 })
 
-const removeFriend = (friendId) => ({
+const removeFriend = (friendInfo) => ({
     type: REMOVE_FRIEND,
-    friendId
+    friendInfo
 })
 
 const receiveJoinedDrawingboard = (drawingBoardId) => ({
@@ -46,12 +46,12 @@ export const fetchUsers = () => (dispatch) => (
 
 export const addFriend = (friendId) => (dispatch) => (
     UserAPiUtil.createFriend(friendId)
-        .then(friendId => dispatch(receiveFriend(friendId)))
+        .then(friendInfo => dispatch(receiveFriend(friendInfo)))
 )
 
 export const deleteFriend = (friendId) => (dispatch) => (
     UserAPiUtil.deleteFriend(friendId)
-        .then(() => dispatch(removeFriend(friendId)))
+        .then((friendInfo) => dispatch(removeFriend(friendInfo)))
 )
 
 export const joinDrawingBoard = (userId, drawingBoardId) => dispatch => (
