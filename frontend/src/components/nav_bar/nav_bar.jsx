@@ -18,7 +18,9 @@ class NavBar extends React.Component {
         return (
             // <div className="nav-container">
             <div>
+                <div className="nav-background">
 
+                </div>
                 {/* <div className="header-left">
                     <Link to="/myWeeasel" className="home-nav" >HOME</Link>
                 </div> */}
