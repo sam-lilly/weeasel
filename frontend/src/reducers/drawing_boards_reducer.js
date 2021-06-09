@@ -1,5 +1,5 @@
 import { RECEIVE_COMMENT, RECEIVE_DRAWING_BOARDS, RECEIVE_DRAWING_BOARD, REMOVE_DRAWING_BOARD } from '../actions/drawing_board_actions';
-import {JOIN_DRAWINGBOARD} from '../actions/user_actions'
+import { JOIN_DRAWINGBOARD } from '../actions/user_actions'
 
 const drawingBoardsReducer = (oldState = [], action) => {
     Object.freeze(oldState);
@@ -13,8 +13,9 @@ const drawingBoardsReducer = (oldState = [], action) => {
             nextState.push(action.drawingBoard.data)
             return nextState;
         case REMOVE_DRAWING_BOARD:
-            delete nextState[action.drawingBoardId];
-            return nextState;
+            let deleted = nextState.filter(board => board._id != action.drawingBoardId)
+
+            return deleted;
         case RECEIVE_COMMENT:
             const comment = action.comment;
             nextState.drawingBoards[action.comment.drawingBoardId].comments.push(comment);

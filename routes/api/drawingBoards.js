@@ -96,7 +96,6 @@ router.delete('/:id',
               user.ownedDrawingBoards.splice(i, 1);
               user.save();
             } else {
-              console.log(user)
               let i = user.joinedDrawingBoards.indexOf(req.params.id);
               user.joinedDrawingBoards.splice(i, 1);
               user.save();
