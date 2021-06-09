@@ -13,6 +13,7 @@ class DrawingBoardIndexItem extends React.Component {
       this.joinBoard = this.joinBoard.bind(this);
       this.handleFriend = this.handleFriend.bind(this);
       this.toggleDropdown = this.toggleDropdown.bind(this);
+      this.handleDelete = this.handleDelete.bind(this);
    }
 
    onClick(drawingBoardId) {
@@ -36,7 +37,7 @@ class DrawingBoardIndexItem extends React.Component {
 
       return e => {
          this.props.joinDrawingBoard(friendId, boardId);
-         this.setState({ users: userArr})
+         this.setState({ users: userArr })
       }
    }
 
@@ -45,16 +46,22 @@ class DrawingBoardIndexItem extends React.Component {
       this.setState({ isOpen: !this.state.isOpen })
    }
 
+   handleDelete(drawingBoardId) {
+      return (e) => {
+         this.props.deleteDrawingBoard(drawingBoardId);
+      }
+   }
+
    render() {
-      let { friends, drawingBoard, updateDrawingBoard, deleteDrawingBoard } = this.props;
+      let { friends, drawingBoard, updateDrawingBoard } = this.props;
 
       if (!drawingBoard) return null;
 
       return (
          <div onClick={this.onClick(drawingBoard._id)} className="boards-index-header">
             {/* <div className="my-db-index-item"> */}
-               <h1 className='drawing-board-name'>{drawingBoard.name}</h1>
-               <h1 className="inside"><i onClick={this.toggleDropdown} className="fas fa-user-plus"></i></h1>
+            <h1 className='drawing-board-name'>{drawingBoard.name}</h1>
+            <h1 className="inside"><i onClick={this.toggleDropdown} className="fas fa-user-plus"></i></h1>
             {/* </div> */}
 
             {this.state.isOpen ?
@@ -62,7 +69,7 @@ class DrawingBoardIndexItem extends React.Component {
                   <h2 className='friend-index-title'> invite your friends!</h2>
                   <div className='add-friend-list'>
                      {friends.map((friend) => {
-                         if (this.props.drawingBoard.users.includes(friend._id)) return;
+                        if (this.props.drawingBoard.users.includes(friend._id)) return;
                         return <div key={friend._id} className='add-friend-item'>
                            <p className='add-friend-username'>{friend.username}</p>
                            <i onClick={this.handleFriend(friend._id, drawingBoard._id)} className="fas fa-plus-circle"></i>
@@ -71,6 +78,10 @@ class DrawingBoardIndexItem extends React.Component {
                   </div>
                </div>
                : null}
+
+            <div>
+               <i onClick={this.handleDelete(drawingBoard._id)} className="fas fa-minus-circle"></i>
+            </div>
          </div >
       )
    }
