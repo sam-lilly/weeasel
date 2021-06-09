@@ -49,12 +49,14 @@ class DrawingBoardIndexItem extends React.Component {
       }, document.addEventListener('click', this.closeClick))
       if (this.state.isOpen) {
          document.removeEventListener('click', this.closeClick)
-      }
+      } 
+
+      
    }
 
    closeClick(e) {
-      e.preventDefault();
-      e.stopPropagation();
+      // e.preventDefault();
+      // e.stopPropagation();
       this.setState({
          isOpen: false
       }, () => {
