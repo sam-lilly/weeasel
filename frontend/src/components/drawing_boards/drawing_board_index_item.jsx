@@ -14,7 +14,7 @@ class DrawingBoardIndexItem extends React.Component {
       this.handleFriend = this.handleFriend.bind(this);
       this.toggleDropdown = this.toggleDropdown.bind(this);
 
-      this.handleDelete = this.handleDelete.bind(this);
+      // this.handleDelete = this.handleDelete.bind(this);
 
       this.closeClick = this.closeClick.bind(this);
 
@@ -68,6 +68,7 @@ class DrawingBoardIndexItem extends React.Component {
 
    handleDelete(drawingBoardId) {
       return (e) => {
+         e.stopPropagation()
          this.props.deleteDrawingBoard(drawingBoardId);
       }
    }
@@ -98,8 +99,8 @@ class DrawingBoardIndexItem extends React.Component {
                   </div>
                </div>
 
-               : null }
-               
+               : null}
+
 
             <div>
                <i onClick={this.handleDelete(drawingBoard._id)} className="fas fa-minus-circle"></i>
