@@ -70,6 +70,7 @@ class DrawingBoardIndexItem extends React.Component {
       return (e) => {
          e.stopPropagation()
          this.props.deleteDrawingBoard(drawingBoardId);
+         this.props.setDrawingBoard("");
       }
    }
 
