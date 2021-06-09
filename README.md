@@ -14,7 +14,7 @@ The live app also facilitates an even better user experience by implementing a b
 
 ## How does it work?
 
-Users have the ability to create and login to their account where they will be prompted to create a drawing board. A drawing baord is basically just a psuedonym for a chat room where you can can draw and talk with friends.
+Users have the ability to create and login to their account where they will be prompted to create a drawing board. A drawing board is basically just a pseudonym for a chat room where you can can draw and talk with friends.
 
 Users also have the ability to add people to their friends list by just clicking the plus sign next to friends located in the right side bar which shows all the users for the site.
 
@@ -24,7 +24,7 @@ Now all thats left is to add friends to your board by clicking the icon next to 
 
 ## Who is it for?
 
-The most sophisticated and well seasoned artists, or someone who just wants to have some fun with their friends that they can cherish as long as the site stays up.
+The most sophisticated and well seasoned artists, or someone who just wants to have some fun with their friends, creating a memory that they can cherish as long as the site stays up.
 
 ## Technologies Used 
 
@@ -55,14 +55,14 @@ React allows a quick and efficient deployment with its knack for code reusabilit
 
 ![Screenshot](props_codee.png)
 
-Redux ensures a fast load time especially when partnered with life-cycle methods to pre-load data that will be saved in the front end whiles imeoultanesouly cutting down on backend requests. 
+Redux ensures a fast load time especially when partnered with life-cycle methods to pre-load data that will be saved in the front end simeoultanesouly cutting down on backend requests. 
 
 ![Screenshot](react_code.png)
 
 
 ## Design Documents
 
-[Link to wiki site](https://github.com/samantha-lilly/weeasel/wiki)
+[Link to proposal](https://github.com/samantha-lilly/weeasel/wiki)
 
 
 
