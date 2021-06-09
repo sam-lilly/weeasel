@@ -9,7 +9,7 @@ const Greeting = ({ currentUser, logout, setDrawingBoard }) => {
         <div className="nav-container">
 
             <div className="header-left">
-                <Link to="/" className="home-nav" >
+                <Link to="/" className="home-nav" id="left-signin" >
                     <i className="fas fa-palette"></i><p>&nbsp;</p>
                     <i className="fas fa-paint-brush"></i>
                 </Link>

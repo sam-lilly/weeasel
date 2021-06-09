@@ -83,28 +83,32 @@ class DrawingBoardIndexItem extends React.Component {
          <div onClick={this.onClick(drawingBoard._id)} className="boards-index-header">
             {/* <div className="my-db-index-item"> */}
             <h1 className='drawing-board-name'>{drawingBoard.name}</h1>
-            <h1 className="inside"><i onClick={this.toggleDropdown} className="fas fa-user-plus"></i></h1>
-            {/* </div> */}
 
-            {this.state.isOpen ?
-               <div className='add-friend-dropdown board-list-nav'>
-                  <h2 className='friend-index-title'> invite your friends to {drawingBoard.name} Board!</h2>
-                  <div className='add-friend-list'>
-                     {friends.map((friend) => {
-                        if (this.props.drawingBoard.users.includes(friend._id)) return;
-                        return <div key={friend._id} className='add-friend-item'>
-                           <p className='add-friend-username'>{friend.username}</p>
-                           <i onClick={this.handleFriend(friend._id, drawingBoard._id)} className="fas fa-plus-circle"></i>
-                        </div>
-                     })}
+            <div className="user-delete-right"> 
+               <h1 className="inside"><i onClick={this.toggleDropdown} className="fas fa-user-plus"></i></h1>
+               {/* </div> */}
+
+               {this.state.isOpen ?
+                  <div className='add-friend-dropdown board-list-nav'>
+                     <h2 className='friend-index-title'> invite your friends to {drawingBoard.name} Board!</h2>
+                     <div className='add-friend-list'>
+                        {friends.map((friend) => {
+                           if (this.props.drawingBoard.users.includes(friend._id)) return;
+                           return <div key={friend._id} className='add-friend-item'>
+                              <p className='add-friend-username'>{friend.username}</p>
+                              <i onClick={this.handleFriend(friend._id, drawingBoard._id)} className="fas fa-plus-circle"></i>
+                           </div>
+                        })}
+                     </div>
                   </div>
+
+                  : null}
+
+
+               <div>
+                  <i onClick={this.handleDelete(drawingBoard._id)} id="delete-board" className="fas fa-minus-circle"></i>
                </div>
 
-               : null}
-
-
-            <div>
-               <i onClick={this.handleDelete(drawingBoard._id)} className="fas fa-minus-circle"></i>
             </div>
 
          </div >
