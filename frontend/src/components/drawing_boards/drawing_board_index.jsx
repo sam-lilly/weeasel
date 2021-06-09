@@ -66,8 +66,9 @@ class DrawingBoardIndex extends React.Component {
    
 
    render() {
-      
-      let { currentUser, friends, drawingBoards, joinedBoards, updateDrawingBoard, fetchDrawingBoard, joinDrawingBoard, leaveDrawingBoard, setDrawingBoard } = this.props;
+
+      let { currentUser, friends, drawingBoards, joinedBoards, updateDrawingBoard, fetchDrawingBoard, joinDrawingBoard, leaveDrawingBoard, setDrawingBoard, deleteDrawingBoard } = this.props;
+
 
       if (!drawingBoards) return null;
 
@@ -83,6 +84,7 @@ class DrawingBoardIndex extends React.Component {
                         joinDrawingBoard={joinDrawingBoard}
                         leaveDrawingBoard={leaveDrawingBoard}
                         updateDrawingBoard={updateDrawingBoard}
+                        deleteDrawingBoard={deleteDrawingBoard}
                         setDrawingBoard={setDrawingBoard}
                         currentUser={currentUser}
                         friends={friends}

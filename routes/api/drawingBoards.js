@@ -43,7 +43,6 @@ router.post('/',
     if (!isValid) {
       return res.status(404).json(errors)
     }
-
     let newDrawingBoard = new DrawingBoard({
       name: req.body.name,
       creator: req.user.id,
@@ -80,21 +79,47 @@ router.put('/:id',
 )
 
 // Finds a matching document, removes it, passing the found document (if any) to the callback.
-// we may not user it :-)
+
+router.delete('/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    DrawingBoard.findById(req.params.id)
+      .then(board => {
+        if (!board) {
+          return res.status(404).send({ error: `DrawingBoard ${req.params.id} doesn't exist` })
+        }
+        Easel.remove({ "_id": { $in: board.easels } })
+        board.users.forEach((userId) => {
+          User.findById(userId).then(user => {
+            if (userId == req.user.id) {
+              let i = user.ownedDrawingBoards.indexOf(req.params.id);
+              user.ownedDrawingBoards.splice(i, 1);
+              user.save();
+            } else {
+              console.log(user)
+              let i = user.joinedDrawingBoards.indexOf(req.params.id);
+              user.joinedDrawingBoards.splice(i, 1);
+              user.save();
+            }
+          })
+        });
+        board.remove();
+        res.send({ drawingBoardId: req.params.id })
+      })
+  }
+)
+
+//new delte
 // router.delete('/:id',
-//   (req, res) => {
-//     DrawingBoard.findByIdAndDelete(req.params.id)
-//       .then(board => {
-//         if (!board) {
-//           return res.status(404).send({ error: `DrawingBoard ${req.params.id} doesn't exist` })
-//         }
-//         return res.send({ success: 'The DrawingBoard has been successfully deleted' })
+//   (req, res, next) => {
+//     DrawingBoard.findById(req.params.id, function (err, board) {
+//       Easel.remove({ "_id": { $in: board.easels } }, function (err) {
+//         if (err) return next(err);
+//         board.remove();
+//         return
 //       })
-//       .catch(err => {
-//         return res.status(500).send({ error: 'Cannot delete this DrawingBoard' })
-//       })
-//   }
-// )
+//     })
+//   })
 
 router.post(`/:drawingBoardsId/comments`, (req, res) => {
   let newComment = req.body;
