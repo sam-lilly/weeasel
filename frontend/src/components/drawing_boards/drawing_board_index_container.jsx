@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchDrawingBoards, fetchDrawingBoard, createDrawingBoard, updateDrawingBoard, fetchAllDrawingBoards } from '../../actions/drawing_board_actions';
+import { fetchDrawingBoards, fetchDrawingBoard, createDrawingBoard, updateDrawingBoard, fetchAllDrawingBoards, deleteDrawingBoard } from '../../actions/drawing_board_actions';
 import { fetchUsers, joinDrawingBoard, leaveDrawingBoard } from '../../actions/user_actions'
 import DrawingBoardIndex from './drawing_board_index';
 import { setDrawingBoard } from '../../actions/session_actions'
@@ -37,7 +37,8 @@ const mDTP = (dispatch) => ({
     createDrawingBoard: (drawingBoard) => dispatch(createDrawingBoard(drawingBoard)),
     fetchUsers: () => dispatch(fetchUsers()),
     setDrawingBoard: (drawingBoardId) => dispatch(setDrawingBoard(drawingBoardId)),
-    updateDrawingBoard: (drawingBoard) => dispatch(updateDrawingBoard(drawingBoard))
+    updateDrawingBoard: (drawingBoard) => dispatch(updateDrawingBoard(drawingBoard)),
+    deleteDrawingBoard: (drawingBoardId) => dispatch(deleteDrawingBoard(drawingBoardId))
 })
 
 export default connect(mSTP, mDTP)(DrawingBoardIndex);
