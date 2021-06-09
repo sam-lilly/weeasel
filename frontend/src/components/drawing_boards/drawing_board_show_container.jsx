@@ -5,7 +5,7 @@ import DrawingBoardShow from './drawing_board_show';
 import { fetchEasels, createEasel, deleteEasel, updateEasel } from '../../actions/easel_actions';
 import {setDrawingBoard} from '../../actions/session_actions'
 
-const mSTP = (state, ownProps) => ({
+const mSTP = (state) => ({
      easels: state.entities.easels || [],
      boardId: state.session.currentBoard,
      currentUsername: state.session.user.username,
