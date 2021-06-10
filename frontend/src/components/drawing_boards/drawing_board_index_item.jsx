@@ -92,7 +92,7 @@ class DrawingBoardIndexItem extends React.Component {
 
                {this.state.isOpen ?
                   <div className='add-friend-dropdown board-list-nav'>
-                     <h2 className='friend-index-title'> invite your friends to {drawingBoard.name} Board!</h2>
+                     <h2 className='friend-index-title'> invite your friends to {drawingBoard.name} board!</h2>
                      <div className='add-friend-list'>
                         {friends.map((friend) => {
                            if (this.props.drawingBoard.users.includes(friend._id)) return;
