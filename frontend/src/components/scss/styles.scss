@@ -885,12 +885,37 @@ input[type="submit"] {
 }
 
 .no-friend{
-    top: -90%;
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    margin-left: 20px;
-    margin-right: 20px;
+  top: -90%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  .no-friends-add {
+    // padding: 15px 0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: rgb(255, 255, 255);
+    text-shadow:
+    0 0 7px rgb(159, 105, 213),
+    0 0 15px rgb(159, 105, 213),
+    0 0 10px rgb(159, 105, 213),
+    0 0 42px rgb(159, 105, 213);
+  }
+
+  i {
+    padding-right: 10px;
+    cursor: pointer;
+    color: rgb(240, 228, 209);
+    filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+
+    &:hover {
+      color: white;
+      filter: drop-shadow(0 0 0.6rem rgb(255, 255, 255));
+    }
+  }
+
 
 }
 
