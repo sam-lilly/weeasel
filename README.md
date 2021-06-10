@@ -5,7 +5,7 @@
 ## Overview
 Weeasel is a collaborative drawing board app that updates users in real time.
 
-![Screenshot](readme_img.png)
+![Screenshot](cheeseburger.gif)
 
 Weeasel bolsters the user-experience with great CRUD, a sleek and aesthetically pleasing user interface as well as an intelligible backend to handle and display user data.
 
