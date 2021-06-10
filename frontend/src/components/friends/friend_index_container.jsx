@@ -5,10 +5,12 @@ import {addFriend, deleteFriend, fetchUsers} from '../../actions/user_actions'
 
 
 const mSTP = (state) => {
+    debugger;
     if (state.session.user && state.entities.users) {
         let users = state.entities.users;
         let currentUserId = state.session.user.id;
-        let friendsArray = users.length > 0 ? users.find(user => currentUserId == user._id).friends : [];
+        let testUser = users.find(user => currentUserId == user._id);
+        let friendsArray = testUser ? testUser.friends : [];
         let friendObjects = users.filter(user => friendsArray.includes(user._id))
         return {
             users: users,
