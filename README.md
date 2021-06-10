@@ -46,7 +46,12 @@ Once a client logs in they will immediately be connected to the server and ready
 ![Screenshot](webcodesnip.png)
 
 
-### MongoDB/Mongoose? 
+### MongoDB/Mongoose
+The backend architecture utilized MongoDB's No-SQL database structure to store documents for users, easels, and drawing boards, including references to related documents as necessary.
+![Screenshot](MongoDB.png)
+
+Mongoose was utilized to create all controllers and routes used to fetch data on API request from user interactions from the frontend.
+![Screenshot](Route_sample.png)
 
 
 ### React and Redux 
