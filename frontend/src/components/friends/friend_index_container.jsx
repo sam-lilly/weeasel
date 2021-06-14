@@ -5,7 +5,7 @@ import {addFriend, deleteFriend, fetchUsers} from '../../actions/user_actions'
 
 
 const mSTP = (state) => {
-    debugger;
+    
     if (state.session.user && state.entities.users) {
         let users = state.entities.users;
         let currentUserId = state.session.user.id;
