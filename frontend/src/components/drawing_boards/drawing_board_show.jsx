@@ -53,12 +53,17 @@ class DrawingBoardShow extends React.Component {
             image.src = data;
         })
 
-        this.drawOnCanvas();
+        this.drawOnCanvas(undefined, undefined, true);
 
     }
 
 
     componentDidUpdate(prevProps, prevState) {
+        
+        // let canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
+        // if (!canvas) return;
+        // let ctx = canvas.getContext('2d');
+            
         if (!this.props.boardId) return;
 
         if (this.props.boardId != prevProps.boardId) {
@@ -96,14 +101,20 @@ class DrawingBoardShow extends React.Component {
         if (!canvas) return;
         const base64Imagedata = canvas.toDataURL("image/png")
         let ctx = canvas.getContext("2d");
-        image.onload = function () {
-            ctx.drawImage(image, 0, 0)
-        }
+        let condition;
+
         if (this.state.mainBoard.image == prevState.mainBoard.image) {
             // image.src =this.state.mainBoard.image
+            condition = true;
             image.src = base64Imagedata
         } else {
+            condition = false;
             image.src = this.state.mainBoard.image;
+        }
+        image.onload = function () {
+            if (true) {
+                ctx.drawImage(image, 0, 0)
+            }
         }
 
 
@@ -115,13 +126,19 @@ class DrawingBoardShow extends React.Component {
 
             const ctx = canvas.getContext("2d");
             // ctx.clearRect(0, 0, canvas.width, canvas.height);
+            image.src = data;
             image.onload = function () {
                 ctx.drawImage(image, 0, 0);
             };
-            image.src = data;
 
         })
-        this.drawOnCanvas()
+        this.drawOnCanvas(canvas, ctx, condition)
+        if (prevState.mainBoard.name == this.state.mainBoard.name) {
+
+            this.drawOnCanvas(canvas, ctx, condition)
+        } else {
+            this.drawOnCanvas()
+        }
     }
 
 
@@ -132,13 +149,30 @@ class DrawingBoardShow extends React.Component {
 
     }
 
-    drawOnCanvas() {
-
-        const canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
-        if (!canvas) return
-
-        this.ctx = canvas.getContext('2d');
-        const ctx = this.ctx
+    drawOnCanvas(canvas,ctx, condition) {
+        
+        if (!canvas) {
+            
+            let cnv = document.querySelector('canvas');
+            if (!cnv) return;
+            let context =cnv.getContext('2d');
+            context.clearRect(0, 0, cnv.width, cnv.height);
+            return;
+        };
+        if (condition) {
+            ctx.lineWidth = this.state.size;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = this.state.color;
+            return;
+        } else {
+            canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
+            ctx = canvas.getContext('2d');
+        }
+        
+        // let canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
+        // this.ctx = canvas.getContext('2d');
+        // const ctx = this.ctx
         const display = document.querySelector('#main-easel-display');
         const display_style = getComputedStyle(display);
         canvas.width = parseInt(display_style.getPropertyValue('width'));
@@ -233,8 +267,9 @@ class DrawingBoardShow extends React.Component {
     }
 
     changeSize(e) {
+        let value = e? e.target.value : 15;
         this.setState({
-            size: e.target.value
+            size: value,
         })
     }
 
@@ -249,8 +284,8 @@ class DrawingBoardShow extends React.Component {
     makeEraser(e) {
         this.setState({
             color: '#F0E4D1',
-            size: '50'
         })
+        this.changeSize();
     }
 
     onEaselNameChange(e) {
@@ -335,7 +370,7 @@ class DrawingBoardShow extends React.Component {
         // const mapped = easels.map(easel => <canvas id={`${easel.id}`}  />)
         // if (!easels) return
 
-        const mapped = () => { this.props.easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel.id} id={`board${easel._id}`} />) }
+        const mapped = () => { this.props.easels.map(easel => <canvas style={{ border: '1px solid black' }} width="200" height="200" onClick={this.changeBoard} key={easel._id} id={`board${easel._id}`} />) }
 
         const main = (<canvas className="canvas" id={`board${this.state.mainBoard._id}`} style={{ border: '1px solid black' }} ></canvas>)
 
@@ -345,8 +380,8 @@ class DrawingBoardShow extends React.Component {
             <div className='easels-dropdown'>
                 {this.props.easels.map(easel => { 
                     return(
-                        <div className='easel-dropdown-component'>
-                            <h3 onClick={this.changeBoard} id={easel._id} className={easel._id === this.state.mainBoard._id ? "main-mini-canvas" : "mini-canvas"}>{easel.name}</h3>
+                        <div key={easel._id} className='easel-dropdown-component'>
+                            <h3 onClick={this.changeBoard} key={easel._id} id={easel._id} className={easel._id === this.state.mainBoard._id ? "main-mini-canvas" : "mini-canvas"}>{easel.name}</h3>
                         </div>
                 )})}
                 <div className='easel-dropdown-create-easel'>
