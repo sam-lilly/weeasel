@@ -6,7 +6,9 @@ import ChatIndexItem from '../chat/chat_index'
 class DrawingBoardShow extends React.Component {
 
     constructor(props) {
+        
         super(props);
+        let userArray = props.currentBoard ? props.currentBoard.users : [];
         this.state = {
             mainBoard: {},
             input: "",
@@ -14,7 +16,9 @@ class DrawingBoardShow extends React.Component {
             size: "5",
             easelDropdown: false,
             chatDropdown: false,
-            newEaselName: ''
+            newEaselName: '',
+            friendsDropdown: false,
+            users: userArray
         }
         // inside of our state we'll have to have the main board image data
         this.createEasel = this.createEasel.bind(this);
@@ -26,12 +30,18 @@ class DrawingBoardShow extends React.Component {
         this.makeEraser = this.makeEraser.bind(this)
         this.onEaselNameChange = this.onEaselNameChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.toggleDropdown = this.toggleDropdown.bind(this);
+        this.closeClick = this.closeClick.bind(this)
+        this.handleFriend = this.handleFriend.bind(this)
 
     }
 
     socket = socket
     ctx;
     componentDidMount() {
+        // this.setState({
+        //     users: this.props.currentBoard.users
+        // })
         this.socket.on("broadcast", function (data) {
             let clientDiv = document.getElementById('clients');
             if (clientDiv) clientDiv.innerHTML = data.description
@@ -59,6 +69,12 @@ class DrawingBoardShow extends React.Component {
 
 
     componentDidUpdate(prevProps, prevState) {
+        debugger;
+        if (this.props.currentBoard && this.props.currentBoard != prevProps.currentBoard){
+        this.setState({
+            users: this.props.currentBoard.users
+        })
+        }
         
         // let canvas = document.querySelector(`#board${this.state.mainBoard._id}`);
         // if (!canvas) return;
@@ -306,6 +322,44 @@ class DrawingBoardShow extends React.Component {
         })
     }
 
+    //FRIENDS
+    toggleDropdown(e) {
+        
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState({
+            friendsDropdown: !this.state.friendsDropdown
+        }, document.addEventListener('click', this.closeClick))
+        if (this.state.isOpen) {
+            document.removeEventListener('click', this.closeClick)
+        }
+
+
+    }
+
+    closeClick(e) {
+        // e.preventDefault();
+        // e.stopPropagation();
+        this.setState({
+            friendsDropdown: false
+        }, () => {
+            document.removeEventListener('click', this.closeClick)
+        })
+    }
+
+    handleFriend(friendId, boardId) {
+        let userArr = this.state.users
+        if (!userArr.includes(friendId)) {
+            userArr = userArr.concat(friendId);
+
+        }
+
+        return e => {
+            
+            this.props.joinDrawingBoard(friendId, boardId);
+            this.setState({ users: userArr })
+        }
+    }
 
 
 
@@ -443,12 +497,28 @@ class DrawingBoardShow extends React.Component {
 
                             <button className='show-easels-button' onClick={this.showEasels}><i className="fas fa-plus"></i>&nbsp; create easels/ switch easel</button>
                             {this.state.easelDropdown ? displayEasels() : null}
+                            <div className='add-friends-section'>
+                                <p>{this.state.users.length -1} Collaborators</p>
+                                <button onClick={
+                                    this.toggleDropdown
+                                    } className="update-boards"><i className="fas fa-plus"></i>&nbsp; Add friends
+                                </button>
+                                {this.state.friendsDropdown ?
+                                    <div className='add-friend-dropdown board-list-nav review-add-friend-dropdown'>
+                                        <h2 className='friend-index-title'>Invite friends!</h2>
+                                        <div className='add-friend-list'>
+                                            {this.props.friends.map((friend) => {
+                                                if (this.state.users.includes(friend._id)) return;
+                                                return <div key={friend._id} className='add-friend-item'>
+                                                    <p className='add-friend-username'>{friend.username}</p>
+                                                    <i onClick={this.handleFriend(friend._id, this.props.currentBoard._id)} className="fas fa-plus-circle"></i>
+                                                </div>
+                                            })}
+                                        </div>
+                                    </div>
 
-                            <button onClick={(e) => {
-                                this.props.fetchEasels(this.props.boardId);
-                                this.setState(this.state)
-                            }
-                            } className="update-boards">update your boards</button>
+                                    : null}
+                            </div>
 
                             {this.props.easels.length > 0 ? mapped() : null}
 
