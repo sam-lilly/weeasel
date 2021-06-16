@@ -498,11 +498,12 @@ class DrawingBoardShow extends React.Component {
                             <button className='show-easels-button' onClick={this.showEasels}><i className="fas fa-plus"></i>&nbsp; create easels/ switch easel</button>
                             {this.state.easelDropdown ? displayEasels() : null}
                             <div className='add-friends-section'>
-                                <p>{this.state.users.length -1} Collaborators</p>
+                                {/* <p className="collab-friends">{this.state.users.length -1} collaborators</p> */}
                                 <button onClick={
                                     this.toggleDropdown
-                                    } className="update-boards"><i className="fas fa-plus"></i>&nbsp; Add friends
+                                    } className="update-boards"><i className="fas fa-plus"></i>&nbsp; add friends
                                 </button>
+                                <p className="collab-friends">{this.state.users.length -1} collaborators</p>
                                 {this.state.friendsDropdown ?
                                     <div className='add-friend-dropdown board-list-nav review-add-friend-dropdown'>
                                         <h2 className='friend-index-title'>Invite friends!</h2>

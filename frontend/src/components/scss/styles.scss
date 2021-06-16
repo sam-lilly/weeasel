@@ -1499,6 +1499,8 @@ div.review-add-friend-dropdown {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-end;
+    align-content: center;
+
     height: 80px;
     i {
       color: rgb(247, 243, 210);
@@ -1552,6 +1554,7 @@ div.review-add-friend-dropdown {
 .show-easels-button{
   z-index: 2;
   // margin-top: 15px;
+  padding-bottom: 10px;
 }
 
 
@@ -1724,5 +1727,16 @@ div.review-add-friend-dropdown {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+
+  // justify-content: center;
   height: 50%;
+}
+
+.collab-friends {
+  font-size: 12px;
+  // color: rgb(247, 243, 210);
+  color: rgb(255, 255, 255);
+  text-shadow:
+    0 0 7px rgb(255, 230, 147),
 }
